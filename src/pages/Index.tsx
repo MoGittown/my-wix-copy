@@ -188,12 +188,12 @@ const Index = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-white/30 group-hover:bg-white/50 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-colors duration-500" />
                 <div className="absolute inset-0 flex flex-col justify-end p-8">
-                  <h3 className="font-display text-2xl md:text-3xl text-black mb-4 drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">{item.title}</h3>
+                  <h3 className="font-display text-2xl md:text-3xl text-white mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">{item.title}</h3>
                   <ul className="space-y-1 font-serif">
                     {item.items.map((li) => (
-                      <li key={li} className="text-black text-base md:text-lg drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">• {li}</li>
+                      <li key={li} className="text-white text-base md:text-lg drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">• {li}</li>
                     ))}
                   </ul>
                 </div>
