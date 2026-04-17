@@ -13,19 +13,19 @@
     /* color_12: #e8e6e6 (light section bg) */
 
     --background: 0 0% 100%;              /* #ffffff */
-    --foreground: 0 0% 21%;               /* #363636 */
+    --foreground: 0 0% 0%;                /* #000000 - schwarz */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 21%;
+    --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 21%;
+    --popover-foreground: 0 0% 0%;
     --primary: 41 80% 61%;                /* #ebba4d - gold accent */
-    --primary-foreground: 0 0% 21%;
+    --primary-foreground: 0 0% 0%;
     --secondary: 0 0% 91%;                /* #e8e6e6 - light grey section */
-    --secondary-foreground: 0 0% 21%;
+    --secondary-foreground: 0 0% 0%;
     --muted: 0 0% 91%;
-    --muted-foreground: 0 0% 37%;         /* #605e5e */
+    --muted-foreground: 0 0% 0%;          /* schwarz statt grau */
     --accent: 41 80% 61%;                 /* #ebba4d */
-    --accent-foreground: 0 0% 21%;
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     --border: 0 0% 88%;
