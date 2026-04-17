@@ -273,34 +273,38 @@ const Index = () => {
 
       {/* Partners */}
       <section className="py-16 px-6 bg-secondary">
-        <div className="max-w-6xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">Einige unserer Partner</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 items-center">
-            {[
-              { name: "Nobilia", file: "81b6c4_27dd97ac85394ead87eea5e95abd3a3b~mv2.jpg", crop: "x_0,y_0,w_234,h_61" },
-              { name: "Häcker", file: "81b6c4_dc784e7a8ada4debbe68f46e1ea2c2d6~mv2.jpg", crop: "x_0,y_0,w_220,h_80" },
-              { name: "Naber", file: "81b6c4_da4bff6f67124dedaea97564f4c45cc2~mv2.jpg", crop: "x_0,y_2,w_200,h_86" },
-              { name: "Siemens", file: "81b6c4_fd19d21d6cd14559bd179107b610eda8~mv2.jpg", crop: "x_0,y_3,w_214,h_86" },
-              { name: "Miele", file: "81b6c4_85dd458999924388bfb78dac3cfdcb7a~mv2.jpg", crop: "x_0,y_0,w_195,h_73" },
-              { name: "Neff", file: "81b6c4_38a756a0e4574fb3b06d30229c86ee73~mv2.jpg", crop: "x_0,y_1,w_216,h_86" },
-              { name: "Amica", file: "81b6c4_8589b1fe154c48fcb5b38b9ac624567c~mv2.jpg", crop: "x_0,y_7,w_174,h_86" },
-              { name: "Berbel", file: "81b6c4_69c05082ee8b4d35b8eda4fb685416a3~mv2.jpg", crop: "x_6,y_0,w_264,h_82" },
-              { name: "Blanco", file: "81b6c4_105b35c5ed5f4dae95fa0a831e4ced62~mv2.jpg", crop: "x_0,y_0,w_142,h_62" },
-              { name: "Horatec", file: "81b6c4_f1314268081444f9a8af92b988dca75a~mv2.jpg", crop: "x_0,y_0,w_160,h_68" },
-              { name: "Stengel", file: "81b6c4_232be34fa32d44a6bbb452aeab015b4d~mv2.jpg", crop: "x_0,y_0,w_205,h_55" },
-              { name: "Priess", file: "81b6c4_f8565afcc4b84abba67dce187a846844~mv2.jpg", crop: "x_0,y_0,w_213,h_62" },
-              { name: "Quooker", file: "81b6c4_146afba9c83141bea2b8a6f7e58d2c1b~mv2.jpg", crop: "x_0,y_0,w_197,h_73" },
-            ].map((p) => (
-              <div key={p.name} className="flex items-center justify-center h-20 p-2">
+          <div className="relative h-32 flex items-center justify-center overflow-hidden">
+            {partners.map((p, i) => (
+              <div
+                key={p.name}
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${i === currentPartner ? "opacity-100" : "opacity-0"}`}
+              >
                 <img
                   src={`https://static.wixstatic.com/media/${p.file}/v1/crop/${p.crop},q_85,enc_avif,quality_auto/${p.file}`}
                   alt={p.name}
-                  className="max-h-full max-w-full object-contain"
+                  className="max-h-24 max-w-full object-contain"
                   loading="lazy"
                 />
               </div>
             ))}
+            <button
+              onClick={() => setCurrentPartner((p) => (p - 1 + partners.length) % partners.length)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 text-foreground/70 hover:text-foreground p-2"
+              aria-label="Vorheriger Partner"
+            >
+              <ChevronLeft size={28} />
+            </button>
+            <button
+              onClick={() => setCurrentPartner((p) => (p + 1) % partners.length)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 text-foreground/70 hover:text-foreground p-2"
+              aria-label="Nächster Partner"
+            >
+              <ChevronRight size={28} />
+            </button>
           </div>
+          <p className="font-serif text-sm text-muted-foreground mt-6">{partners[currentPartner].name}</p>
         </div>
       </section>
 
