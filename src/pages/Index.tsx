@@ -10,6 +10,8 @@ import projektSchubladeEiche from "@/assets/projekt-schublade-eiche.jpg";
 import projektBadJuergen from "@/assets/projekt-bad-juergen.jpg";
 import projektBadJuergen2 from "@/assets/projekt-bad-juergen-2.jpg";
 import projektKuecheNussbaum from "@/assets/projekt-kueche-nussbaum.jpg";
+import projektKuecheMiele from "@/assets/projekt-kueche-miele.jpg";
+import projektKuecheNaturstein from "@/assets/projekt-kueche-naturstein.jpg";
 import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
@@ -28,6 +30,8 @@ const projectGallery = [
   { src: projektBadJuergen, caption: "Badezimmer mit Doppelwaschtisch in Eiche-Optik – maßgefertigt" },
   { src: projektBadJuergen2, caption: "Hochschrank in Eiche-Optik mit Schubladen – passend zum Waschtisch" },
   { src: projektKuecheNussbaum, caption: "Küche in Nussbaum mit Naturstein-Arbeitsplatte und Kochinsel" },
+  { src: projektKuecheMiele, caption: "Hochglanz-Küchenzeile mit Miele-Einbaugeräten und Naturstein-Arbeitsplatte" },
+  { src: projektKuecheNaturstein, caption: "Küche in Nussbaum mit großzügiger Naturstein-Arbeitsplatte und Spiegel-Rückwand" },
   { src: projektSideboardDetail, caption: "Sideboard in Grau matt mit Eiche-Schubladen – Detailansicht" },
   { src: projektSideboardSchublade, caption: "Sideboard mit massiver Eiche-Schublade und filigraner Front" },
   { src: projektSideboardGrau, caption: "Sideboard in Grau matt auf schlanken Metallfüßen" },
