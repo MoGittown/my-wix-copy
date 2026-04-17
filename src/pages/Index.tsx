@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin } from "lucide-react";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
   {
@@ -54,18 +56,8 @@ const testimonials = [
   },
 ];
 
-const navItems = [
-  { label: "HOME", href: "#home" },
-  { label: "Küchen, Objekteinrichtung & Co.", href: "#portfolio" },
-  { label: "Das sagen unsere Kunden", href: "#clients" },
-  { label: "Unternehmen", href: "#about" },
-  { label: "Referenzen", href: "#portfolio" },
-  { label: "Kontakt", href: "#contact" },
-];
-
 const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -74,51 +66,9 @@ const Index = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const scrollTo = (href: string) => {
-    setMobileMenuOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-          <a href="#home" className="text-2xl font-bold tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Vollmer Objektmöbel
-          </a>
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex gap-6">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollTo(item.href)}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-          {/* Mobile hamburger */}
-          <button className="lg:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            <div className="w-6 flex flex-col gap-1.5">
-              <span className={`h-0.5 bg-foreground transition-all ${mobileMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
-              <span className={`h-0.5 bg-foreground transition-all ${mobileMenuOpen ? "opacity-0" : ""}`} />
-              <span className={`h-0.5 bg-foreground transition-all ${mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-            </div>
-          </button>
-        </div>
-        {mobileMenuOpen && (
-          <nav className="lg:hidden bg-background border-t border-border px-6 py-4 flex flex-col gap-3">
-            {navItems.map((item) => (
-              <button key={item.label} onClick={() => scrollTo(item.href)} className="text-left text-sm text-muted-foreground hover:text-primary">
-                {item.label}
-              </button>
-            ))}
-          </nav>
-        )}
-      </header>
+      <SiteHeader />
 
       {/* Hero Slider */}
       <section id="home" className="relative h-screen overflow-hidden">
@@ -288,13 +238,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-foreground text-background py-8 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm opacity-80">© {new Date().getFullYear()} Vollmer Objektmöbel. Alle Rechte vorbehalten.</p>
-          <p className="text-sm opacity-80">Impressum</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 };
