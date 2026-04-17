@@ -123,7 +123,6 @@ const HeroSlider = ({ slides, intervalMs = 6000 }: { slides: HeroSlide[]; interv
             className={`absolute inset-0 transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
           >
             <img src={slide.image} alt="Vollmer Objektmöbel" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-white/20" />
             <div
               onPointerDown={isActive ? onPointerDown : undefined}
               onPointerMove={isActive ? onPointerMove : undefined}
