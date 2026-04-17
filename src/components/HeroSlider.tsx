@@ -19,12 +19,22 @@ const ADMIN_KEY = "hero-admin-mode";
 
 const defaultOverride: Override = { xPct: 50, yPct: 50, fontScale: 1 };
 
+// Feste Defaults pro Slide (vom Admin im Browser justiert und exportiert)
+const presetOverrides: Record<number, Override> = {
+  0: { xPct: 32, yPct: 28, fontScale: 0.85 },
+  1: { xPct: 50, yPct: 17, fontScale: 0.85 },
+  2: { xPct: 50, yPct: 18, fontScale: 0.85 },
+  3: { xPct: 50, yPct: 18, fontScale: 0.85 },
+  4: { xPct: 50, yPct: 18, fontScale: 0.85 },
+};
+
 function loadOverrides(): Record<number, Override> {
-  if (typeof window === "undefined") return {};
+  if (typeof window === "undefined") return { ...presetOverrides };
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    return { ...presetOverrides, ...stored };
   } catch {
-    return {};
+    return { ...presetOverrides };
   }
 }
 
