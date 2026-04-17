@@ -18,6 +18,8 @@ import projektKuecheNussbaumAbend from "@/assets/projekt-kueche-nussbaum-abend.j
 import projektKuecheNussbaumTag from "@/assets/projekt-kueche-nussbaum-tag.jpg";
 import projektKuecheAnthrazitInsel from "@/assets/projekt-kueche-anthrazit-insel.jpg";
 import projektKuecheBlauAnthrazit from "@/assets/projekt-kueche-blau-anthrazit.jpg";
+import projektDetailMuehlen from "@/assets/projekt-detail-muehlen.jpg";
+import projektDetailArmatur from "@/assets/projekt-detail-armatur.jpg";
 import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
