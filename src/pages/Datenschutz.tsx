@@ -4,8 +4,8 @@ import SiteFooter from "@/components/SiteFooter";
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="mb-8">
-    <h2 className="text-xl md:text-2xl font-bold mb-3 mt-8">{title}</h2>
-    <div className="text-muted-foreground leading-relaxed space-y-3">{children}</div>
+    <h2 className="font-display text-xl md:text-2xl text-foreground mb-3 mt-8">{title}</h2>
+    <div className="font-serif text-muted-foreground leading-relaxed space-y-3">{children}</div>
   </div>
 );
 
@@ -18,17 +18,17 @@ const Datenschutz = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <SiteHeader />
-      <main className="flex-1 pt-16">
+      <main className="flex-1 pt-20">
         <section className="py-16 px-6 max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-8">Datenschutzerklärung</h1>
+          <h1 className="font-display text-4xl md:text-5xl text-foreground mb-8">Datenschutzerklärung</h1>
 
-          <p className="text-muted-foreground leading-relaxed mb-4">
+          <p className="font-serif text-muted-foreground leading-relaxed mb-4">
             Personenbezogene Daten (nachfolgend zumeist nur „Daten" genannt) werden von uns nur im Rahmen der Erforderlichkeit sowie zum Zwecke der Bereitstellung eines funktionsfähigen und nutzerfreundlichen Internetauftritts, inklusive seiner Inhalte und der dort angebotenen Leistungen, verarbeitet.
           </p>
-          <p className="text-muted-foreground leading-relaxed mb-4">
+          <p className="font-serif text-muted-foreground leading-relaxed mb-4">
             Gemäß Art. 4 Ziffer 1. der Verordnung (EU) 2016/679, also der Datenschutz-Grundverordnung (nachfolgend nur „DSGVO" genannt), gilt als „Verarbeitung" jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführter Vorgang oder jede solche Vorgangsreihe im Zusammenhang mit personenbezogenen Daten, wie das Erheben, das Erfassen, die Organisation, das Ordnen, die Speicherung, die Anpassung oder Veränderung, das Auslesen, das Abfragen, die Verwendung, die Offenlegung durch Übermittlung, Verbreitung oder eine andere Form der Bereitstellung, den Abgleich oder die Verknüpfung, die Einschränkung, das Löschen oder die Vernichtung.
           </p>
-          <p className="text-muted-foreground leading-relaxed mb-4">
+          <p className="font-serif text-muted-foreground leading-relaxed mb-4">
             Mit der nachfolgenden Datenschutzerklärung informieren wir Sie insbesondere über Art, Umfang, Zweck, Dauer und Rechtsgrundlage der Verarbeitung personenbezogener Daten, soweit wir entweder allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung entscheiden. Zudem informieren wir Sie nachfolgend über die von uns zu Optimierungszwecken sowie zur Steigerung der Nutzungsqualität eingesetzten Fremdkomponenten, soweit hierdurch Dritte Daten in wiederum eigener Verantwortung verarbeiten.
           </p>
 

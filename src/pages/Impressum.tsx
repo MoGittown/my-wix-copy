@@ -11,28 +11,28 @@ const Impressum = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <SiteHeader />
-      <main className="flex-1 pt-16">
+      <main className="flex-1 pt-20">
         <section className="py-16 px-6 max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-8">Impressum</h1>
+          <h1 className="font-display text-4xl md:text-5xl text-foreground mb-8">Impressum</h1>
 
-          <h2 className="text-2xl font-bold mb-4">Angaben gemäß § 5 TMG</h2>
-          <div className="text-muted-foreground space-y-1 mb-10">
-            <p className="font-semibold text-foreground">Vollmer Objektmöbel</p>
+          <h2 className="font-display text-2xl text-foreground mb-4">Angaben gemäß § 5 TMG</h2>
+          <div className="font-serif text-muted-foreground space-y-1 mb-10">
+            <p className="font-display text-foreground">Vollmer Objektmöbel</p>
             <p>Maurice Vollmer</p>
             <p>Schusters Garten 4</p>
             <p>50374 Erftstadt</p>
             <p>Deutschland</p>
           </div>
 
-          <h2 className="text-2xl font-bold mb-4">Kontakt</h2>
-          <div className="text-muted-foreground space-y-2 mb-10">
+          <h2 className="font-display text-2xl text-foreground mb-4">Kontakt</h2>
+          <div className="font-serif text-muted-foreground space-y-2 mb-10">
             <p>Tel: <a href="tel:+4922359765401" className="text-primary hover:underline">02235-9765401</a></p>
             <p>E-Mail: <a href="mailto:office@vollmer-objektmoebel.com" className="text-primary hover:underline">office@vollmer-objektmoebel.com</a></p>
             <p>Web: <a href="https://www.vollmer-objektmoebel.com" className="text-primary hover:underline">www.vollmer-objektmoebel.com</a></p>
           </div>
 
-          <h2 className="text-2xl font-bold mb-4">Umsatzsteuer-ID</h2>
-          <p className="text-muted-foreground">
+          <h2 className="font-display text-2xl text-foreground mb-4">Umsatzsteuer-ID</h2>
+          <p className="font-serif text-muted-foreground">
             Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
             <span className="text-foreground font-medium">DE 123513601</span>
           </p>

@@ -29,18 +29,31 @@ const SiteHeader = () => {
     }
   };
 
+  const isActive = (to: string) => {
+    if (to === "/") return location.pathname === "/" && !location.hash;
+    if (to.startsWith("/#")) return false;
+    return location.pathname === to;
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        <Link to="/" className="text-2xl font-bold tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm">
+      <div className="max-w-[1400px] mx-auto px-8 flex items-center justify-between h-20">
+        <Link
+          to="/"
+          className="font-display text-2xl md:text-3xl text-foreground tracking-tight"
+        >
           Vollmer Objektmöbel
         </Link>
-        <nav className="hidden lg:flex gap-6">
+        <nav className="hidden lg:flex items-center gap-7">
           {navItems.map((item) => (
             <button
               key={item.label}
               onClick={() => handleClick(item.to)}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              className={`font-display text-[13px] uppercase tracking-wide transition-colors ${
+                isActive(item.to)
+                  ? "text-primary"
+                  : "text-foreground hover:text-primary"
+              }`}
             >
               {item.label}
             </button>
@@ -57,7 +70,13 @@ const SiteHeader = () => {
       {open && (
         <nav className="lg:hidden bg-background border-t border-border px-6 py-4 flex flex-col gap-3">
           {navItems.map((item) => (
-            <button key={item.label} onClick={() => handleClick(item.to)} className="text-left text-sm text-muted-foreground hover:text-primary">
+            <button
+              key={item.label}
+              onClick={() => handleClick(item.to)}
+              className={`font-display text-left text-sm uppercase tracking-wide ${
+                isActive(item.to) ? "text-primary" : "text-foreground hover:text-primary"
+              }`}
+            >
               {item.label}
             </button>
           ))}

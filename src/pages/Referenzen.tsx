@@ -98,17 +98,17 @@ const Referenzen = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <SiteHeader />
-      <main className="flex-1 pt-16">
+      <main className="flex-1 pt-20">
         <section className="py-16 px-6 max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Referenzen</h1>
-          <p className="text-xl text-muted-foreground text-center mb-16">
+          <h1 className="font-display text-4xl md:text-5xl text-foreground mb-4 text-center">Referenzen</h1>
+          <p className="font-serif text-xl text-muted-foreground text-center mb-16">
             Aus dem Bereich Küchen, Küchenstudio, Küchenplanung und Objektmöbel
           </p>
 
           <div className="space-y-20">
             {projects.map((p) => (
               <div key={p.title}>
-                <h2 className="text-2xl md:text-3xl font-bold mb-6">{p.title}</h2>
+                <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">{p.title}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {p.images.map((file, i) => (
                     <a
@@ -116,7 +116,7 @@ const Referenzen = () => {
                       href={wix(file)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group block overflow-hidden rounded-lg shadow-md aspect-[4/3] bg-muted"
+                      className="group block overflow-hidden shadow-md aspect-[4/3] bg-secondary"
                     >
                       <img
                         src={wix(file)}
