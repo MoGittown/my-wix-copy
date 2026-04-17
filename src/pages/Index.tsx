@@ -10,6 +10,16 @@ const heroSlides = [
   },
 ];
 
+const projectGallery = [
+  { src: "https://static.wixstatic.com/media/81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein \"San Sebastian\" satiniert" },
+  { src: "https://static.wixstatic.com/media/81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein \"San Sebastian\" satiniert" },
+  { src: "https://static.wixstatic.com/media/81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { src: "https://static.wixstatic.com/media/81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { src: "https://static.wixstatic.com/media/81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
+  { src: "https://static.wixstatic.com/media/81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
+  { src: "https://static.wixstatic.com/media/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg", caption: "Krankenhausausstattung – Patientenzimmer & Empfangstheken" },
+  { src: "https://static.wixstatic.com/media/81b6c4_e6c75db583cb4643b94f6b05c7cad22b~mv2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_e6c75db583cb4643b94f6b05c7cad22b~mv2.jpg", caption: "Krankenhausausstattung – Schwestern-Küchen & Wandvertäfelung" },
+];
 
 const portfolioItems = [
   {
