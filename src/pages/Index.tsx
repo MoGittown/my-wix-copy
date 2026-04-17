@@ -23,64 +23,23 @@ import projektDetailArmatur from "@/assets/projekt-detail-armatur.jpg";
 import projektKuecheAnthrazitUebersicht from "@/assets/projekt-kueche-anthrazit-uebersicht.jpg";
 import projektKuecheAnthrazitPetrol from "@/assets/projekt-kueche-anthrazit-petrol.jpg";
 import SiteFooter from "@/components/SiteFooter";
+import HeroSlider, { type HeroSlide } from "@/components/HeroSlider";
 import heroMaurice from "@/assets/hero-1-maurice-vollmer.jpg";
 import heroPraxis from "@/assets/hero-2-praxis.jpeg";
 import heroKueche from "@/assets/hero-3-kueche.jpeg";
 import heroProjekt from "@/assets/hero-4-projektleitung.jpeg";
 import heroCoworking from "@/assets/hero-5-coworking.jpeg";
 
-// textPosition: vertikale & horizontale Ausrichtung des Textes pro Slide
-// vertical: "top" | "center" | "bottom"  (oder Pixel-Offset z.B. "20%")
-// horizontal: "left" | "center" | "right"
-// offsetY / offsetX: Feinjustierung in % (negativ = nach oben/links)
-type HeroSlide = {
-  image: string;
-  lines: string[];
-  vertical?: "top" | "center" | "bottom";
-  horizontal?: "left" | "center" | "right";
-  offsetY?: string; // z.B. "-10%" oder "20px"
-  offsetX?: string;
-};
-
 const heroSlides: HeroSlide[] = [
   {
     image: heroMaurice,
     lines: ["Freiraum für Kreativität entsteht", "mit jedem neuen Raum", "ob Küchen, Praxis oder Büro"],
-    vertical: "center",
-    horizontal: "center",
-    offsetY: "0%",
-    offsetX: "0%",
   },
-  {
-    image: heroPraxis,
-    lines: ["Praxiseinrichtungen"],
-    vertical: "center",
-    horizontal: "center",
-  },
-  {
-    image: heroKueche,
-    lines: ["Exklusive Küchen"],
-    vertical: "center",
-    horizontal: "center",
-  },
-  {
-    image: heroProjekt,
-    lines: ["Projektbegleitung"],
-    vertical: "center",
-    horizontal: "center",
-  },
-  {
-    image: heroCoworking,
-    lines: ["Coworking Spaces"],
-    vertical: "center",
-    horizontal: "center",
-  },
+  { image: heroPraxis, lines: ["Praxiseinrichtungen"] },
+  { image: heroKueche, lines: ["Exklusive Küchen"] },
+  { image: heroProjekt, lines: ["Projektbegleitung"] },
+  { image: heroCoworking, lines: ["Coworking Spaces"] },
 ];
-
-const verticalClass = (v?: HeroSlide["vertical"]) =>
-  v === "top" ? "items-start pt-24" : v === "bottom" ? "items-end pb-24" : "items-center";
-const horizontalClass = (h?: HeroSlide["horizontal"]) =>
-  h === "left" ? "justify-start text-left" : h === "right" ? "justify-end text-right" : "justify-center text-center";
 
 const wixImg = (file: string) =>
   `https://static.wixstatic.com/media/${file}/v1/fill/w_1400,h_800,al_c,q_90,enc_avif,quality_auto/${file}`;
@@ -161,7 +120,6 @@ const testimonials = [
 ];
 
 const Index = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [currentProject, setCurrentProject] = useState(0);
   const [currentPartner, setCurrentPartner] = useState(0);
 
@@ -181,18 +139,6 @@ const Index = () => {
     { name: "Quooker", file: "81b6c4_146afba9c83141bea2b8a6f7e58d2c1b~mv2.jpg", crop: "x_0,y_0,w_197,h_73" },
   ];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentProject((prev) => (prev + 1) % projectGallery.length);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -205,45 +151,9 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      {/* Hero Slider */}
-      <section id="home" className="relative h-screen overflow-hidden">
-        {heroSlides.map((slide, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 transition-opacity duration-1000 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}
-          >
-            <img src={slide.image} alt="Vollmer Objektmöbel" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-white/20" />
-            <div className={`absolute inset-0 flex px-6 ${verticalClass(slide.vertical)} ${horizontalClass(slide.horizontal)}`}>
-              <div
-                className="max-w-5xl"
-                style={{ transform: `translate(${slide.offsetX ?? "0%"}, ${slide.offsetY ?? "0%"})` }}
-              >
-                {slide.lines.map((line, j) => (
-                  <h2 key={j} className="font-display text-3xl md:text-5xl lg:text-6xl text-black font-normal leading-tight drop-shadow-[0_2px_4px_rgba(255,255,255,0.6)]">
-                    {line}
-                  </h2>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-        {heroSlides.length > 1 && (
-          <>
-            <button onClick={() => setCurrentSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Vorheriger Slide">
-              <ChevronLeft size={48} />
-            </button>
-            <button onClick={() => setCurrentSlide((p) => (p + 1) % heroSlides.length)} className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Nächster Slide">
-              <ChevronRight size={48} />
-            </button>
-          </>
-        )}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-          {heroSlides.map((_, i) => (
-            <button key={i} onClick={() => setCurrentSlide(i)} className={`w-3 h-3 rounded-full transition-colors ${i === currentSlide ? "bg-primary" : "bg-white/50"}`} />
-          ))}
-        </div>
-      </section>
+      {/* Hero Slider mit Admin-Modus */}
+      <HeroSlider slides={heroSlides} />
+
 
       {/* About */}
       <section id="about" className="py-24 px-6 bg-background">
