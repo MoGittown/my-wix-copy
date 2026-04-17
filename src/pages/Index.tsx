@@ -209,19 +209,14 @@ const Index = () => {
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8 md:mb-10 leading-snug">Hier finden Sie unsere neusten Projekte.</h2>
           <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
             {projectGallery.map((slide, i) => {
-              // Performance: nur aktiver + Nachbarbilder im DOM, Rest erst bei Bedarf
               const isActive = i === currentProject;
-              const isNeighbor =
-                i === (currentProject + 1) % projectGallery.length ||
-                i === (currentProject - 1 + projectGallery.length) % projectGallery.length;
-              if (!isActive && !isNeighbor) return null;
               return (
                 <img
                   key={i}
                   src={slide.src}
                   alt={slide.caption}
                   className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
-                  loading="lazy"
+                  loading={i <= 1 ? "eager" : "lazy"}
                   decoding="async"
                 />
               );
