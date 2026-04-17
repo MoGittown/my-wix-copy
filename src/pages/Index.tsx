@@ -21,6 +21,7 @@ import projektKuecheBlauAnthrazit from "@/assets/projekt-kueche-blau-anthrazit.j
 import projektDetailMuehlen from "@/assets/projekt-detail-muehlen.jpg";
 import projektDetailArmatur from "@/assets/projekt-detail-armatur.jpg";
 import projektKuecheAnthrazitUebersicht from "@/assets/projekt-kueche-anthrazit-uebersicht.jpg";
+import projektKuecheAnthrazitPetrol from "@/assets/projekt-kueche-anthrazit-petrol.jpg";
 import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
@@ -44,6 +45,7 @@ const projectGallery = [
   { src: projektKuecheAnthrazitInsel, caption: "Landhaus-Küche in Anthrazit mit Kochinsel und Naturstein-Arbeitsplatte" },
   { src: projektKuecheBlauAnthrazit, caption: "Küche in Anthrazit kombiniert mit petrolblauer Kochinsel" },
   { src: projektKuecheAnthrazitUebersicht, caption: "Moderne Anthrazit-Küche mit freistehender Kochinsel und Keramikspüle" },
+  { src: projektKuecheAnthrazitPetrol, caption: "Anthrazit-Landhausküche mit petrolblauer Kochinsel und offenen Holzregalen" },
   { src: projektDetailArmatur, caption: "Detailansicht: Edelstahl-Armatur mit Doppel-Keramikspüle auf Naturstein" },
   { src: projektDetailMuehlen, caption: "Detailansicht: Naturstein-Arbeitsplatte mit dezenter Maserung" },
   { src: projektKuecheNussbaumTag, caption: "Nussbaum-Küche mit Spiegel-Rückwand bei Tageslicht" },
