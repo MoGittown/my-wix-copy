@@ -118,16 +118,19 @@ const Referenzen = () => {
                   {p.images.map((file, i) => (
                     <a
                       key={i}
-                      href={wix(file)}
+                      href={wixFull(file)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group block overflow-hidden shadow-md aspect-[4/3] bg-secondary"
                     >
                       <img
-                        src={wix(file)}
+                        src={wixThumb(file, 600)}
+                        srcSet={wixSrcSet(file)}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         alt={`${p.title} – Bild ${i + 1}`}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
+                        decoding="async"
                       />
                     </a>
                   ))}
