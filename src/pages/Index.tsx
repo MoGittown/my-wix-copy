@@ -12,6 +12,12 @@ import projektBadJuergen2 from "@/assets/projekt-bad-juergen-2.jpg";
 import projektKuecheNussbaum from "@/assets/projekt-kueche-nussbaum.jpg";
 import projektKuecheMiele from "@/assets/projekt-kueche-miele.jpg";
 import projektKuecheNaturstein from "@/assets/projekt-kueche-naturstein.jpg";
+import projektKuecheSpiegelwand from "@/assets/projekt-kueche-spiegelwand.jpg";
+import projektKuecheMieleDetail from "@/assets/projekt-kueche-miele-detail.jpg";
+import projektKuecheNussbaumAbend from "@/assets/projekt-kueche-nussbaum-abend.jpg";
+import projektKuecheNussbaumTag from "@/assets/projekt-kueche-nussbaum-tag.jpg";
+import projektKuecheAnthrazitInsel from "@/assets/projekt-kueche-anthrazit-insel.jpg";
+import projektKuecheBlauAnthrazit from "@/assets/projekt-kueche-blau-anthrazit.jpg";
 import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
@@ -32,6 +38,12 @@ const projectGallery = [
   { src: projektKuecheNussbaum, caption: "Küche in Nussbaum mit Naturstein-Arbeitsplatte und Kochinsel" },
   { src: projektKuecheMiele, caption: "Hochglanz-Küchenzeile mit Miele-Einbaugeräten und Naturstein-Arbeitsplatte" },
   { src: projektKuecheNaturstein, caption: "Küche in Nussbaum mit großzügiger Naturstein-Arbeitsplatte und Spiegel-Rückwand" },
+  { src: projektKuecheAnthrazitInsel, caption: "Landhaus-Küche in Anthrazit mit Kochinsel und Naturstein-Arbeitsplatte" },
+  { src: projektKuecheBlauAnthrazit, caption: "Küche in Anthrazit kombiniert mit petrolblauer Kochinsel" },
+  { src: projektKuecheNussbaumTag, caption: "Nussbaum-Küche mit Spiegel-Rückwand bei Tageslicht" },
+  { src: projektKuecheNussbaumAbend, caption: "Nussbaum-Kochinsel mit Naturstein – stimmungsvoll bei Abendlicht" },
+  { src: projektKuecheSpiegelwand, caption: "Küche mit raumvergrößernder Spiegel-Rückwand und Nussbaum-Wandregal" },
+  { src: projektKuecheMieleDetail, caption: "Detailansicht: Miele-Backofen-Turm in Hochglanz-Weiß" },
   { src: projektSideboardDetail, caption: "Sideboard in Grau matt mit Eiche-Schubladen – Detailansicht" },
   { src: projektSideboardSchublade, caption: "Sideboard mit massiver Eiche-Schublade und filigraner Front" },
   { src: projektSideboardGrau, caption: "Sideboard in Grau matt auf schlanken Metallfüßen" },
