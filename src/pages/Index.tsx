@@ -156,30 +156,30 @@ const Index = () => {
 
 
       {/* About */}
-      <section id="about" className="py-24 px-6 bg-background">
+      <section id="about" className="py-16 md:py-24 px-4 sm:px-6 bg-background">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="font-serif text-xl md:text-2xl leading-relaxed text-foreground">
+          <p className="font-serif text-base sm:text-xl md:text-2xl leading-relaxed text-foreground">
             Wir bieten hochwertige kundenspezifische Objektmöbel mit einem hervorragenden Preis-Leistungs-Verhältnis,
           </p>
-          <p className="font-serif text-xl md:text-2xl leading-relaxed text-foreground mb-8">
+          <p className="font-serif text-base sm:text-xl md:text-2xl leading-relaxed text-foreground mb-6 md:mb-8">
             individuell in Form, Farbe und Material.
           </p>
-          <h3 className="font-display text-base md:text-lg text-primary tracking-wide mb-8">
+          <h3 className="font-display text-sm sm:text-base md:text-lg text-primary tracking-wide mb-6 md:mb-8 leading-relaxed">
             Innenausbau · Exklusive Küchen · Praxisräume · Büros · Co-working-Spaces · Co-Living · Micro-Apartments
           </h3>
-          <p className="font-serif text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+          <p className="font-serif text-sm sm:text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             Die Basis für unsere Arbeit ist jahrzehntelange Berufserfahrung. Wir arbeiten ökonomisch, verantwortlich, effizient, präzise, zuverlässig, termintreu und persönlich.
           </p>
-          <p className="font-serif text-muted-foreground leading-relaxed mt-4">Unser Ziel ist die vollständige Kundenzufriedenheit.</p>
-          <p className="font-serif text-muted-foreground leading-relaxed mt-4">Wir beraten Sie gerne in einem persönlichem Gespräch.</p>
+          <p className="font-serif text-sm sm:text-base text-muted-foreground leading-relaxed mt-4">Unser Ziel ist die vollständige Kundenzufriedenheit.</p>
+          <p className="font-serif text-sm sm:text-base text-muted-foreground leading-relaxed mt-4">Wir beraten Sie gerne in einem persönlichem Gespräch.</p>
         </div>
       </section>
 
       {/* Portfolio */}
-      <section id="portfolio" className="py-24 px-6 bg-secondary">
+      <section id="portfolio" className="py-16 md:py-24 px-4 sm:px-6 bg-secondary">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-16">Portfolio</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground text-center mb-10 md:mb-16">Portfolio</h2>
+          <div className="grid sm:grid-cols-2 gap-5 md:gap-8">
             {portfolioItems.map((item) => (
               <div key={item.title} className="group relative overflow-hidden aspect-square">
                 <img
@@ -189,11 +189,11 @@ const Index = () => {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-colors duration-500" />
-                <div className="absolute inset-0 flex flex-col justify-end p-8">
-                  <h3 className="font-display text-2xl md:text-3xl text-white mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">{item.title}</h3>
+                <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-8">
+                  <h3 className="font-display text-xl sm:text-2xl md:text-3xl text-white mb-2 md:mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">{item.title}</h3>
                   <ul className="space-y-1 font-serif">
                     {item.items.map((li) => (
-                      <li key={li} className="text-white text-base md:text-lg drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">• {li}</li>
+                      <li key={li} className="text-white text-sm sm:text-base md:text-lg drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">• {li}</li>
                     ))}
                   </ul>
                 </div>
@@ -204,9 +204,9 @@ const Index = () => {
       </section>
 
       {/* Neuste Projekte Slider */}
-      <section className="py-24 px-6 bg-background">
+      <section className="py-16 md:py-24 px-4 sm:px-6 bg-background">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">Hier finden Sie unsere neusten Projekte.</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8 md:mb-10 leading-snug">Hier finden Sie unsere neusten Projekte.</h2>
           <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
             {projectGallery.map((slide, i) => (
               <img
@@ -217,36 +217,36 @@ const Index = () => {
                 loading="lazy"
               />
             ))}
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-12 pb-5 px-6 text-center">
-              <p className="font-display text-sm md:text-base text-white">{projectGallery[currentProject]?.caption}</p>
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-10 md:pt-12 pb-4 md:pb-5 px-4 md:px-6 text-center">
+              <p className="font-display text-xs sm:text-sm md:text-base text-white">{projectGallery[currentProject]?.caption}</p>
             </div>
-            <button onClick={() => setCurrentProject((p) => (p - 1 + projectGallery.length) % projectGallery.length)} className="absolute left-3 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-2" aria-label="Vorheriges Projekt">
-              <ChevronLeft size={28} />
+            <button onClick={() => setCurrentProject((p) => (p - 1 + projectGallery.length) % projectGallery.length)} className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-1.5 md:p-2" aria-label="Vorheriges Projekt">
+              <ChevronLeft className="w-5 h-5 md:w-7 md:h-7" />
             </button>
-            <button onClick={() => setCurrentProject((p) => (p + 1) % projectGallery.length)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-2" aria-label="Nächstes Projekt">
-              <ChevronRight size={28} />
+            <button onClick={() => setCurrentProject((p) => (p + 1) % projectGallery.length)} className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-1.5 md:p-2" aria-label="Nächstes Projekt">
+              <ChevronRight className="w-5 h-5 md:w-7 md:h-7" />
             </button>
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2">
+            <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 flex gap-2">
               {projectGallery.map((_, i) => (
-                <button key={i} onClick={() => setCurrentProject(i)} className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentProject ? "bg-primary" : "bg-white/60"}`} aria-label={`Projekt ${i + 1}`} />
+                <button key={i} onClick={() => setCurrentProject(i)} className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-colors ${i === currentProject ? "bg-primary" : "bg-white/60"}`} aria-label={`Projekt ${i + 1}`} />
               ))}
             </div>
           </div>
-          <a href="/referenzen" className="inline-block mt-8 font-display text-sm uppercase tracking-wider text-foreground hover:text-primary transition-colors border-b border-foreground hover:border-primary pb-1">
+          <a href="/referenzen" className="inline-block mt-6 md:mt-8 font-display text-xs sm:text-sm uppercase tracking-wider text-foreground hover:text-primary transition-colors border-b border-foreground hover:border-primary pb-1">
             Alle Referenzen ansehen
           </a>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section id="clients" className="py-24 px-6 bg-background">
+      <section id="clients" className="py-16 md:py-24 px-4 sm:px-6 bg-background">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-16">Kundenstimmen</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground text-center mb-10 md:mb-16">Kundenstimmen</h2>
+          <div className="grid md:grid-cols-2 gap-5 md:gap-8">
             {testimonials.map((t) => (
-              <div key={t.name} className="bg-card border border-border p-8 shadow-sm">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center font-display text-xl text-foreground">
+              <div key={t.name} className="bg-card border border-border p-5 md:p-8 shadow-sm">
+                <div className="flex items-center gap-4 mb-4 md:mb-6">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-secondary flex items-center justify-center font-display text-lg md:text-xl text-foreground shrink-0">
                     {t.name.charAt(0)}
                   </div>
                   <div>
@@ -254,7 +254,7 @@ const Index = () => {
                     <p className="font-serif text-sm text-muted-foreground">{t.role}</p>
                   </div>
                 </div>
-                <p className="font-serif text-muted-foreground leading-relaxed italic">"{t.text}"</p>
+                <p className="font-serif text-sm sm:text-base text-muted-foreground leading-relaxed italic">"{t.text}"</p>
               </div>
             ))}
           </div>
@@ -299,13 +299,13 @@ const Index = () => {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-24 px-6 bg-background">
+      <section id="contact" className="py-16 md:py-24 px-4 sm:px-6 bg-background">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-16">Kontakt</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 font-serif">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground text-center mb-10 md:mb-16">Kontakt</h2>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="space-y-5 md:space-y-6 font-serif">
               <div>
-                <h3 className="font-display text-2xl text-foreground mb-2">Vollmer Objektmöbel</h3>
+                <h3 className="font-display text-xl sm:text-2xl text-foreground mb-2">Vollmer Objektmöbel</h3>
                 <p className="text-muted-foreground">Maurice Vollmer</p>
               </div>
               <div className="flex items-start gap-3">
@@ -319,13 +319,13 @@ const Index = () => {
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
                 <div className="text-muted-foreground">
-                  <p>+49 2235-9765401</p>
-                  <p>01573-8753464</p>
+                  <a href="tel:+4922359765401" className="hover:text-primary transition-colors block">+49 2235-9765401</a>
+                  <a href="tel:+4915738753464" className="hover:text-primary transition-colors block">01573-8753464</a>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <a href="mailto:office@vollmer-objektmoebel.com" className="text-primary hover:underline">
+                <a href="mailto:office@vollmer-objektmoebel.com" className="text-primary hover:underline break-all">
                   office@vollmer-objektmoebel.com
                 </a>
               </div>
