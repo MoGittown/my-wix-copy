@@ -94,8 +94,12 @@ const Index = () => {
     }, 6000);
     return () => clearInterval(timer);
   }, []);
-
-
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentProject((prev) => (prev + 1) % projectGallery.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
