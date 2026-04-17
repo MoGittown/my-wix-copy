@@ -45,7 +45,7 @@ const HeroSlider = ({ slides, intervalMs = 6000 }: { slides: HeroSlide[]; interv
           >
             <img src={slide.image} alt="Vollmer Objektmöbel" className="w-full h-full object-cover" />
             <div
-              className="absolute max-w-5xl px-6 text-center"
+              className="absolute w-[90%] max-w-5xl px-2 sm:px-6 text-center"
               style={{
                 left: `${p.xPct}%`,
                 top: `${p.yPct}%`,
@@ -56,7 +56,7 @@ const HeroSlider = ({ slides, intervalMs = 6000 }: { slides: HeroSlide[]; interv
               {slide.lines.map((line, j) => (
                 <h2
                   key={j}
-                  className="font-display text-3xl md:text-5xl lg:text-6xl text-black font-normal leading-tight drop-shadow-[0_2px_4px_rgba(255,255,255,0.6)]"
+                  className="font-display text-xl sm:text-3xl md:text-5xl lg:text-6xl text-black font-normal leading-tight drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]"
                 >
                   {line}
                 </h2>
@@ -70,17 +70,17 @@ const HeroSlider = ({ slides, intervalMs = 6000 }: { slides: HeroSlide[]; interv
         <>
           <button
             onClick={() => setCurrentSlide((p) => (p - 1 + slides.length) % slides.length)}
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white"
+            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1"
             aria-label="Vorheriger Slide"
           >
-            <ChevronLeft size={48} />
+            <ChevronLeft className="w-8 h-8 sm:w-12 sm:h-12" />
           </button>
           <button
             onClick={() => setCurrentSlide((p) => (p + 1) % slides.length)}
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white"
+            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1"
             aria-label="Nächster Slide"
           >
-            <ChevronRight size={48} />
+            <ChevronRight className="w-8 h-8 sm:w-12 sm:h-12" />
           </button>
         </>
       )}
