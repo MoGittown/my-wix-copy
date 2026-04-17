@@ -12,6 +12,12 @@ import projektBadJuergen2 from "@/assets/projekt-bad-juergen-2.jpg";
 import projektKuecheNussbaum from "@/assets/projekt-kueche-nussbaum.jpg";
 import projektKuecheMiele from "@/assets/projekt-kueche-miele.jpg";
 import projektKuecheNaturstein from "@/assets/projekt-kueche-naturstein.jpg";
+import projektKuecheSpiegelwand from "@/assets/projekt-kueche-spiegelwand.jpg";
+import projektKuecheMieleDetail from "@/assets/projekt-kueche-miele-detail.jpg";
+import projektKuecheNussbaumAbend from "@/assets/projekt-kueche-nussbaum-abend.jpg";
+import projektKuecheNussbaumTag from "@/assets/projekt-kueche-nussbaum-tag.jpg";
+import projektKuecheAnthrazitInsel from "@/assets/projekt-kueche-anthrazit-insel.jpg";
+import projektKuecheBlauAnthrazit from "@/assets/projekt-kueche-blau-anthrazit.jpg";
 import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
