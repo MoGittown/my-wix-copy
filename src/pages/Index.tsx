@@ -82,7 +82,7 @@ const Index = () => {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center px-6">
                 {slide.lines.map((line, j) => (
-                  <h2 key={j} className="text-3xl md:text-5xl lg:text-6xl text-white font-medium leading-tight">
+                  <h2 key={j} className="font-display text-3xl md:text-5xl lg:text-6xl text-white font-normal leading-tight drop-shadow-lg">
                     {line}
                   </h2>
                 ))}
@@ -108,32 +108,32 @@ const Index = () => {
       </section>
 
       {/* About */}
-      <section id="about" className="py-24 px-6">
+      <section id="about" className="py-24 px-6 bg-background">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xl md:text-2xl leading-relaxed text-foreground">
+          <p className="font-serif text-xl md:text-2xl leading-relaxed text-foreground">
             Wir bieten hochwertige kundenspezifische Objektmöbel mit einem hervorragenden Preis-Leistungs-Verhältnis,
           </p>
-          <p className="text-xl md:text-2xl leading-relaxed text-foreground mb-8">
+          <p className="font-serif text-xl md:text-2xl leading-relaxed text-foreground mb-8">
             individuell in Form, Farbe und Material.
           </p>
-          <h3 className="text-lg md:text-xl text-primary font-semibold mb-8">
+          <h3 className="font-display text-base md:text-lg text-primary tracking-wide mb-8">
             Innenausbau · Exklusive Küchen · Praxisräume · Büros · Co-working-Spaces · Co-Living · Micro-Apartments
           </h3>
-          <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+          <p className="font-serif text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             Die Basis für unsere Arbeit ist jahrzehntelange Berufserfahrung. Wir arbeiten ökonomisch, verantwortlich, effizient, präzise, zuverlässig, termintreu und persönlich.
           </p>
-          <p className="text-muted-foreground leading-relaxed mt-4">Unser Ziel ist die vollständige Kundenzufriedenheit.</p>
-          <p className="text-muted-foreground leading-relaxed mt-4">Wir beraten Sie gerne in einem persönlichem Gespräch.</p>
+          <p className="font-serif text-muted-foreground leading-relaxed mt-4">Unser Ziel ist die vollständige Kundenzufriedenheit.</p>
+          <p className="font-serif text-muted-foreground leading-relaxed mt-4">Wir beraten Sie gerne in einem persönlichem Gespräch.</p>
         </div>
       </section>
 
       {/* Portfolio */}
       <section id="portfolio" className="py-24 px-6 bg-secondary">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">Portfolio</h2>
+          <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-16">Portfolio</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {portfolioItems.map((item) => (
-              <div key={item.title} className="group relative overflow-hidden rounded-lg aspect-square">
+              <div key={item.title} className="group relative overflow-hidden aspect-square">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -142,10 +142,10 @@ const Index = () => {
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-500" />
                 <div className="absolute inset-0 flex flex-col justify-end p-8">
-                  <h3 className="text-2xl md:text-3xl text-white font-bold mb-4">{item.title}</h3>
-                  <ul className="space-y-1">
+                  <h3 className="font-display text-2xl md:text-3xl text-white mb-4">{item.title}</h3>
+                  <ul className="space-y-1 font-serif">
                     {item.items.map((li) => (
-                      <li key={li} className="text-white/90 text-sm md:text-base">• {li}</li>
+                      <li key={li} className="text-white/90 text-base md:text-lg">• {li}</li>
                     ))}
                   </ul>
                 </div>
@@ -156,22 +156,22 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section id="clients" className="py-24 px-6">
+      <section id="clients" className="py-24 px-6 bg-background">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">Kundenstimmen</h2>
+          <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-16">Kundenstimmen</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {testimonials.map((t) => (
-              <div key={t.name} className="bg-card border border-border rounded-lg p-8 shadow-sm">
+              <div key={t.name} className="bg-card border border-border p-8 shadow-sm">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center text-xl font-bold text-muted-foreground">
+                  <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center font-display text-xl text-foreground">
                     {t.name.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">{t.name}</h4>
-                    <p className="text-sm text-muted-foreground">{t.role}</p>
+                    <h4 className="font-display text-foreground">{t.name}</h4>
+                    <p className="font-serif text-sm text-muted-foreground">{t.role}</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground leading-relaxed italic">"{t.text}"</p>
+                <p className="font-serif text-muted-foreground leading-relaxed italic">"{t.text}"</p>
               </div>
             ))}
           </div>
@@ -181,7 +181,7 @@ const Index = () => {
       {/* Partners */}
       <section className="py-16 px-6 bg-secondary">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-10">Einige unserer Partner</h2>
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">Einige unserer Partner</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 items-center">
             {[
               { name: "Nobilia", file: "81b6c4_27dd97ac85394ead87eea5e95abd3a3b~mv2.jpg", crop: "x_0,y_0,w_234,h_61" },
@@ -212,13 +212,13 @@ const Index = () => {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-24 px-6">
+      <section id="contact" className="py-24 px-6 bg-background">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">Kontakt</h2>
+          <h2 className="font-display text-4xl md:text-5xl text-foreground text-center mb-16">Kontakt</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+            <div className="space-y-6 font-serif">
               <div>
-                <h3 className="text-2xl font-bold mb-2">Vollmer Objektmöbel</h3>
+                <h3 className="font-display text-2xl text-foreground mb-2">Vollmer Objektmöbel</h3>
                 <p className="text-muted-foreground">Maurice Vollmer</p>
               </div>
               <div className="flex items-start gap-3">
@@ -248,7 +248,7 @@ const Index = () => {
               <img
                 src="https://static.wixstatic.com/media/81b6c4_12ffe13a374840cd9c583630babbb08d~mv2_d_3480_3108_s_4_2.jpg/v1/crop/x_0,y_441,w_3480,h_2226/fill/w_469,h_300,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Maurice%20Vollmer-1%20(3).jpg"
                 alt="Maurice Vollmer"
-                className="rounded-lg shadow-lg max-w-full"
+                className="shadow-lg max-w-full"
                 loading="lazy"
               />
             </div>
