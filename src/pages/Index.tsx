@@ -7,6 +7,9 @@ import projektSideboardDetail from "@/assets/projekt-sideboard-detail.jpg";
 import projektSideboardSchublade from "@/assets/projekt-sideboard-schublade.jpg";
 import projektSideboardGrau from "@/assets/projekt-sideboard-grau.jpg";
 import projektSchubladeEiche from "@/assets/projekt-schublade-eiche.jpg";
+import projektBadJuergen from "@/assets/projekt-bad-juergen.jpg";
+import projektBadJuergen2 from "@/assets/projekt-bad-juergen-2.jpg";
+import projektKuecheNussbaum from "@/assets/projekt-kueche-nussbaum.jpg";
 import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
@@ -22,6 +25,9 @@ const wixImg = (file: string) =>
 const projectGallery = [
   { src: projektEichenschrank, caption: "Einbauschrank in Eiche – maßgefertigt mit Schublade und Kleiderlift" },
   { src: projektBadmoebel, caption: "Badmöbel mit Doppelwaschtisch und Hochschrank in Eiche-Optik" },
+  { src: projektBadJuergen, caption: "Badezimmer mit Doppelwaschtisch in Eiche-Optik – maßgefertigt" },
+  { src: projektBadJuergen2, caption: "Hochschrank in Eiche-Optik mit Schubladen – passend zum Waschtisch" },
+  { src: projektKuecheNussbaum, caption: "Küche in Nussbaum mit Naturstein-Arbeitsplatte und Kochinsel" },
   { src: projektSideboardDetail, caption: "Sideboard in Grau matt mit Eiche-Schubladen – Detailansicht" },
   { src: projektSideboardSchublade, caption: "Sideboard mit massiver Eiche-Schublade und filigraner Front" },
   { src: projektSideboardGrau, caption: "Sideboard in Grau matt auf schlanken Metallfüßen" },
