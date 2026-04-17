@@ -2,8 +2,13 @@ import { useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
-const wix = (file: string) =>
-  `https://static.wixstatic.com/media/${file}/v1/fill/w_1200,h_800,q_85,enc_avif,quality_auto/${file}`;
+// Wix-CDN: liefert moderne Formate (WebP/AVIF) automatisch via enc_auto
+const wixThumb = (file: string, w = 600) =>
+  `https://static.wixstatic.com/media/${file}/v1/fill/w_${w},h_${Math.round((w * 3) / 4)},q_80,enc_auto/${file}`;
+const wixFull = (file: string) =>
+  `https://static.wixstatic.com/media/${file}/v1/fill/w_1600,h_1200,q_85,enc_auto/${file}`;
+const wixSrcSet = (file: string) =>
+  [400, 600, 900, 1200].map((w) => `${wixThumb(file, w)} ${w}w`).join(", ");
 
 const projects = [
   {
