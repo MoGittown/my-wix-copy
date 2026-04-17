@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import projektEichenschrank from "@/assets/projekt-eichenschrank.jpg";
