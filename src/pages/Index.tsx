@@ -20,6 +20,18 @@ const heroSlides = [
     image: "https://static.wixstatic.com/media/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg/v1/fill/w_1920,h_937,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg",
     lines: ["Praxisräume & Büros", "Funktional, ästhetisch, langlebig"],
   },
+  {
+    image: "https://static.wixstatic.com/media/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg/v1/fill/w_1920,h_937,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg",
+    lines: ["Coworking & Co-Living", "Räume, die Menschen verbinden"],
+  },
+];
+
+const projectSlides = [
+  "https://static.wixstatic.com/media/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg",
+  "https://static.wixstatic.com/media/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg",
+  "https://static.wixstatic.com/media/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg",
+  "https://static.wixstatic.com/media/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg",
+  "https://static.wixstatic.com/media/81b6c4_1dd3319a4b8c4b7da23f1f5aa0e1f05e~mv2_d_3872_2581_s_4_2.jpg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_1dd3319a4b8c4b7da23f1f5aa0e1f05e~mv2_d_3872_2581_s_4_2.jpg",
 ];
 
 const portfolioItems = [
@@ -70,6 +82,24 @@ const testimonials = [
 
 const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentProject, setCurrentProject] = useState(0);
+  const [currentPartner, setCurrentPartner] = useState(0);
+
+  const partners = [
+    { name: "Nobilia", file: "81b6c4_27dd97ac85394ead87eea5e95abd3a3b~mv2.jpg", crop: "x_0,y_0,w_234,h_61" },
+    { name: "Häcker", file: "81b6c4_dc784e7a8ada4debbe68f46e1ea2c2d6~mv2.jpg", crop: "x_0,y_0,w_220,h_80" },
+    { name: "Naber", file: "81b6c4_da4bff6f67124dedaea97564f4c45cc2~mv2.jpg", crop: "x_0,y_2,w_200,h_86" },
+    { name: "Siemens", file: "81b6c4_fd19d21d6cd14559bd179107b610eda8~mv2.jpg", crop: "x_0,y_3,w_214,h_86" },
+    { name: "Miele", file: "81b6c4_85dd458999924388bfb78dac3cfdcb7a~mv2.jpg", crop: "x_0,y_0,w_195,h_73" },
+    { name: "Neff", file: "81b6c4_38a756a0e4574fb3b06d30229c86ee73~mv2.jpg", crop: "x_0,y_1,w_216,h_86" },
+    { name: "Amica", file: "81b6c4_8589b1fe154c48fcb5b38b9ac624567c~mv2.jpg", crop: "x_0,y_7,w_174,h_86" },
+    { name: "Berbel", file: "81b6c4_69c05082ee8b4d35b8eda4fb685416a3~mv2.jpg", crop: "x_6,y_0,w_264,h_82" },
+    { name: "Blanco", file: "81b6c4_105b35c5ed5f4dae95fa0a831e4ced62~mv2.jpg", crop: "x_0,y_0,w_142,h_62" },
+    { name: "Horatec", file: "81b6c4_f1314268081444f9a8af92b988dca75a~mv2.jpg", crop: "x_0,y_0,w_160,h_68" },
+    { name: "Stengel", file: "81b6c4_232be34fa32d44a6bbb452aeab015b4d~mv2.jpg", crop: "x_0,y_0,w_205,h_55" },
+    { name: "Priess", file: "81b6c4_f8565afcc4b84abba67dce187a846844~mv2.jpg", crop: "x_0,y_0,w_213,h_62" },
+    { name: "Quooker", file: "81b6c4_146afba9c83141bea2b8a6f7e58d2c1b~mv2.jpg", crop: "x_0,y_0,w_197,h_73" },
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -77,6 +107,20 @@ const Index = () => {
     }, 6000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentProject((prev) => (prev + 1) % projectSlides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentPartner((prev) => (prev + 1) % partners.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [partners.length]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -98,20 +142,6 @@ const Index = () => {
                     {line}
                   </h2>
                 ))}
-                <div className="mt-10 flex gap-4 justify-center">
-                  <a
-                    href="#contact"
-                    className="bg-primary text-primary-foreground font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/90 transition-colors"
-                  >
-                    Jetzt anfragen
-                  </a>
-                  <a
-                    href="#portfolio"
-                    className="border border-white text-white font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-white hover:text-foreground transition-colors"
-                  >
-                    Projekte ansehen
-                  </a>
-                </div>
               </div>
             </div>
           </div>
@@ -193,13 +223,27 @@ const Index = () => {
             <li>• Koordinierung von Gewerken</li>
             <li>• Erstellung des Bauzeitenplans</li>
           </ul>
-          <div>
-            <a
-              href="/referenzen"
-              className="inline-block bg-primary text-primary-foreground font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/90 transition-colors"
-            >
-              Unsere neusten Projekte
-            </a>
+          <div className="relative max-w-4xl mx-auto mt-10 aspect-[16/9] overflow-hidden bg-secondary">
+            {projectSlides.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`Projekt ${i + 1}`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === currentProject ? "opacity-100" : "opacity-0"}`}
+                loading="lazy"
+              />
+            ))}
+            <button onClick={() => setCurrentProject((p) => (p - 1 + projectSlides.length) % projectSlides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Vorheriges Projekt">
+              <ChevronLeft size={28} />
+            </button>
+            <button onClick={() => setCurrentProject((p) => (p + 1) % projectSlides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Nächstes Projekt">
+              <ChevronRight size={28} />
+            </button>
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+              {projectSlides.map((_, i) => (
+                <button key={i} onClick={() => setCurrentProject(i)} className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentProject ? "bg-primary" : "bg-white/60"}`} aria-label={`Projekt ${i + 1}`} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -229,34 +273,38 @@ const Index = () => {
 
       {/* Partners */}
       <section className="py-16 px-6 bg-secondary">
-        <div className="max-w-6xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">Einige unserer Partner</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 items-center">
-            {[
-              { name: "Nobilia", file: "81b6c4_27dd97ac85394ead87eea5e95abd3a3b~mv2.jpg", crop: "x_0,y_0,w_234,h_61" },
-              { name: "Häcker", file: "81b6c4_dc784e7a8ada4debbe68f46e1ea2c2d6~mv2.jpg", crop: "x_0,y_0,w_220,h_80" },
-              { name: "Naber", file: "81b6c4_da4bff6f67124dedaea97564f4c45cc2~mv2.jpg", crop: "x_0,y_2,w_200,h_86" },
-              { name: "Siemens", file: "81b6c4_fd19d21d6cd14559bd179107b610eda8~mv2.jpg", crop: "x_0,y_3,w_214,h_86" },
-              { name: "Miele", file: "81b6c4_85dd458999924388bfb78dac3cfdcb7a~mv2.jpg", crop: "x_0,y_0,w_195,h_73" },
-              { name: "Neff", file: "81b6c4_38a756a0e4574fb3b06d30229c86ee73~mv2.jpg", crop: "x_0,y_1,w_216,h_86" },
-              { name: "Amica", file: "81b6c4_8589b1fe154c48fcb5b38b9ac624567c~mv2.jpg", crop: "x_0,y_7,w_174,h_86" },
-              { name: "Berbel", file: "81b6c4_69c05082ee8b4d35b8eda4fb685416a3~mv2.jpg", crop: "x_6,y_0,w_264,h_82" },
-              { name: "Blanco", file: "81b6c4_105b35c5ed5f4dae95fa0a831e4ced62~mv2.jpg", crop: "x_0,y_0,w_142,h_62" },
-              { name: "Horatec", file: "81b6c4_f1314268081444f9a8af92b988dca75a~mv2.jpg", crop: "x_0,y_0,w_160,h_68" },
-              { name: "Stengel", file: "81b6c4_232be34fa32d44a6bbb452aeab015b4d~mv2.jpg", crop: "x_0,y_0,w_205,h_55" },
-              { name: "Priess", file: "81b6c4_f8565afcc4b84abba67dce187a846844~mv2.jpg", crop: "x_0,y_0,w_213,h_62" },
-              { name: "Quooker", file: "81b6c4_146afba9c83141bea2b8a6f7e58d2c1b~mv2.jpg", crop: "x_0,y_0,w_197,h_73" },
-            ].map((p) => (
-              <div key={p.name} className="flex items-center justify-center h-20 p-2">
+          <div className="relative h-32 flex items-center justify-center overflow-hidden">
+            {partners.map((p, i) => (
+              <div
+                key={p.name}
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${i === currentPartner ? "opacity-100" : "opacity-0"}`}
+              >
                 <img
                   src={`https://static.wixstatic.com/media/${p.file}/v1/crop/${p.crop},q_85,enc_avif,quality_auto/${p.file}`}
                   alt={p.name}
-                  className="max-h-full max-w-full object-contain"
+                  className="max-h-24 max-w-full object-contain"
                   loading="lazy"
                 />
               </div>
             ))}
+            <button
+              onClick={() => setCurrentPartner((p) => (p - 1 + partners.length) % partners.length)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 text-foreground/70 hover:text-foreground p-2"
+              aria-label="Vorheriger Partner"
+            >
+              <ChevronLeft size={28} />
+            </button>
+            <button
+              onClick={() => setCurrentPartner((p) => (p + 1) % partners.length)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 text-foreground/70 hover:text-foreground p-2"
+              aria-label="Nächster Partner"
+            >
+              <ChevronRight size={28} />
+            </button>
           </div>
+          <p className="font-serif text-sm text-muted-foreground mt-6">{partners[currentPartner].name}</p>
         </div>
       </section>
 
