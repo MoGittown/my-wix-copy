@@ -19,10 +19,12 @@ const SiteHeader = () => {
     setOpen(false);
     if (to.includes("#")) {
       const [path, hash] = to.split("#");
-      if (location.pathname === (path || "/")) {
+      const targetPath = path || "/";
+      if (location.pathname === targetPath) {
         document.querySelector(`#${hash}`)?.scrollIntoView({ behavior: "smooth" });
       } else {
-        navigate(to);
+        // Erst navigieren, dann nach dem Mount zum Anker scrollen
+        navigate(targetPath, { state: { scrollTo: hash } });
       }
     } else {
       navigate(to);
