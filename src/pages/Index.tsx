@@ -42,6 +42,8 @@ const projectGallery = [
   { src: projektKuecheNaturstein, caption: "Küche in Nussbaum mit großzügiger Naturstein-Arbeitsplatte und Spiegel-Rückwand" },
   { src: projektKuecheAnthrazitInsel, caption: "Landhaus-Küche in Anthrazit mit Kochinsel und Naturstein-Arbeitsplatte" },
   { src: projektKuecheBlauAnthrazit, caption: "Küche in Anthrazit kombiniert mit petrolblauer Kochinsel" },
+  { src: projektDetailArmatur, caption: "Detailansicht: Edelstahl-Armatur mit Doppel-Keramikspüle auf Naturstein" },
+  { src: projektDetailMuehlen, caption: "Detailansicht: Naturstein-Arbeitsplatte mit dezenter Maserung" },
   { src: projektKuecheNussbaumTag, caption: "Nussbaum-Küche mit Spiegel-Rückwand bei Tageslicht" },
   { src: projektKuecheNussbaumAbend, caption: "Nussbaum-Kochinsel mit Naturstein – stimmungsvoll bei Abendlicht" },
   { src: projektKuecheSpiegelwand, caption: "Küche mit raumvergrößernder Spiegel-Rückwand und Nussbaum-Wandregal" },
