@@ -38,12 +38,25 @@ const HeroSlider = ({ slides, intervalMs = 6000 }: { slides: HeroSlide[]; interv
       {slides.map((slide, i) => {
         const p = getPos(i);
         const isActive = i === currentSlide;
+        // Performance: nur aktiver Slide + direkter Nachbar werden überhaupt im DOM/geladen
+        const isNeighbor =
+          i === (currentSlide + 1) % slides.length ||
+          i === (currentSlide - 1 + slides.length) % slides.length;
+        const shouldRender = isActive || isNeighbor || i === 0;
+        if (!shouldRender) return null;
         return (
           <div
             key={i}
             className={`absolute inset-0 transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
           >
-            <img src={slide.image} alt="Vollmer Objektmöbel" className="w-full h-full object-cover" />
+            <img
+              src={slide.image}
+              alt="Vollmer Objektmöbel"
+              className="w-full h-full object-cover"
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+              {...(i === 0 ? { fetchPriority: "high" as const } : {})}
+            />
             <div
               className="absolute w-[90%] max-w-5xl px-2 sm:px-6 text-center"
               style={{
