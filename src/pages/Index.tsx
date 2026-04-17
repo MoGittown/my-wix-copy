@@ -208,15 +208,24 @@ const Index = () => {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8 md:mb-10 leading-snug">Hier finden Sie unsere neusten Projekte.</h2>
           <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
-            {projectGallery.map((slide, i) => (
-              <img
-                key={i}
-                src={slide.src}
-                alt={slide.caption}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === currentProject ? "opacity-100" : "opacity-0"}`}
-                loading="lazy"
-              />
-            ))}
+            {projectGallery.map((slide, i) => {
+              // Performance: nur aktiver + Nachbarbilder im DOM, Rest erst bei Bedarf
+              const isActive = i === currentProject;
+              const isNeighbor =
+                i === (currentProject + 1) % projectGallery.length ||
+                i === (currentProject - 1 + projectGallery.length) % projectGallery.length;
+              if (!isActive && !isNeighbor) return null;
+              return (
+                <img
+                  key={i}
+                  src={slide.src}
+                  alt={slide.caption}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              );
+            })}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-10 md:pt-12 pb-4 md:pb-5 px-4 md:px-6 text-center">
               <p className="font-display text-xs sm:text-sm md:text-base text-white">{projectGallery[currentProject]?.caption}</p>
             </div>
@@ -266,19 +275,27 @@ const Index = () => {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">Einige unserer Partner</h2>
           <div className="relative h-32 flex items-center justify-center overflow-hidden">
-            {partners.map((p, i) => (
-              <div
-                key={p.name}
-                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${i === currentPartner ? "opacity-100" : "opacity-0"}`}
-              >
-                <img
-                  src={`https://static.wixstatic.com/media/${p.file}/v1/crop/${p.crop},q_85,enc_avif,quality_auto/${p.file}`}
-                  alt={p.name}
-                  className="max-h-24 max-w-full object-contain"
-                  loading="lazy"
-                />
-              </div>
-            ))}
+            {partners.map((p, i) => {
+              const isActive = i === currentPartner;
+              const isNeighbor =
+                i === (currentPartner + 1) % partners.length ||
+                i === (currentPartner - 1 + partners.length) % partners.length;
+              if (!isActive && !isNeighbor) return null;
+              return (
+                <div
+                  key={p.name}
+                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${isActive ? "opacity-100" : "opacity-0"}`}
+                >
+                  <img
+                    src={`https://static.wixstatic.com/media/${p.file}/v1/crop/${p.crop},q_85,enc_avif,quality_auto/${p.file}`}
+                    alt={p.name}
+                    className="max-h-24 max-w-full object-contain"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              );
+            })}
             <button
               onClick={() => setCurrentPartner((p) => (p - 1 + partners.length) % partners.length)}
               className="absolute left-0 top-1/2 -translate-y-1/2 text-foreground/70 hover:text-foreground p-2"
