@@ -92,22 +92,36 @@ const Index = () => {
             <img src={slide.image} alt="Vollmer Objektmöbel" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center px-6">
+              <div className="text-center px-6 max-w-5xl">
                 {slide.lines.map((line, j) => (
                   <h2 key={j} className="font-display text-3xl md:text-5xl lg:text-6xl text-white font-normal leading-tight drop-shadow-lg">
                     {line}
                   </h2>
                 ))}
+                <div className="mt-10 flex gap-4 justify-center">
+                  <a
+                    href="#contact"
+                    className="bg-primary text-primary-foreground font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/90 transition-colors"
+                  >
+                    Jetzt anfragen
+                  </a>
+                  <a
+                    href="#portfolio"
+                    className="border border-white text-white font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-white hover:text-foreground transition-colors"
+                  >
+                    Projekte ansehen
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         ))}
         {heroSlides.length > 1 && (
           <>
-            <button onClick={() => setCurrentSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white">
+            <button onClick={() => setCurrentSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Vorheriger Slide">
               <ChevronLeft size={48} />
             </button>
-            <button onClick={() => setCurrentSlide((p) => (p + 1) % heroSlides.length)} className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white">
+            <button onClick={() => setCurrentSlide((p) => (p + 1) % heroSlides.length)} className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Nächster Slide">
               <ChevronRight size={48} />
             </button>
           </>
