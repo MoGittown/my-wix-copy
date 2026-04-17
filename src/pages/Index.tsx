@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin } from "lucide-react";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
   {
@@ -288,13 +290,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-foreground text-background py-8 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm opacity-80">© {new Date().getFullYear()} Vollmer Objektmöbel. Alle Rechte vorbehalten.</p>
-          <p className="text-sm opacity-80">Impressum</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 };
