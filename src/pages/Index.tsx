@@ -183,28 +183,37 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Projektbegleitung */}
+      {/* Neuste Projekte Slider */}
       <section className="py-24 px-6 bg-background">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">Projektbegleitung</h2>
-          <p className="font-serif text-lg leading-relaxed text-muted-foreground mb-6">
-            Wir haben ein umfangreiches Netzwerk für alle Gewerke und begleiten Ihr Projekt von der ersten Idee bis zur Schlüsselübergabe.
-          </p>
-          <ul className="font-serif text-foreground space-y-2 mb-10 inline-block text-left">
-            <li>• Bauleitung auf der Baustelle</li>
-            <li>• Koordinierung von Gewerken</li>
-            <li>• Erstellung des Bauzeitenplans</li>
-          </ul>
-          <a href="/referenzen" className="inline-block group mt-4">
-            <img
-              src="https://static.wixstatic.com/media/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg/v1/fill/w_252,h_168,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg"
-              alt="Unsere neusten Projekte"
-              className="mx-auto shadow-md transition-transform duration-300 group-hover:scale-105"
-              loading="lazy"
-            />
-            <p className="font-serif text-foreground mt-4 group-hover:text-primary transition-colors">
-              Hier finden Sie unsere neusten Projekte.
-            </p>
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">Hier finden Sie unsere neusten Projekte.</h2>
+          <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
+            {projectGallery.map((slide, i) => (
+              <img
+                key={i}
+                src={slide.src}
+                alt={slide.caption}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === currentProject ? "opacity-100" : "opacity-0"}`}
+                loading="lazy"
+              />
+            ))}
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-12 pb-5 px-6 text-center">
+              <p className="font-display text-sm md:text-base text-white">{projectGallery[currentProject].caption}</p>
+            </div>
+            <button onClick={() => setCurrentProject((p) => (p - 1 + projectGallery.length) % projectGallery.length)} className="absolute left-3 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-2" aria-label="Vorheriges Projekt">
+              <ChevronLeft size={28} />
+            </button>
+            <button onClick={() => setCurrentProject((p) => (p + 1) % projectGallery.length)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-2" aria-label="Nächstes Projekt">
+              <ChevronRight size={28} />
+            </button>
+            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2">
+              {projectGallery.map((_, i) => (
+                <button key={i} onClick={() => setCurrentProject(i)} className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentProject ? "bg-primary" : "bg-white/60"}`} aria-label={`Projekt ${i + 1}`} />
+              ))}
+            </div>
+          </div>
+          <a href="/referenzen" className="inline-block mt-8 font-display text-sm uppercase tracking-wider text-foreground hover:text-primary transition-colors border-b border-foreground hover:border-primary pb-1">
+            Alle Referenzen ansehen
           </a>
         </div>
       </section>
