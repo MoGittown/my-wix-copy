@@ -2,8 +2,13 @@ import { useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
-const wix = (file: string) =>
-  `https://static.wixstatic.com/media/${file}/v1/fill/w_1200,h_800,q_85,enc_avif,quality_auto/${file}`;
+// Wix-CDN: liefert moderne Formate (WebP/AVIF) automatisch via enc_auto
+const wixThumb = (file: string, w = 600) =>
+  `https://static.wixstatic.com/media/${file}/v1/fill/w_${w},h_${Math.round((w * 3) / 4)},q_80,enc_auto/${file}`;
+const wixFull = (file: string) =>
+  `https://static.wixstatic.com/media/${file}/v1/fill/w_1600,h_1200,q_85,enc_auto/${file}`;
+const wixSrcSet = (file: string) =>
+  [400, 600, 900, 1200].map((w) => `${wixThumb(file, w)} ${w}w`).join(", ");
 
 const projects = [
   {
@@ -113,16 +118,19 @@ const Referenzen = () => {
                   {p.images.map((file, i) => (
                     <a
                       key={i}
-                      href={wix(file)}
+                      href={wixFull(file)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group block overflow-hidden shadow-md aspect-[4/3] bg-secondary"
                     >
                       <img
-                        src={wix(file)}
+                        src={wixThumb(file, 600)}
+                        srcSet={wixSrcSet(file)}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         alt={`${p.title} – Bild ${i + 1}`}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
+                        decoding="async"
                       />
                     </a>
                   ))}

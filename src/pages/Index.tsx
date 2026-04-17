@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import projektEichenschrank from "@/assets/projekt-eichenschrank.jpg";
@@ -146,6 +147,18 @@ const Index = () => {
     }, 2500);
     return () => clearInterval(timer);
   }, [partners.length]);
+
+  // Scrollt zu Anker, wenn von anderer Seite mit state.scrollTo navigiert wurde
+  const location = useLocation();
+  useEffect(() => {
+    const target = (location.state as { scrollTo?: string } | null)?.scrollTo;
+    if (target) {
+      // Kurze Verzögerung, damit das DOM gemountet ist
+      requestAnimationFrame(() => {
+        document.querySelector(`#${target}`)?.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-background">
