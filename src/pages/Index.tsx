@@ -223,13 +223,27 @@ const Index = () => {
             <li>• Koordinierung von Gewerken</li>
             <li>• Erstellung des Bauzeitenplans</li>
           </ul>
-          <div>
-            <a
-              href="/referenzen"
-              className="inline-block bg-primary text-primary-foreground font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/90 transition-colors"
-            >
-              Unsere neusten Projekte
-            </a>
+          <div className="relative max-w-4xl mx-auto mt-10 aspect-[16/9] overflow-hidden bg-secondary">
+            {projectSlides.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`Projekt ${i + 1}`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === currentProject ? "opacity-100" : "opacity-0"}`}
+                loading="lazy"
+              />
+            ))}
+            <button onClick={() => setCurrentProject((p) => (p - 1 + projectSlides.length) % projectSlides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Vorheriges Projekt">
+              <ChevronLeft size={28} />
+            </button>
+            <button onClick={() => setCurrentProject((p) => (p + 1) % projectSlides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Nächstes Projekt">
+              <ChevronRight size={28} />
+            </button>
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+              {projectSlides.map((_, i) => (
+                <button key={i} onClick={() => setCurrentProject(i)} className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentProject ? "bg-primary" : "bg-white/60"}`} aria-label={`Projekt ${i + 1}`} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
