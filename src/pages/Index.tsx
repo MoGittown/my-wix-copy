@@ -10,16 +10,36 @@ const heroSlides = [
   },
 ];
 
+const wixImg = (file: string) =>
+  `https://static.wixstatic.com/media/${file}/v1/fill/w_1400,h_800,al_c,q_90,enc_avif,quality_auto/${file}`;
+
 const projectGallery = [
-  { src: "https://static.wixstatic.com/media/81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein \"San Sebastian\" satiniert" },
-  { src: "https://static.wixstatic.com/media/81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein \"San Sebastian\" satiniert" },
-  { src: "https://static.wixstatic.com/media/81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { src: "https://static.wixstatic.com/media/81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { src: "https://static.wixstatic.com/media/81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
-  { src: "https://static.wixstatic.com/media/81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
-  { src: "https://static.wixstatic.com/media/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg", caption: "Krankenhausausstattung – Patientenzimmer & Empfangstheken" },
-  { src: "https://static.wixstatic.com/media/81b6c4_e6c75db583cb4643b94f6b05c7cad22b~mv2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_e6c75db583cb4643b94f6b05c7cad22b~mv2.jpg", caption: "Krankenhausausstattung – Schwestern-Küchen & Wandvertäfelung" },
-];
+  { file: "81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
+  { file: "81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
+  { file: "81b6c4_25f240abdfa84ba7a15bd0238d7794f2~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
+  { file: "81b6c4_bbcdaaf76e3e4444bd01bf9d07198c1f~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
+  { file: "81b6c4_ed24787bfe344b608890522d628a0e31~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
+  { file: "81b6c4_51dedc99c64c4b4c8d0c9be54d11bd95~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
+  { file: "81b6c4_c184ba2d66354f08b4428b9739af0cc4~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
+  { file: "81b6c4_c640fa2de53a4dcaadc4ee8c1059ca39~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
+  { file: "81b6c4_691da7e0125a46d897b9e07a4beda022~mv2_d_5184_3456_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { file: "81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { file: "81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { file: "81b6c4_c77f29df7e134982985de7e1264c4d52~mv2_d_3000_4000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { file: "81b6c4_4a6f00f080fe47e4b9cd83d387ef5bca~mv2_d_3000_4000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { file: "81b6c4_7ea1206275554cc2894ad32fc4bb7b8b~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { file: "81b6c4_6e1d76128f274ed2a05630ababf6498d~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
+  { file: "81b6c4_22cc564685fd470a9cc20014d1212b68~mv2_d_3000_4000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
+  { file: "81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
+  { file: "81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
+  { file: "81b6c4_dccf936686cc4fdd818802174994fb90~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
+  { file: "81b6c4_92e92c169bba4c9bb0086c284f135594~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Patientenzimmer & Empfangstheken" },
+  { file: "81b6c4_c022f31cee44483cafadb3bb4ec1bf01~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Patientenzimmer & Empfangstheken" },
+  { file: "81b6c4_ad8bbad699b741e3840267505b6de92d~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Schwestern-Küchen & Wandvertäfelung" },
+  { file: "81b6c4_23c6c6a9c6fb4095b0885625d8fe5aaa~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Schwestern-Küchen & Wandvertäfelung" },
+  { file: "81b6c4_24588f9d5b73441f84894766940d1c10~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Fensterbänke zum Sitzen" },
+  { file: "81b6c4_0f287b665f7d4f73b4cea3fbb43c6390~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Fensterbänke zum Sitzen" },
+].map((p) => ({ src: wixImg(p.file), caption: p.caption }));
 
 const portfolioItems = [
   {
@@ -36,6 +56,11 @@ const portfolioItems = [
     image: "https://static.wixstatic.com/media/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg/v1/fill/w_571,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg",
     title: "Küchenstudio",
     items: ["Objektküchen", "Teeküchen", "Coworking", "Privathaushalte", "lang lebige Stahlküchen"],
+  },
+  {
+    image: "https://static.wixstatic.com/media/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg/v1/fill/w_570,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg",
+    title: "Projektbegleitung",
+    items: ["Beratung", "Planung", "Umsetzung", "Termin- & Kostenkontrolle"],
   },
 ];
 
