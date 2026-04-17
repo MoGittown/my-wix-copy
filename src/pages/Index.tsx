@@ -142,20 +142,6 @@ const Index = () => {
                     {line}
                   </h2>
                 ))}
-                <div className="mt-10 flex gap-4 justify-center">
-                  <a
-                    href="#contact"
-                    className="bg-primary text-primary-foreground font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/90 transition-colors"
-                  >
-                    Jetzt anfragen
-                  </a>
-                  <a
-                    href="#portfolio"
-                    className="border border-white text-white font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-white hover:text-foreground transition-colors"
-                  >
-                    Projekte ansehen
-                  </a>
-                </div>
               </div>
             </div>
           </div>
