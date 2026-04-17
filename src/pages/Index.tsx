@@ -27,25 +27,60 @@ import heroMaurice from "@/assets/hero-1-maurice-vollmer.jpg";
 import heroPraxis from "@/assets/hero-2-praxis.jpeg";
 import heroKueche from "@/assets/hero-3-kueche.jpeg";
 import heroProjekt from "@/assets/hero-4-projektleitung.jpeg";
+import heroCoworking from "@/assets/hero-5-coworking.jpeg";
 
-const heroSlides = [
+// textPosition: vertikale & horizontale Ausrichtung des Textes pro Slide
+// vertical: "top" | "center" | "bottom"  (oder Pixel-Offset z.B. "20%")
+// horizontal: "left" | "center" | "right"
+// offsetY / offsetX: Feinjustierung in % (negativ = nach oben/links)
+type HeroSlide = {
+  image: string;
+  lines: string[];
+  vertical?: "top" | "center" | "bottom";
+  horizontal?: "left" | "center" | "right";
+  offsetY?: string; // z.B. "-10%" oder "20px"
+  offsetX?: string;
+};
+
+const heroSlides: HeroSlide[] = [
   {
     image: heroMaurice,
     lines: ["Freiraum für Kreativität entsteht", "mit jedem neuen Raum", "ob Küchen, Praxis oder Büro"],
+    vertical: "center",
+    horizontal: "center",
+    offsetY: "0%",
+    offsetX: "0%",
   },
   {
     image: heroPraxis,
     lines: ["Praxiseinrichtungen"],
+    vertical: "center",
+    horizontal: "center",
   },
   {
     image: heroKueche,
     lines: ["Exklusive Küchen"],
+    vertical: "center",
+    horizontal: "center",
   },
   {
     image: heroProjekt,
     lines: ["Projektbegleitung"],
+    vertical: "center",
+    horizontal: "center",
+  },
+  {
+    image: heroCoworking,
+    lines: ["Coworking Spaces"],
+    vertical: "center",
+    horizontal: "center",
   },
 ];
+
+const verticalClass = (v?: HeroSlide["vertical"]) =>
+  v === "top" ? "items-start pt-24" : v === "bottom" ? "items-end pb-24" : "items-center";
+const horizontalClass = (h?: HeroSlide["horizontal"]) =>
+  h === "left" ? "justify-start text-left" : h === "right" ? "justify-end text-right" : "justify-center text-center";
 
 const wixImg = (file: string) =>
   `https://static.wixstatic.com/media/${file}/v1/fill/w_1400,h_800,al_c,q_90,enc_avif,quality_auto/${file}`;
