@@ -53,17 +53,17 @@ const testimonials = [
   {
     name: "Nondas Kalpakidis",
     role: "Projektmanager",
-    text: "Während meiner Tätigkeit als Projektmanager für den weltweit größten Business Center Anbieter Regus, haben wir gemeinsam mit Herrn Vollmer die Lounge eingerichtet. Sowohl die Kommunikation wie auch die Ausführung und Qualität seiner Arbeit waren auf Top Niveau.",
+    text: "Während meiner Tätigkeit als Projektmanager für den weltweit größten Business Center Anbieter Regus, haben wir gemeinsam mit Herrn Vollmer die Lounge eingerichtet. Sowohl die Kommunikation wie auch die Ausführung und Qualität seiner Arbeit waren auf Top Niveau. Ich freue mich bereits auf kommende Projekte. Wir haben eine Offene Küche mit Sitzmöglichkeit, Copy-points, Meeting booths (doppelte Sitznische), Designer Tische und weiter hochwertige Möbel implementiert",
   },
   {
     name: "Christian O.",
     role: "privat",
-    text: "Wir haben vom Herrn Vollmer und seinem Team unsere neue Küche einrichten lassen. Vom ersten Schritt an wurden unsere Designvorgaben und Ideen mit viel Sinn fürs Detail und einer kosteneffizienten Planung perfekt in eine wunderschöne Küche umgesetzt.",
+    text: "Wir haben vom Herrn Vollmer und seinem Team unsere neue Küche einrichten lassen. Vom ersten Schritt an wurden unsere Designvorgaben und Ideen mit viel Sinn fürs Detail und einer kosteneffizienten Planung perfekt in eine wunderschöne Küche umgesetzt. Die Kommunikation war immer sehr angenehm und unkompliziert. Seine Arbeitsweise ist strukturiert, präzise und sauber. Es gibt keine Ecke, die nicht sauber verarbeitet ist. Selbst nicht verschuldete, unvorhergesehene Probleme wurden unkompliziert und schnell gelöst. Eine absolute Empfehlung! Wir freuen uns schon auf die nächsten Projekte.",
   },
   {
     name: "Lu Kn",
     role: "privat",
-    text: "Dies ist jetzt meine dritte geplante Küche und mit Abstand vom Ergebnis her die Schönste. Herr Vollmer hat unsere Ideen aufgenommen, aber auch selber Impulse gegeben. Handwerklich wurde sehr sauber gearbeitet. Gerne wieder, vielen Dank!",
+    text: "Wir haben uns von Herrn Vollmer nach unseren Vorstellungen und Ideen eine Küche planen und aufbauen lassen. Dies ist jetzt meine dritte geplante Küche und mit Abstand vom Ergebnis her die Schönste. Herr Vollmer hat unsere Ideen aufgenommen, aber auch selber Impulse gegeben, wie z.B. ein Naturbrett als Tresen, passt super zum Rest der Küche. Ein Landschaftsmotiv hinter Glas als Spritzschutz am Herd macht die Küche direkt persönlicher. Die ganze Abwicklung, Terminabsprachen und sonstige Kommunikation lief prima. Handwerklich wurde sehr sauber gearbeitet. Erlebt man leider nicht mehr so oft. Auch die Reklamation eines Transportschäden und Austausch des beschädigten Unterschrank war schnell und zügig erledigt. Gerne wieder, vielen Dank!",
   },
 ];
 
