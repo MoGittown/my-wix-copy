@@ -164,45 +164,9 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      {/* Hero Slider */}
-      <section id="home" className="relative h-screen overflow-hidden">
-        {heroSlides.map((slide, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 transition-opacity duration-1000 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}
-          >
-            <img src={slide.image} alt="Vollmer Objektmöbel" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-white/20" />
-            <div className={`absolute inset-0 flex px-6 ${verticalClass(slide.vertical)} ${horizontalClass(slide.horizontal)}`}>
-              <div
-                className="max-w-5xl"
-                style={{ transform: `translate(${slide.offsetX ?? "0%"}, ${slide.offsetY ?? "0%"})` }}
-              >
-                {slide.lines.map((line, j) => (
-                  <h2 key={j} className="font-display text-3xl md:text-5xl lg:text-6xl text-black font-normal leading-tight drop-shadow-[0_2px_4px_rgba(255,255,255,0.6)]">
-                    {line}
-                  </h2>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-        {heroSlides.length > 1 && (
-          <>
-            <button onClick={() => setCurrentSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Vorheriger Slide">
-              <ChevronLeft size={48} />
-            </button>
-            <button onClick={() => setCurrentSlide((p) => (p + 1) % heroSlides.length)} className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Nächster Slide">
-              <ChevronRight size={48} />
-            </button>
-          </>
-        )}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-          {heroSlides.map((_, i) => (
-            <button key={i} onClick={() => setCurrentSlide(i)} className={`w-3 h-3 rounded-full transition-colors ${i === currentSlide ? "bg-primary" : "bg-white/50"}`} />
-          ))}
-        </div>
-      </section>
+      {/* Hero Slider mit Admin-Modus */}
+      <HeroSlider slides={heroSlides} />
+
 
       {/* About */}
       <section id="about" className="py-24 px-6 bg-background">
