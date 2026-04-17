@@ -85,12 +85,7 @@ const Index = () => {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentProject((prev) => (prev + 1) % projectSlides.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
+
 
   useEffect(() => {
     const timer = setInterval(() => {
