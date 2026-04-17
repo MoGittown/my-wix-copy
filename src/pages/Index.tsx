@@ -18,6 +18,8 @@ import projektKuecheNussbaumAbend from "@/assets/projekt-kueche-nussbaum-abend.j
 import projektKuecheNussbaumTag from "@/assets/projekt-kueche-nussbaum-tag.jpg";
 import projektKuecheAnthrazitInsel from "@/assets/projekt-kueche-anthrazit-insel.jpg";
 import projektKuecheBlauAnthrazit from "@/assets/projekt-kueche-blau-anthrazit.jpg";
+import projektDetailMuehlen from "@/assets/projekt-detail-muehlen.jpg";
+import projektDetailArmatur from "@/assets/projekt-detail-armatur.jpg";
 import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
@@ -40,6 +42,8 @@ const projectGallery = [
   { src: projektKuecheNaturstein, caption: "Küche in Nussbaum mit großzügiger Naturstein-Arbeitsplatte und Spiegel-Rückwand" },
   { src: projektKuecheAnthrazitInsel, caption: "Landhaus-Küche in Anthrazit mit Kochinsel und Naturstein-Arbeitsplatte" },
   { src: projektKuecheBlauAnthrazit, caption: "Küche in Anthrazit kombiniert mit petrolblauer Kochinsel" },
+  { src: projektDetailArmatur, caption: "Detailansicht: Edelstahl-Armatur mit Doppel-Keramikspüle auf Naturstein" },
+  { src: projektDetailMuehlen, caption: "Detailansicht: Naturstein-Arbeitsplatte mit dezenter Maserung" },
   { src: projektKuecheNussbaumTag, caption: "Nussbaum-Küche mit Spiegel-Rückwand bei Tageslicht" },
   { src: projektKuecheNussbaumAbend, caption: "Nussbaum-Kochinsel mit Naturstein – stimmungsvoll bei Abendlicht" },
   { src: projektKuecheSpiegelwand, caption: "Küche mit raumvergrößernder Spiegel-Rückwand und Nussbaum-Wandregal" },
