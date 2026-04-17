@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
+import projektEichenschrank from "@/assets/projekt-eichenschrank.jpg";
+import projektBadmoebel from "@/assets/projekt-badmoebel.jpg";
+import projektSideboardDetail from "@/assets/projekt-sideboard-detail.jpg";
+import projektSideboardSchublade from "@/assets/projekt-sideboard-schublade.jpg";
+import projektSideboardGrau from "@/assets/projekt-sideboard-grau.jpg";
+import projektSchubladeEiche from "@/assets/projekt-schublade-eiche.jpg";
 import SiteFooter from "@/components/SiteFooter";
 
 const heroSlides = [
@@ -14,32 +20,13 @@ const wixImg = (file: string) =>
   `https://static.wixstatic.com/media/${file}/v1/fill/w_1400,h_800,al_c,q_90,enc_avif,quality_auto/${file}`;
 
 const projectGallery = [
-  { file: "81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
-  { file: "81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
-  { file: "81b6c4_25f240abdfa84ba7a15bd0238d7794f2~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
-  { file: "81b6c4_bbcdaaf76e3e4444bd01bf9d07198c1f~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
-  { file: "81b6c4_ed24787bfe344b608890522d628a0e31~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
-  { file: "81b6c4_51dedc99c64c4b4c8d0c9be54d11bd95~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
-  { file: "81b6c4_c184ba2d66354f08b4428b9739af0cc4~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
-  { file: "81b6c4_c640fa2de53a4dcaadc4ee8c1059ca39~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert" },
-  { file: "81b6c4_691da7e0125a46d897b9e07a4beda022~mv2_d_5184_3456_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { file: "81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { file: "81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { file: "81b6c4_c77f29df7e134982985de7e1264c4d52~mv2_d_3000_4000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { file: "81b6c4_4a6f00f080fe47e4b9cd83d387ef5bca~mv2_d_3000_4000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { file: "81b6c4_7ea1206275554cc2894ad32fc4bb7b8b~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { file: "81b6c4_6e1d76128f274ed2a05630ababf6498d~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
-  { file: "81b6c4_22cc564685fd470a9cc20014d1212b68~mv2_d_3000_4000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
-  { file: "81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
-  { file: "81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
-  { file: "81b6c4_dccf936686cc4fdd818802174994fb90~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
-  { file: "81b6c4_92e92c169bba4c9bb0086c284f135594~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Patientenzimmer & Empfangstheken" },
-  { file: "81b6c4_c022f31cee44483cafadb3bb4ec1bf01~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Patientenzimmer & Empfangstheken" },
-  { file: "81b6c4_ad8bbad699b741e3840267505b6de92d~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Schwestern-Küchen & Wandvertäfelung" },
-  { file: "81b6c4_23c6c6a9c6fb4095b0885625d8fe5aaa~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Schwestern-Küchen & Wandvertäfelung" },
-  { file: "81b6c4_24588f9d5b73441f84894766940d1c10~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Fensterbänke zum Sitzen" },
-  { file: "81b6c4_0f287b665f7d4f73b4cea3fbb43c6390~mv2_d_4000_3000_s_4_2.jpg", caption: "Krankenhausausstattung – Fensterbänke zum Sitzen" },
-].map((p) => ({ src: wixImg(p.file), caption: p.caption }));
+  { src: projektEichenschrank, caption: "Einbauschrank in Eiche – maßgefertigt mit Schublade und Kleiderlift" },
+  { src: projektBadmoebel, caption: "Badmöbel mit Doppelwaschtisch und Hochschrank in Eiche-Optik" },
+  { src: projektSideboardDetail, caption: "Sideboard in Grau matt mit Eiche-Schubladen – Detailansicht" },
+  { src: projektSideboardSchublade, caption: "Sideboard mit massiver Eiche-Schublade und filigraner Front" },
+  { src: projektSideboardGrau, caption: "Sideboard in Grau matt auf schlanken Metallfüßen" },
+  { src: projektSchubladeEiche, caption: "Massive Eiche-Schublade mit traditioneller Zinkenverbindung" },
+];
 
 const portfolioItems = [
   {
