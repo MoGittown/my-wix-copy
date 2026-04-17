@@ -219,7 +219,7 @@ const Index = () => {
               />
             ))}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-12 pb-5 px-6 text-center">
-              <p className="font-display text-sm md:text-base text-white">{projectGallery[currentProject].caption}</p>
+              <p className="font-display text-sm md:text-base text-white">{projectGallery[currentProject]?.caption}</p>
             </div>
             <button onClick={() => setCurrentProject((p) => (p - 1 + projectGallery.length) % projectGallery.length)} className="absolute left-3 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-2" aria-label="Vorheriges Projekt">
               <ChevronLeft size={28} />
