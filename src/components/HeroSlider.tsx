@@ -72,7 +72,7 @@ const HeroSlider = ({ slides, intervalMs = 6000 }: { slides: HeroSlide[]; interv
     return () => clearInterval(t);
   }, [adminMode, slides.length, intervalMs]);
 
-  const getOv = (i: number): Override => overrides[i] ?? defaultOverride;
+  const getOv = (i: number): Override => overrides[i] ?? presetOverrides[i] ?? defaultOverride;
 
   const updateOv = (i: number, patch: Partial<Override>) => {
     setOverrides((prev) => {
