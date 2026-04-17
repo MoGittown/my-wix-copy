@@ -8,30 +8,17 @@ const heroSlides = [
     image: "https://static.wixstatic.com/media/81b6c4_1dd3319a4b8c4b7da23f1f5aa0e1f05e~mv2_d_3872_2581_s_4_2.jpg/v1/fill/w_1920,h_937,al_t,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_1dd3319a4b8c4b7da23f1f5aa0e1f05e~mv2_d_3872_2581_s_4_2.jpg",
     lines: ["Freiraum für Kreativität entsteht", "mit jedem neuen Raum", "ob Küchen, Praxis oder Büro"],
   },
-  {
-    image: "https://static.wixstatic.com/media/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg/v1/fill/w_1920,h_937,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg",
-    lines: ["Objektmöbel mit Charakter", "individuell in Form, Farbe und Material"],
-  },
-  {
-    image: "https://static.wixstatic.com/media/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg/v1/fill/w_1920,h_937,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg",
-    lines: ["Exklusive Küchen", "vom Konzept bis zur Montage"],
-  },
-  {
-    image: "https://static.wixstatic.com/media/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg/v1/fill/w_1920,h_937,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg",
-    lines: ["Praxisräume & Büros", "Funktional, ästhetisch, langlebig"],
-  },
-  {
-    image: "https://static.wixstatic.com/media/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg/v1/fill/w_1920,h_937,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg",
-    lines: ["Coworking & Co-Living", "Räume, die Menschen verbinden"],
-  },
 ];
 
 const projectSlides = [
-  "https://static.wixstatic.com/media/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg",
-  "https://static.wixstatic.com/media/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg",
-  "https://static.wixstatic.com/media/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg",
-  "https://static.wixstatic.com/media/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg",
-  "https://static.wixstatic.com/media/81b6c4_1dd3319a4b8c4b7da23f1f5aa0e1f05e~mv2_d_3872_2581_s_4_2.jpg/v1/fill/w_1200,h_700,al_c,q_85,enc_avif,quality_auto/81b6c4_1dd3319a4b8c4b7da23f1f5aa0e1f05e~mv2_d_3872_2581_s_4_2.jpg",
+  { src: "https://static.wixstatic.com/media/81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein \"San Sebastian\" satiniert" },
+  { src: "https://static.wixstatic.com/media/81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein \"San Sebastian\" satiniert" },
+  { src: "https://static.wixstatic.com/media/81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { src: "https://static.wixstatic.com/media/81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
+  { src: "https://static.wixstatic.com/media/81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
+  { src: "https://static.wixstatic.com/media/81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
+  { src: "https://static.wixstatic.com/media/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg", caption: "Krankenhausausstattung – Patientenzimmer & Empfangstheken" },
+  { src: "https://static.wixstatic.com/media/81b6c4_e6c75db583cb4643b94f6b05c7cad22b~mv2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_e6c75db583cb4643b94f6b05c7cad22b~mv2.jpg", caption: "Krankenhausausstattung – Schwestern-Küchen & Wandvertäfelung" },
 ];
 
 const portfolioItems = [
@@ -48,7 +35,7 @@ const portfolioItems = [
   {
     image: "https://static.wixstatic.com/media/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg/v1/fill/w_571,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg",
     title: "Küchenstudio",
-    items: ["Objektküchen", "Teeküchen", "Coworking", "Privathaushalte", "Langlebige Stahlküchen"],
+    items: ["Objektküchen", "Teeküchen", "Coworking", "Privathaushalte", "lang lebige Stahlküchen"],
   },
   {
     image: "https://static.wixstatic.com/media/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg/v1/fill/w_570,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg",
@@ -66,17 +53,17 @@ const testimonials = [
   {
     name: "Nondas Kalpakidis",
     role: "Projektmanager",
-    text: "Während meiner Tätigkeit als Projektmanager für den weltweit größten Business Center Anbieter Regus, haben wir gemeinsam mit Herrn Vollmer die Lounge eingerichtet. Sowohl die Kommunikation wie auch die Ausführung und Qualität seiner Arbeit waren auf Top Niveau.",
+    text: "Während meiner Tätigkeit als Projektmanager für den weltweit größten Business Center Anbieter Regus, haben wir gemeinsam mit Herrn Vollmer die Lounge eingerichtet. Sowohl die Kommunikation wie auch die Ausführung und Qualität seiner Arbeit waren auf Top Niveau. Ich freue mich bereits auf kommende Projekte. Wir haben eine Offene Küche mit Sitzmöglichkeit, Copy-points, Meeting booths (doppelte Sitznische), Designer Tische und weiter hochwertige Möbel implementiert",
   },
   {
     name: "Christian O.",
     role: "privat",
-    text: "Wir haben vom Herrn Vollmer und seinem Team unsere neue Küche einrichten lassen. Vom ersten Schritt an wurden unsere Designvorgaben und Ideen mit viel Sinn fürs Detail und einer kosteneffizienten Planung perfekt in eine wunderschöne Küche umgesetzt.",
+    text: "Wir haben vom Herrn Vollmer und seinem Team unsere neue Küche einrichten lassen. Vom ersten Schritt an wurden unsere Designvorgaben und Ideen mit viel Sinn fürs Detail und einer kosteneffizienten Planung perfekt in eine wunderschöne Küche umgesetzt. Die Kommunikation war immer sehr angenehm und unkompliziert. Seine Arbeitsweise ist strukturiert, präzise und sauber. Es gibt keine Ecke, die nicht sauber verarbeitet ist. Selbst nicht verschuldete, unvorhergesehene Probleme wurden unkompliziert und schnell gelöst. Eine absolute Empfehlung! Wir freuen uns schon auf die nächsten Projekte.",
   },
   {
     name: "Lu Kn",
     role: "privat",
-    text: "Dies ist jetzt meine dritte geplante Küche und mit Abstand vom Ergebnis her die Schönste. Herr Vollmer hat unsere Ideen aufgenommen, aber auch selber Impulse gegeben. Handwerklich wurde sehr sauber gearbeitet. Gerne wieder, vielen Dank!",
+    text: "Wir haben uns von Herrn Vollmer nach unseren Vorstellungen und Ideen eine Küche planen und aufbauen lassen. Dies ist jetzt meine dritte geplante Küche und mit Abstand vom Ergebnis her die Schönste. Herr Vollmer hat unsere Ideen aufgenommen, aber auch selber Impulse gegeben, wie z.B. ein Naturbrett als Tresen, passt super zum Rest der Küche. Ein Landschaftsmotiv hinter Glas als Spritzschutz am Herd macht die Küche direkt persönlicher. Die ganze Abwicklung, Terminabsprachen und sonstige Kommunikation lief prima. Handwerklich wurde sehr sauber gearbeitet. Erlebt man leider nicht mehr so oft. Auch die Reklamation eines Transportschäden und Austausch des beschädigten Unterschrank war schnell und zügig erledigt. Gerne wieder, vielen Dank!",
   },
 ];
 
@@ -224,22 +211,25 @@ const Index = () => {
             <li>• Erstellung des Bauzeitenplans</li>
           </ul>
           <div className="relative max-w-4xl mx-auto mt-10 aspect-[16/9] overflow-hidden bg-secondary">
-            {projectSlides.map((src, i) => (
+            {projectSlides.map((slide, i) => (
               <img
                 key={i}
-                src={src}
-                alt={`Projekt ${i + 1}`}
+                src={slide.src}
+                alt={slide.caption}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === currentProject ? "opacity-100" : "opacity-0"}`}
                 loading="lazy"
               />
             ))}
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-10 pb-4 px-6 text-center">
+              <p className="font-display text-sm md:text-base text-white">{projectSlides[currentProject].caption}</p>
+            </div>
             <button onClick={() => setCurrentProject((p) => (p - 1 + projectSlides.length) % projectSlides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Vorheriges Projekt">
               <ChevronLeft size={28} />
             </button>
             <button onClick={() => setCurrentProject((p) => (p + 1) % projectSlides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Nächstes Projekt">
               <ChevronRight size={28} />
             </button>
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-2">
               {projectSlides.map((_, i) => (
                 <button key={i} onClick={() => setCurrentProject(i)} className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentProject ? "bg-primary" : "bg-white/60"}`} aria-label={`Projekt ${i + 1}`} />
               ))}
