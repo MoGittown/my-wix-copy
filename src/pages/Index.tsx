@@ -120,7 +120,6 @@ const testimonials = [
 ];
 
 const Index = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [currentProject, setCurrentProject] = useState(0);
   const [currentPartner, setCurrentPartner] = useState(0);
 
@@ -140,18 +139,6 @@ const Index = () => {
     { name: "Quooker", file: "81b6c4_146afba9c83141bea2b8a6f7e58d2c1b~mv2.jpg", crop: "x_0,y_0,w_197,h_73" },
   ];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentProject((prev) => (prev + 1) % projectGallery.length);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
