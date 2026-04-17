@@ -8,6 +8,18 @@ const heroSlides = [
     image: "https://static.wixstatic.com/media/81b6c4_1dd3319a4b8c4b7da23f1f5aa0e1f05e~mv2_d_3872_2581_s_4_2.jpg/v1/fill/w_1920,h_937,al_t,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_1dd3319a4b8c4b7da23f1f5aa0e1f05e~mv2_d_3872_2581_s_4_2.jpg",
     lines: ["Freiraum für Kreativität entsteht", "mit jedem neuen Raum", "ob Küchen, Praxis oder Büro"],
   },
+  {
+    image: "https://static.wixstatic.com/media/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg/v1/fill/w_1920,h_937,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg",
+    lines: ["Objektmöbel mit Charakter", "individuell in Form, Farbe und Material"],
+  },
+  {
+    image: "https://static.wixstatic.com/media/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg/v1/fill/w_1920,h_937,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg",
+    lines: ["Exklusive Küchen", "vom Konzept bis zur Montage"],
+  },
+  {
+    image: "https://static.wixstatic.com/media/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg/v1/fill/w_1920,h_937,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg",
+    lines: ["Praxisräume & Büros", "Funktional, ästhetisch, langlebig"],
+  },
 ];
 
 const portfolioItems = [
@@ -80,22 +92,36 @@ const Index = () => {
             <img src={slide.image} alt="Vollmer Objektmöbel" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center px-6">
+              <div className="text-center px-6 max-w-5xl">
                 {slide.lines.map((line, j) => (
                   <h2 key={j} className="font-display text-3xl md:text-5xl lg:text-6xl text-white font-normal leading-tight drop-shadow-lg">
                     {line}
                   </h2>
                 ))}
+                <div className="mt-10 flex gap-4 justify-center">
+                  <a
+                    href="#contact"
+                    className="bg-primary text-primary-foreground font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/90 transition-colors"
+                  >
+                    Jetzt anfragen
+                  </a>
+                  <a
+                    href="#portfolio"
+                    className="border border-white text-white font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-white hover:text-foreground transition-colors"
+                  >
+                    Projekte ansehen
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         ))}
         {heroSlides.length > 1 && (
           <>
-            <button onClick={() => setCurrentSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white">
+            <button onClick={() => setCurrentSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Vorheriger Slide">
               <ChevronLeft size={48} />
             </button>
-            <button onClick={() => setCurrentSlide((p) => (p + 1) % heroSlides.length)} className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white">
+            <button onClick={() => setCurrentSlide((p) => (p + 1) % heroSlides.length)} className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Nächster Slide">
               <ChevronRight size={48} />
             </button>
           </>
@@ -151,6 +177,29 @@ const Index = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projektbegleitung */}
+      <section className="py-24 px-6 bg-background">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">Projektbegleitung</h2>
+          <p className="font-serif text-lg leading-relaxed text-muted-foreground mb-6">
+            Wir haben ein umfangreiches Netzwerk für alle Gewerke und begleiten Ihr Projekt von der ersten Idee bis zur Schlüsselübergabe.
+          </p>
+          <ul className="font-serif text-foreground space-y-2 mb-10 inline-block text-left">
+            <li>• Bauleitung auf der Baustelle</li>
+            <li>• Koordinierung von Gewerken</li>
+            <li>• Erstellung des Bauzeitenplans</li>
+          </ul>
+          <div>
+            <a
+              href="/referenzen"
+              className="inline-block bg-primary text-primary-foreground font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/90 transition-colors"
+            >
+              Unsere neusten Projekte
+            </a>
           </div>
         </div>
       </section>
