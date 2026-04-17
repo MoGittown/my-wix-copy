@@ -67,6 +67,10 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        display: ["Spinnaker", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
+        serif: ["EB Garamond", "Georgia", "Times New Roman", "serif"],
+      },
       keyframes: {
         "accordion-down": {
           from: {
@@ -88,12 +92,6 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-      },
-    },
-  },
-      fontFamily: {
-        display: ["Spinnaker", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
-        serif: ["EB Garamond", "Georgia", "Times New Roman", "serif"],
       },
     },
   },
