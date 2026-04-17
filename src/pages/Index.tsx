@@ -157,11 +157,11 @@ const Index = () => {
             className={`absolute inset-0 transition-opacity duration-1000 ${i === currentSlide ? "opacity-100" : "opacity-0"}`}
           >
             <img src={slide.image} alt="Vollmer Objektmöbel" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 bg-white/20" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center px-6 max-w-5xl">
                 {slide.lines.map((line, j) => (
-                  <h2 key={j} className="font-display text-3xl md:text-5xl lg:text-6xl text-white font-normal leading-tight drop-shadow-lg">
+                  <h2 key={j} className="font-display text-3xl md:text-5xl lg:text-6xl text-black font-normal leading-tight drop-shadow-[0_2px_4px_rgba(255,255,255,0.6)]">
                     {line}
                   </h2>
                 ))}
@@ -219,12 +219,12 @@ const Index = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-white/30 group-hover:bg-white/50 transition-colors duration-500" />
                 <div className="absolute inset-0 flex flex-col justify-end p-8">
-                  <h3 className="font-display text-2xl md:text-3xl text-white mb-4">{item.title}</h3>
+                  <h3 className="font-display text-2xl md:text-3xl text-black mb-4 drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">{item.title}</h3>
                   <ul className="space-y-1 font-serif">
                     {item.items.map((li) => (
-                      <li key={li} className="text-white/90 text-base md:text-lg">• {li}</li>
+                      <li key={li} className="text-black text-base md:text-lg drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]">• {li}</li>
                     ))}
                   </ul>
                 </div>
