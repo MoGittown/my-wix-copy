@@ -214,8 +214,11 @@ const Index = () => {
           >
             <img src={slide.image} alt="Vollmer Objektmöbel" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-white/20" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center px-6 max-w-5xl">
+            <div className={`absolute inset-0 flex px-6 ${verticalClass(slide.vertical)} ${horizontalClass(slide.horizontal)}`}>
+              <div
+                className="max-w-5xl"
+                style={{ transform: `translate(${slide.offsetX ?? "0%"}, ${slide.offsetY ?? "0%"})` }}
+              >
                 {slide.lines.map((line, j) => (
                   <h2 key={j} className="font-display text-3xl md:text-5xl lg:text-6xl text-black font-normal leading-tight drop-shadow-[0_2px_4px_rgba(255,255,255,0.6)]">
                     {line}
