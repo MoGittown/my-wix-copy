@@ -69,7 +69,7 @@ const testimonials = [
 
 const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+  const [currentProject, setCurrentProject] = useState(0);
   const [currentPartner, setCurrentPartner] = useState(0);
 
   const partners = [
