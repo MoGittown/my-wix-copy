@@ -10,16 +10,6 @@ const heroSlides = [
   },
 ];
 
-const projectSlides = [
-  { src: "https://static.wixstatic.com/media/81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein \"San Sebastian\" satiniert" },
-  { src: "https://static.wixstatic.com/media/81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_2f2ad643a8dc4b67ad2b826da8068cbf~mv2_d_3000_4000_s_4_2.jpg", caption: "Wohn-Küche mit Naturstein \"San Sebastian\" satiniert" },
-  { src: "https://static.wixstatic.com/media/81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { src: "https://static.wixstatic.com/media/81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_156a8328aafd4150b82add6e9af52f80~mv2_d_4000_3000_s_4_2.jpg", caption: "Business Club Möbel und Coworking Area mit freistehender Küche" },
-  { src: "https://static.wixstatic.com/media/81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
-  { src: "https://static.wixstatic.com/media/81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_89b2c22e3b1d491c9e8ccda4d09cfd13~mv2_d_4000_3000_s_4_2.jpg", caption: "Moderne Büro-Küche mit Theke" },
-  { src: "https://static.wixstatic.com/media/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg", caption: "Krankenhausausstattung – Patientenzimmer & Empfangstheken" },
-  { src: "https://static.wixstatic.com/media/81b6c4_e6c75db583cb4643b94f6b05c7cad22b~mv2.jpg/v1/fill/w_1200,h_700,q_90,enc_avif,quality_auto/81b6c4_e6c75db583cb4643b94f6b05c7cad22b~mv2.jpg", caption: "Krankenhausausstattung – Schwestern-Küchen & Wandvertäfelung" },
-];
 
 const portfolioItems = [
   {
@@ -69,7 +59,7 @@ const testimonials = [
 
 const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentProject, setCurrentProject] = useState(0);
+  
   const [currentPartner, setCurrentPartner] = useState(0);
 
   const partners = [
@@ -95,12 +85,7 @@ const Index = () => {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentProject((prev) => (prev + 1) % projectSlides.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
+
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -210,31 +195,17 @@ const Index = () => {
             <li>• Koordinierung von Gewerken</li>
             <li>• Erstellung des Bauzeitenplans</li>
           </ul>
-          <div className="relative max-w-4xl mx-auto mt-10 aspect-[16/9] overflow-hidden bg-secondary">
-            {projectSlides.map((slide, i) => (
-              <img
-                key={i}
-                src={slide.src}
-                alt={slide.caption}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === currentProject ? "opacity-100" : "opacity-0"}`}
-                loading="lazy"
-              />
-            ))}
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-10 pb-4 px-6 text-center">
-              <p className="font-display text-sm md:text-base text-white">{projectSlides[currentProject].caption}</p>
-            </div>
-            <button onClick={() => setCurrentProject((p) => (p - 1 + projectSlides.length) % projectSlides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Vorheriges Projekt">
-              <ChevronLeft size={28} />
-            </button>
-            <button onClick={() => setCurrentProject((p) => (p + 1) % projectSlides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Nächstes Projekt">
-              <ChevronRight size={28} />
-            </button>
-            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-2">
-              {projectSlides.map((_, i) => (
-                <button key={i} onClick={() => setCurrentProject(i)} className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentProject ? "bg-primary" : "bg-white/60"}`} aria-label={`Projekt ${i + 1}`} />
-              ))}
-            </div>
-          </div>
+          <a href="/referenzen" className="inline-block group mt-4">
+            <img
+              src="https://static.wixstatic.com/media/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg/v1/fill/w_252,h_168,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg"
+              alt="Unsere neusten Projekte"
+              className="mx-auto shadow-md transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            <p className="font-serif text-foreground mt-4 group-hover:text-primary transition-colors">
+              Hier finden Sie unsere neusten Projekte.
+            </p>
+          </a>
         </div>
       </section>
 
