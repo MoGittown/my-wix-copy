@@ -181,6 +181,29 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Projektbegleitung */}
+      <section className="py-24 px-6 bg-background">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">Projektbegleitung</h2>
+          <p className="font-serif text-lg leading-relaxed text-muted-foreground mb-6">
+            Wir haben ein umfangreiches Netzwerk für alle Gewerke und begleiten Ihr Projekt von der ersten Idee bis zur Schlüsselübergabe.
+          </p>
+          <ul className="font-serif text-foreground space-y-2 mb-10 inline-block text-left">
+            <li>• Bauleitung auf der Baustelle</li>
+            <li>• Koordinierung von Gewerken</li>
+            <li>• Erstellung des Bauzeitenplans</li>
+          </ul>
+          <div>
+            <a
+              href="/referenzen"
+              className="inline-block bg-primary text-primary-foreground font-display text-sm uppercase tracking-wider px-8 py-3 hover:bg-primary/90 transition-colors"
+            >
+              Unsere neusten Projekte
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section id="clients" className="py-24 px-6 bg-background">
         <div className="max-w-6xl mx-auto">
