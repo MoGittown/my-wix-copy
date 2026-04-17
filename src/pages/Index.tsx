@@ -210,31 +210,17 @@ const Index = () => {
             <li>• Koordinierung von Gewerken</li>
             <li>• Erstellung des Bauzeitenplans</li>
           </ul>
-          <div className="relative max-w-4xl mx-auto mt-10 aspect-[16/9] overflow-hidden bg-secondary">
-            {projectSlides.map((slide, i) => (
-              <img
-                key={i}
-                src={slide.src}
-                alt={slide.caption}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === currentProject ? "opacity-100" : "opacity-0"}`}
-                loading="lazy"
-              />
-            ))}
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent pt-10 pb-4 px-6 text-center">
-              <p className="font-display text-sm md:text-base text-white">{projectSlides[currentProject].caption}</p>
-            </div>
-            <button onClick={() => setCurrentProject((p) => (p - 1 + projectSlides.length) % projectSlides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Vorheriges Projekt">
-              <ChevronLeft size={28} />
-            </button>
-            <button onClick={() => setCurrentProject((p) => (p + 1) % projectSlides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/30 hover:bg-black/50 p-2" aria-label="Nächstes Projekt">
-              <ChevronRight size={28} />
-            </button>
-            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-2">
-              {projectSlides.map((_, i) => (
-                <button key={i} onClick={() => setCurrentProject(i)} className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentProject ? "bg-primary" : "bg-white/60"}`} aria-label={`Projekt ${i + 1}`} />
-              ))}
-            </div>
-          </div>
+          <a href="/referenzen" className="inline-block group mt-4">
+            <img
+              src="https://static.wixstatic.com/media/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg/v1/fill/w_252,h_168,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg"
+              alt="Unsere neusten Projekte"
+              className="mx-auto shadow-md transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+            <p className="font-serif text-foreground mt-4 group-hover:text-primary transition-colors">
+              Hier finden Sie unsere neusten Projekte.
+            </p>
+          </a>
         </div>
       </section>
 
