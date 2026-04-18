@@ -22,6 +22,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { GripVertical } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { toast } from "@/hooks/use-toast";
 
 // Wix-CDN: liefert moderne Formate (WebP/AVIF) automatisch via enc_auto
 const wixThumb = (file: string, w = 600) =>
