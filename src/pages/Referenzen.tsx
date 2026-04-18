@@ -22,6 +22,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { GripVertical } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { toast } from "@/hooks/use-toast";
 
 // Wix-CDN: liefert moderne Formate (WebP/AVIF) automatisch via enc_auto
 const wixThumb = (file: string, w = 600) =>
@@ -525,6 +526,42 @@ const Referenzen = () => {
     });
   };
 
+  const buildExportJson = () => {
+    const payload = {
+      order: projectIds,
+      images: Object.fromEntries(projectIds.map((id) => [id, imagesMap[id] || []])),
+    };
+    return JSON.stringify(payload, null, 2);
+  };
+
+  const handleExportClipboard = async () => {
+    const json = buildExportJson();
+    try {
+      await navigator.clipboard.writeText(json);
+      toast({ title: "In Zwischenablage kopiert", description: "JSON ist bereit zum Einfügen in den Chat." });
+    } catch {
+      toast({
+        title: "Kopieren fehlgeschlagen",
+        description: "Bitte stattdessen den Download-Button benutzen.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleExportDownload = () => {
+    const json = buildExportJson();
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "referenzen-sortierung.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast({ title: "Datei heruntergeladen", description: "referenzen-sortierung.json" });
+  };
+
   const handleResetAll = () => {
     const fresh = defaultImagesMap();
     setImagesMap(fresh);
@@ -563,12 +600,26 @@ const Referenzen = () => {
                   Projekt-Überschriften am Griff <GripVertical className="inline w-3 h-3" /> verschieben · Bilder direkt im Raster ziehen · Bilder können auch in ein anderes Projekt gezogen werden – die Bereiche passen sich automatisch an.
                 </p>
               </div>
-              <button
-                onClick={handleResetAll}
-                className="font-display text-xs uppercase tracking-wide px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors shrink-0"
-              >
-                Alle zurücksetzen
-              </button>
+              <div className="flex flex-wrap gap-2 shrink-0">
+                <button
+                  onClick={handleExportClipboard}
+                  className="font-display text-xs uppercase tracking-wide px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
+                  Sortierung exportieren
+                </button>
+                <button
+                  onClick={handleExportDownload}
+                  className="font-display text-xs uppercase tracking-wide px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors"
+                >
+                  Als Datei
+                </button>
+                <button
+                  onClick={handleResetAll}
+                  className="font-display text-xs uppercase tracking-wide px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors"
+                >
+                  Alle zurücksetzen
+                </button>
+              </div>
             </div>
           )}
 
