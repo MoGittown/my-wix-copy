@@ -1,0 +1,39 @@
+# Hostinger / Apache – SPA Routing für React Router (BrowserRouter)
+# Leitet alle Anfragen, die keine echte Datei/Ordner sind, an index.html weiter,
+# damit Deep-Links wie /referenzen, /unternehmen, /impressum, /datenschutz funktionieren.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # HTTPS erzwingen (optional – Hostinger liefert i.d.R. SSL bereits aus)
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Wenn Datei oder Verzeichnis existiert → direkt ausliefern
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Sonst: index.html (SPA Fallback)
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Caching für statische Assets (Bilder, JS, CSS, Fonts)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Gzip/Deflate Kompression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
