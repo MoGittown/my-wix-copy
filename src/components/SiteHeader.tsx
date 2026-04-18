@@ -17,6 +17,15 @@ const SiteHeader = () => {
 
   const handleClick = (to: string) => {
     setOpen(false);
+    if (to === "/") {
+      if (location.pathname === "/") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/");
+        window.scrollTo({ top: 0 });
+      }
+      return;
+    }
     if (to.includes("#")) {
       const [path, hash] = to.split("#");
       const targetPath = path || "/";
