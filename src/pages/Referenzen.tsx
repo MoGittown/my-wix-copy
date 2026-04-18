@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import {
   DndContext,
   closestCenter,
@@ -13,9 +12,11 @@ import {
   SortableContext,
   arrayMove,
   rectSortingStrategy,
+  verticalListSortingStrategy,
   useSortable,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { GripVertical } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -117,7 +118,8 @@ const projects: Project[] = [
   },
 ];
 
-const STORAGE_KEY = "referenzen-order-v1";
+const STORAGE_KEY = "referenzen-order-v2";
+const PROJECT_ORDER_KEY = "referenzen-project-order-v1";
 
 type OrderMap = Record<string, string[]>;
 
@@ -129,7 +131,6 @@ const loadOrder = (): OrderMap => {
     return {};
   }
 };
-
 const saveOrder = (order: OrderMap) => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
@@ -137,8 +138,23 @@ const saveOrder = (order: OrderMap) => {
     /* ignore */
   }
 };
+const loadProjectOrder = (): string[] => {
+  try {
+    const raw = localStorage.getItem(PROJECT_ORDER_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+};
+const saveProjectOrder = (ids: string[]) => {
+  try {
+    localStorage.setItem(PROJECT_ORDER_KEY, JSON.stringify(ids));
+  } catch {
+    /* ignore */
+  }
+};
 
-// Wendet gespeicherte Reihenfolge an, behält neue/entfernte Bilder konsistent
+// Wendet Bild-Reihenfolge an, behält neue/entfernte Bilder konsistent
 const applyOrder = (project: Project, order: OrderMap): string[] => {
   const saved = order[project.id];
   if (!saved) return project.images;
@@ -148,15 +164,31 @@ const applyOrder = (project: Project, order: OrderMap): string[] => {
   return [...ordered, ...missing];
 };
 
-type SortableImageProps = {
+// Wendet Projekt-Reihenfolge an, hängt unbekannte hinten an
+const applyProjectOrder = (savedIds: string[]): Project[] => {
+  if (!savedIds.length) return projects;
+  const map = new Map(projects.map((p) => [p.id, p]));
+  const ordered = savedIds.map((id) => map.get(id)).filter(Boolean) as Project[];
+  const usedIds = new Set(ordered.map((p) => p.id));
+  const remaining = projects.filter((p) => !usedIds.has(p.id));
+  return [...ordered, ...remaining];
+};
+
+// =================== SortableImage ===================
+
+const SortableImage = ({
+  id,
+  file,
+  title,
+  index,
+  isAdmin,
+}: {
   id: string;
   file: string;
   title: string;
   index: number;
   isAdmin: boolean;
-};
-
-const SortableImage = ({ id, file, title, index, isAdmin }: SortableImageProps) => {
+}) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
 
   const style: React.CSSProperties = {
@@ -210,14 +242,19 @@ const SortableImage = ({ id, file, title, index, isAdmin }: SortableImageProps) 
   );
 };
 
-type ProjectGridProps = {
+// =================== ImageGrid (innerer DnD-Kontext) ===================
+
+const ImageGrid = ({
+  project,
+  files,
+  isAdmin,
+  onReorder,
+}: {
   project: Project;
   files: string[];
   isAdmin: boolean;
   onReorder: (next: string[]) => void;
-};
-
-const ProjectGrid = ({ project, files, isAdmin, onReorder }: ProjectGridProps) => {
+}) => {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } }),
@@ -252,23 +289,92 @@ const ProjectGrid = ({ project, files, isAdmin, onReorder }: ProjectGridProps) =
   );
 };
 
+// =================== SortableProject (ganzer Block) ===================
+
+const SortableProject = ({
+  project,
+  files,
+  isAdmin,
+  hasCustomImageOrder,
+  onReorderImages,
+  onResetProject,
+}: {
+  project: Project;
+  files: string[];
+  isAdmin: boolean;
+  hasCustomImageOrder: boolean;
+  onReorderImages: (next: string[]) => void;
+  onResetProject: () => void;
+}) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: project.id,
+  });
+
+  const style: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style}>
+      <div className="flex items-start justify-between gap-4 mb-6">
+        <div className="flex items-start gap-3 flex-1">
+          {isAdmin && (
+            <button
+              {...attributes}
+              {...listeners}
+              aria-label="Projekt verschieben"
+              className="mt-2 shrink-0 p-2 rounded border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors cursor-grab active:cursor-grabbing touch-none"
+            >
+              <GripVertical className="w-5 h-5" />
+            </button>
+          )}
+          <h2 className="font-display text-2xl md:text-3xl text-foreground">{project.title}</h2>
+        </div>
+        {isAdmin && hasCustomImageOrder && (
+          <button
+            onClick={onResetProject}
+            className="shrink-0 font-display text-xs uppercase tracking-wide px-3 py-1.5 border border-muted-foreground text-muted-foreground hover:border-foreground hover:text-foreground transition-colors"
+          >
+            Zurücksetzen
+          </button>
+        )}
+      </div>
+      <ImageGrid project={project} files={files} isAdmin={isAdmin} onReorder={onReorderImages} />
+    </div>
+  );
+};
+
+// =================== Page ===================
+
+// Admin-Modus: hier umschalten. Auf `false` setzen, um Admin auszublenden.
+const ADMIN_ENABLED = true;
+
 const Referenzen = () => {
-  const [searchParams] = useSearchParams();
-  const isAdmin = searchParams.get("admin") === "1";
+  const isAdmin = ADMIN_ENABLED;
   const [order, setOrder] = useState<OrderMap>({});
+  const [projectIds, setProjectIds] = useState<string[]>(projects.map((p) => p.id));
 
   useEffect(() => {
     document.title = "Referenzen – Vollmer Objektmöbel";
     window.scrollTo(0, 0);
     setOrder(loadOrder());
+    const savedProjOrder = loadProjectOrder();
+    if (savedProjOrder.length) {
+      setProjectIds(applyProjectOrder(savedProjOrder).map((p) => p.id));
+    }
   }, []);
 
-  const orderedProjects = useMemo(
-    () => projects.map((p) => ({ project: p, files: applyOrder(p, order) })),
-    [order],
-  );
+  const orderedProjects = useMemo(() => {
+    const map = new Map(projects.map((p) => [p.id, p]));
+    return projectIds
+      .map((id) => map.get(id))
+      .filter(Boolean)
+      .map((p) => ({ project: p as Project, files: applyOrder(p as Project, order) }));
+  }, [projectIds, order]);
 
-  const handleReorder = (projectId: string, next: string[]) => {
+  const handleReorderImages = (projectId: string, next: string[]) => {
     setOrder((prev) => {
       const updated = { ...prev, [projectId]: next };
       saveOrder(updated);
@@ -288,6 +394,26 @@ const Referenzen = () => {
   const handleResetAll = () => {
     setOrder({});
     saveOrder({});
+    const defaults = projects.map((p) => p.id);
+    setProjectIds(defaults);
+    saveProjectOrder([]);
+  };
+
+  // Sensors für Projekt-Sortierung (vertikal)
+  const projectSensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } }),
+  );
+
+  const handleProjectDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIndex = projectIds.indexOf(String(active.id));
+    const newIndex = projectIds.indexOf(String(over.id));
+    if (oldIndex < 0 || newIndex < 0) return;
+    const next = arrayMove(projectIds, oldIndex, newIndex);
+    setProjectIds(next);
+    saveProjectOrder(next);
   };
 
   return (
@@ -301,47 +427,45 @@ const Referenzen = () => {
           </p>
 
           {isAdmin && (
-            <div className="mb-12 p-4 border-2 border-primary bg-primary/5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="mb-12 p-4 border-2 border-primary bg-primary/5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sticky top-20 z-30 backdrop-blur-sm">
               <div>
                 <p className="font-display text-sm text-foreground">
-                  🛠 Admin-Modus aktiv – Bilder per Drag &amp; Drop sortieren
+                  🛠 Admin-Modus aktiv
                 </p>
                 <p className="font-sans text-xs text-muted-foreground mt-1">
-                  Reihenfolge wird automatisch in diesem Browser gespeichert.
+                  Projekt-Überschriften am Griff <GripVertical className="inline w-3 h-3" /> verschieben · Bilder direkt im Raster ziehen · Reihenfolge wird im Browser gespeichert.
                 </p>
               </div>
               <button
                 onClick={handleResetAll}
-                className="font-display text-xs uppercase tracking-wide px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors"
+                className="font-display text-xs uppercase tracking-wide px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors shrink-0"
               >
                 Alle zurücksetzen
               </button>
             </div>
           )}
 
-          <div className="space-y-20">
-            {orderedProjects.map(({ project, files }) => (
-              <div key={project.id}>
-                <div className="flex items-start justify-between gap-4 mb-6">
-                  <h2 className="font-display text-2xl md:text-3xl text-foreground">{project.title}</h2>
-                  {isAdmin && order[project.id] && (
-                    <button
-                      onClick={() => handleResetProject(project.id)}
-                      className="shrink-0 font-display text-xs uppercase tracking-wide px-3 py-1.5 border border-muted-foreground text-muted-foreground hover:border-foreground hover:text-foreground transition-colors"
-                    >
-                      Zurücksetzen
-                    </button>
-                  )}
-                </div>
-                <ProjectGrid
-                  project={project}
-                  files={files}
-                  isAdmin={isAdmin}
-                  onReorder={(next) => handleReorder(project.id, next)}
-                />
+          <DndContext
+            sensors={projectSensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleProjectDragEnd}
+          >
+            <SortableContext items={projectIds} strategy={verticalListSortingStrategy}>
+              <div className="space-y-20">
+                {orderedProjects.map(({ project, files }) => (
+                  <SortableProject
+                    key={project.id}
+                    project={project}
+                    files={files}
+                    isAdmin={isAdmin}
+                    hasCustomImageOrder={Boolean(order[project.id])}
+                    onReorderImages={(next) => handleReorderImages(project.id, next)}
+                    onResetProject={() => handleResetProject(project.id)}
+                  />
+                ))}
               </div>
-            ))}
-          </div>
+            </SortableContext>
+          </DndContext>
         </section>
       </main>
       <SiteFooter />
