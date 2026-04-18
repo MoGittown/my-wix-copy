@@ -600,12 +600,26 @@ const Referenzen = () => {
                   Projekt-Überschriften am Griff <GripVertical className="inline w-3 h-3" /> verschieben · Bilder direkt im Raster ziehen · Bilder können auch in ein anderes Projekt gezogen werden – die Bereiche passen sich automatisch an.
                 </p>
               </div>
-              <button
-                onClick={handleResetAll}
-                className="font-display text-xs uppercase tracking-wide px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors shrink-0"
-              >
-                Alle zurücksetzen
-              </button>
+              <div className="flex flex-wrap gap-2 shrink-0">
+                <button
+                  onClick={handleExportClipboard}
+                  className="font-display text-xs uppercase tracking-wide px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
+                  Sortierung exportieren
+                </button>
+                <button
+                  onClick={handleExportDownload}
+                  className="font-display text-xs uppercase tracking-wide px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors"
+                >
+                  Als Datei
+                </button>
+                <button
+                  onClick={handleResetAll}
+                  className="font-display text-xs uppercase tracking-wide px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors"
+                >
+                  Alle zurücksetzen
+                </button>
+              </div>
             </div>
           )}
 
