@@ -6,7 +6,10 @@ import {
   TouchSensor,
   useSensor,
   useSensors,
+  DragOverlay,
   type DragEndEvent,
+  type DragStartEvent,
+  type DragOverEvent,
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -118,22 +121,47 @@ const projects: Project[] = [
   },
 ];
 
-const STORAGE_KEY = "referenzen-order-v2";
+// V3: Bilder können jetzt zwischen Projekten verschoben werden,
+// daher speichern wir die komplette Zuordnung Projekt → Bilder.
+const IMAGES_KEY = "referenzen-images-v3";
 const PROJECT_ORDER_KEY = "referenzen-project-order-v1";
 
-type OrderMap = Record<string, string[]>;
+type ImagesMap = Record<string, string[]>;
 
-const loadOrder = (): OrderMap => {
+const defaultImagesMap = (): ImagesMap =>
+  Object.fromEntries(projects.map((p) => [p.id, [...p.images]]));
+
+const loadImagesMap = (): ImagesMap => {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : {};
+    const raw = localStorage.getItem(IMAGES_KEY);
+    if (!raw) return defaultImagesMap();
+    const saved = JSON.parse(raw) as ImagesMap;
+    // Konsistenz: alle bekannten Bilder müssen genau einmal vorhanden sein
+    const allKnown = new Set(projects.flatMap((p) => p.images));
+    const seen = new Set<string>();
+    const result: ImagesMap = {};
+    for (const p of projects) {
+      const list = (saved[p.id] || []).filter((f) => allKnown.has(f) && !seen.has(f));
+      list.forEach((f) => seen.add(f));
+      result[p.id] = list;
+    }
+    // Fehlende Bilder ihrem Original-Projekt hinten anhängen
+    for (const p of projects) {
+      for (const f of p.images) {
+        if (!seen.has(f)) {
+          result[p.id].push(f);
+          seen.add(f);
+        }
+      }
+    }
+    return result;
   } catch {
-    return {};
+    return defaultImagesMap();
   }
 };
-const saveOrder = (order: OrderMap) => {
+const saveImagesMap = (map: ImagesMap) => {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
+    localStorage.setItem(IMAGES_KEY, JSON.stringify(map));
   } catch {
     /* ignore */
   }
@@ -154,48 +182,37 @@ const saveProjectOrder = (ids: string[]) => {
   }
 };
 
-// Wendet Bild-Reihenfolge an, behält neue/entfernte Bilder konsistent
-const applyOrder = (project: Project, order: OrderMap): string[] => {
-  const saved = order[project.id];
-  if (!saved) return project.images;
-  const known = new Set(project.images);
-  const ordered = saved.filter((f) => known.has(f));
-  const missing = project.images.filter((f) => !ordered.includes(f));
-  return [...ordered, ...missing];
-};
-
-// Wendet Projekt-Reihenfolge an, hängt unbekannte hinten an
-const applyProjectOrder = (savedIds: string[]): Project[] => {
-  if (!savedIds.length) return projects;
-  const map = new Map(projects.map((p) => [p.id, p]));
-  const ordered = savedIds.map((id) => map.get(id)).filter(Boolean) as Project[];
-  const usedIds = new Set(ordered.map((p) => p.id));
-  const remaining = projects.filter((p) => !usedIds.has(p.id));
-  return [...ordered, ...remaining];
+// Eindeutige Drag-IDs: "projekt-id::bild-datei", damit das gleiche Bild
+// theoretisch keine Kollision verursacht und wir das Quell-Projekt erkennen.
+const makeImgId = (projectId: string, file: string) => `${projectId}::${file}`;
+const parseImgId = (id: string): { projectId: string; file: string } => {
+  const idx = id.indexOf("::");
+  return { projectId: id.slice(0, idx), file: id.slice(idx + 2) };
 };
 
 // =================== SortableImage ===================
 
 const SortableImage = ({
-  id,
+  dragId,
   file,
   title,
   index,
   isAdmin,
 }: {
-  id: string;
+  dragId: string;
   file: string;
   title: string;
   index: number;
   isAdmin: boolean;
 }) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: dragId,
+  });
 
   const style: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
-    zIndex: isDragging ? 10 : "auto",
+    opacity: isDragging ? 0.3 : 1,
   };
 
   const inner = (
@@ -242,50 +259,49 @@ const SortableImage = ({
   );
 };
 
-// =================== ImageGrid (innerer DnD-Kontext) ===================
+// Drop-Zone, die das gesamte Projekt-Raster als gültigen Container markiert
+// (auch wenn das Projekt aktuell leer ist).
+import { useDroppable } from "@dnd-kit/core";
 
-const ImageGrid = ({
-  project,
+const ProjectGrid = ({
+  projectId,
   files,
+  title,
   isAdmin,
-  onReorder,
 }: {
-  project: Project;
+  projectId: string;
   files: string[];
+  title: string;
   isAdmin: boolean;
-  onReorder: (next: string[]) => void;
 }) => {
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
-    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } }),
-  );
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-    const oldIndex = files.indexOf(String(active.id));
-    const newIndex = files.indexOf(String(over.id));
-    if (oldIndex < 0 || newIndex < 0) return;
-    onReorder(arrayMove(files, oldIndex, newIndex));
-  };
+  const { setNodeRef, isOver } = useDroppable({ id: `container::${projectId}` });
+  const dragIds = files.map((f) => makeImgId(projectId, f));
 
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext items={files} strategy={rectSortingStrategy}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {files.map((file, i) => (
-            <SortableImage
-              key={file}
-              id={file}
-              file={file}
-              title={project.title}
-              index={i}
-              isAdmin={isAdmin}
-            />
-          ))}
-        </div>
-      </SortableContext>
-    </DndContext>
+    <SortableContext items={dragIds} strategy={rectSortingStrategy}>
+      <div
+        ref={setNodeRef}
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[120px] rounded-md transition-colors ${
+          isAdmin && isOver ? "bg-primary/10 outline-2 outline-dashed outline-primary" : ""
+        }`}
+      >
+        {files.length === 0 && isAdmin && (
+          <div className="col-span-full py-8 text-center font-sans text-sm text-muted-foreground border-2 border-dashed border-muted-foreground/40 rounded">
+            Bilder hier hineinziehen
+          </div>
+        )}
+        {files.map((file, i) => (
+          <SortableImage
+            key={makeImgId(projectId, file)}
+            dragId={makeImgId(projectId, file)}
+            file={file}
+            title={title}
+            index={i}
+            isAdmin={isAdmin}
+          />
+        ))}
+      </div>
+    </SortableContext>
   );
 };
 
@@ -295,19 +311,17 @@ const SortableProject = ({
   project,
   files,
   isAdmin,
-  hasCustomImageOrder,
-  onReorderImages,
+  isModified,
   onResetProject,
 }: {
   project: Project;
   files: string[];
   isAdmin: boolean;
-  hasCustomImageOrder: boolean;
-  onReorderImages: (next: string[]) => void;
+  isModified: boolean;
   onResetProject: () => void;
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: project.id,
+    id: `project::${project.id}`,
   });
 
   const style: React.CSSProperties = {
@@ -330,9 +344,14 @@ const SortableProject = ({
               <GripVertical className="w-5 h-5" />
             </button>
           )}
-          <h2 className="font-display text-2xl md:text-3xl text-foreground">{project.title}</h2>
+          <h2 className="font-display text-2xl md:text-3xl text-foreground">
+            {project.title}
+            {isAdmin && (
+              <span className="ml-3 font-sans text-sm text-muted-foreground">({files.length})</span>
+            )}
+          </h2>
         </div>
-        {isAdmin && hasCustomImageOrder && (
+        {isAdmin && isModified && (
           <button
             onClick={onResetProject}
             className="shrink-0 font-display text-xs uppercase tracking-wide px-3 py-1.5 border border-muted-foreground text-muted-foreground hover:border-foreground hover:text-foreground transition-colors"
@@ -341,80 +360,190 @@ const SortableProject = ({
           </button>
         )}
       </div>
-      <ImageGrid project={project} files={files} isAdmin={isAdmin} onReorder={onReorderImages} />
+      <ProjectGrid projectId={project.id} files={files} title={project.title} isAdmin={isAdmin} />
     </div>
   );
 };
 
 // =================== Page ===================
 
-// Admin-Modus: hier umschalten. Auf `false` setzen, um Admin auszublenden.
 const ADMIN_ENABLED = true;
 
 const Referenzen = () => {
   const isAdmin = ADMIN_ENABLED;
-  const [order, setOrder] = useState<OrderMap>({});
+  const [imagesMap, setImagesMap] = useState<ImagesMap>(defaultImagesMap);
   const [projectIds, setProjectIds] = useState<string[]>(projects.map((p) => p.id));
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = "Referenzen – Vollmer Objektmöbel";
     window.scrollTo(0, 0);
-    setOrder(loadOrder());
+    setImagesMap(loadImagesMap());
     const savedProjOrder = loadProjectOrder();
     if (savedProjOrder.length) {
-      setProjectIds(applyProjectOrder(savedProjOrder).map((p) => p.id));
+      const known = new Set(projects.map((p) => p.id));
+      const ordered = savedProjOrder.filter((id) => known.has(id));
+      const remaining = projects.map((p) => p.id).filter((id) => !ordered.includes(id));
+      setProjectIds([...ordered, ...remaining]);
     }
   }, []);
 
-  const orderedProjects = useMemo(() => {
-    const map = new Map(projects.map((p) => [p.id, p]));
-    return projectIds
-      .map((id) => map.get(id))
-      .filter(Boolean)
-      .map((p) => ({ project: p as Project, files: applyOrder(p as Project, order) }));
-  }, [projectIds, order]);
+  const projectMap = useMemo(() => new Map(projects.map((p) => [p.id, p])), []);
 
-  const handleReorderImages = (projectId: string, next: string[]) => {
-    setOrder((prev) => {
-      const updated = { ...prev, [projectId]: next };
-      saveOrder(updated);
-      return updated;
+  // Findet das Projekt zu einer Drag-ID (Bild oder Container)
+  const findProjectIdByDragId = (dragId: string): string | null => {
+    if (dragId.startsWith("container::")) return dragId.slice("container::".length);
+    if (dragId.startsWith("project::")) return null;
+    // Bild-ID
+    const { projectId } = parseImgId(dragId);
+    return projectId;
+  };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } }),
+  );
+
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(String(event.active.id));
+  };
+
+  // Live-Verschiebung zwischen Containern beim Hovern
+  const handleDragOver = (event: DragOverEvent) => {
+    const { active, over } = event;
+    if (!over) return;
+    const activeId = String(active.id);
+    const overId = String(over.id);
+
+    // Nur Bilder behandeln
+    if (activeId.startsWith("project::") || activeId.startsWith("container::")) return;
+
+    const activeProj = parseImgId(activeId).projectId;
+    const overProj = findProjectIdByDragId(overId);
+    if (!overProj || activeProj === overProj) return;
+
+    setImagesMap((prev) => {
+      const fromList = [...(prev[activeProj] || [])];
+      const toList = [...(prev[overProj] || [])];
+      const file = parseImgId(activeId).file;
+      const fromIdx = fromList.indexOf(file);
+      if (fromIdx < 0) return prev;
+      fromList.splice(fromIdx, 1);
+
+      // Insert-Position bestimmen
+      let insertIdx = toList.length;
+      if (overId.startsWith("container::")) {
+        insertIdx = toList.length;
+      } else {
+        const overFile = parseImgId(overId).file;
+        const overIdx = toList.indexOf(overFile);
+        insertIdx = overIdx >= 0 ? overIdx : toList.length;
+      }
+      toList.splice(insertIdx, 0, file);
+
+      return { ...prev, [activeProj]: fromList, [overProj]: toList };
     });
   };
 
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    setActiveId(null);
+    if (!over) return;
+    const activeId = String(active.id);
+    const overId = String(over.id);
+
+    // Projekt-Sortierung
+    if (activeId.startsWith("project::") && overId.startsWith("project::")) {
+      const a = activeId.slice("project::".length);
+      const o = overId.slice("project::".length);
+      if (a === o) return;
+      const oldIdx = projectIds.indexOf(a);
+      const newIdx = projectIds.indexOf(o);
+      if (oldIdx < 0 || newIdx < 0) return;
+      const next = arrayMove(projectIds, oldIdx, newIdx);
+      setProjectIds(next);
+      saveProjectOrder(next);
+      return;
+    }
+
+    // Bild innerhalb desselben Projekts neu sortieren
+    if (!activeId.startsWith("project::") && !activeId.startsWith("container::")) {
+      const activeProj = parseImgId(activeId).projectId;
+      const overProj = findProjectIdByDragId(overId);
+      if (!overProj) return;
+
+      if (activeProj === overProj && !overId.startsWith("container::")) {
+        const overFile = parseImgId(overId).file;
+        const file = parseImgId(activeId).file;
+        setImagesMap((prev) => {
+          const list = [...(prev[activeProj] || [])];
+          const oldIdx = list.indexOf(file);
+          const newIdx = list.indexOf(overFile);
+          if (oldIdx < 0 || newIdx < 0 || oldIdx === newIdx) return prev;
+          const next = { ...prev, [activeProj]: arrayMove(list, oldIdx, newIdx) };
+          saveImagesMap(next);
+          return next;
+        });
+        return;
+      }
+
+      // Cross-Container war schon in dragOver erledigt – nur speichern
+      setImagesMap((prev) => {
+        saveImagesMap(prev);
+        return prev;
+      });
+    }
+  };
+
+  const handleDragCancel = () => setActiveId(null);
+
   const handleResetProject = (projectId: string) => {
-    setOrder((prev) => {
-      const updated = { ...prev };
-      delete updated[projectId];
-      saveOrder(updated);
-      return updated;
+    const original = projectMap.get(projectId);
+    if (!original) return;
+    setImagesMap((prev) => {
+      // Bilder die aktuell woanders liegen, aber original zu diesem Projekt gehören → zurückholen
+      // Bilder die hier liegen, aber original zu anderem Projekt gehören → zurück zum Original
+      const originalSet = new Set(original.images);
+      const next: ImagesMap = {};
+      // Erstmal alle Listen ohne die Bilder dieses Projekts (= original-Bilder)
+      for (const p of projects) {
+        next[p.id] = (prev[p.id] || []).filter((f) => !originalSet.has(f));
+      }
+      // Bilder, die ursprünglich zu anderen Projekten gehören und aktuell hier liegen,
+      // an ihren Original-Platz zurück
+      const currentForeign = (prev[projectId] || []).filter((f) => !originalSet.has(f));
+      for (const f of currentForeign) {
+        const home = projects.find((p) => p.images.includes(f));
+        if (home && !next[home.id].includes(f)) {
+          next[home.id].push(f);
+        }
+      }
+      // Diesem Projekt seine Original-Bilder in Original-Reihenfolge geben
+      next[projectId] = [...original.images];
+      saveImagesMap(next);
+      return next;
     });
   };
 
   const handleResetAll = () => {
-    setOrder({});
-    saveOrder({});
+    const fresh = defaultImagesMap();
+    setImagesMap(fresh);
+    saveImagesMap(fresh);
     const defaults = projects.map((p) => p.id);
     setProjectIds(defaults);
     saveProjectOrder([]);
   };
 
-  // Sensors für Projekt-Sortierung (vertikal)
-  const projectSensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
-    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } }),
-  );
-
-  const handleProjectDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-    const oldIndex = projectIds.indexOf(String(active.id));
-    const newIndex = projectIds.indexOf(String(over.id));
-    if (oldIndex < 0 || newIndex < 0) return;
-    const next = arrayMove(projectIds, oldIndex, newIndex);
-    setProjectIds(next);
-    saveProjectOrder(next);
+  const isProjectModified = (projectId: string) => {
+    const orig = projectMap.get(projectId)?.images || [];
+    const curr = imagesMap[projectId] || [];
+    if (orig.length !== curr.length) return true;
+    return orig.some((f, i) => curr[i] !== f);
   };
+
+  const activeFile = activeId && !activeId.startsWith("project::") && !activeId.startsWith("container::")
+    ? parseImgId(activeId).file
+    : null;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -429,11 +558,9 @@ const Referenzen = () => {
           {isAdmin && (
             <div className="mb-12 p-4 border-2 border-primary bg-primary/5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sticky top-20 z-30 backdrop-blur-sm">
               <div>
-                <p className="font-display text-sm text-foreground">
-                  🛠 Admin-Modus aktiv
-                </p>
+                <p className="font-display text-sm text-foreground">🛠 Admin-Modus aktiv</p>
                 <p className="font-sans text-xs text-muted-foreground mt-1">
-                  Projekt-Überschriften am Griff <GripVertical className="inline w-3 h-3" /> verschieben · Bilder direkt im Raster ziehen · Reihenfolge wird im Browser gespeichert.
+                  Projekt-Überschriften am Griff <GripVertical className="inline w-3 h-3" /> verschieben · Bilder direkt im Raster ziehen · Bilder können auch in ein anderes Projekt gezogen werden – die Bereiche passen sich automatisch an.
                 </p>
               </div>
               <button
@@ -446,25 +573,47 @@ const Referenzen = () => {
           )}
 
           <DndContext
-            sensors={projectSensors}
+            sensors={sensors}
             collisionDetection={closestCenter}
-            onDragEnd={handleProjectDragEnd}
+            onDragStart={handleDragStart}
+            onDragOver={handleDragOver}
+            onDragEnd={handleDragEnd}
+            onDragCancel={handleDragCancel}
           >
-            <SortableContext items={projectIds} strategy={verticalListSortingStrategy}>
+            <SortableContext
+              items={projectIds.map((id) => `project::${id}`)}
+              strategy={verticalListSortingStrategy}
+            >
               <div className="space-y-20">
-                {orderedProjects.map(({ project, files }) => (
-                  <SortableProject
-                    key={project.id}
-                    project={project}
-                    files={files}
-                    isAdmin={isAdmin}
-                    hasCustomImageOrder={Boolean(order[project.id])}
-                    onReorderImages={(next) => handleReorderImages(project.id, next)}
-                    onResetProject={() => handleResetProject(project.id)}
-                  />
-                ))}
+                {projectIds.map((id) => {
+                  const project = projectMap.get(id);
+                  if (!project) return null;
+                  const files = imagesMap[id] || [];
+                  return (
+                    <SortableProject
+                      key={id}
+                      project={project}
+                      files={files}
+                      isAdmin={isAdmin}
+                      isModified={isProjectModified(id)}
+                      onResetProject={() => handleResetProject(id)}
+                    />
+                  );
+                })}
               </div>
             </SortableContext>
+
+            <DragOverlay>
+              {activeFile ? (
+                <div className="aspect-[4/3] w-64 overflow-hidden shadow-2xl ring-2 ring-primary">
+                  <img
+                    src={wixThumb(activeFile, 600)}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ) : null}
+            </DragOverlay>
           </DndContext>
         </section>
       </main>
