@@ -1,4 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  rectSortingStrategy,
+  useSortable,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -10,8 +27,11 @@ const wixFull = (file: string) =>
 const wixSrcSet = (file: string) =>
   [400, 600, 900, 1200].map((w) => `${wixThumb(file, w)} ${w}w`).join(", ");
 
-const projects = [
+type Project = { id: string; title: string; images: string[] };
+
+const projects: Project[] = [
   {
+    id: "kueche-naturstein",
     title: 'Wohn-Küche mit Naturstein "San Sebastian" satiniert',
     images: [
       "81b6c4_eb2215591c3b41ea98020f9561599b18~mv2_d_4000_3000_s_4_2.jpg",
@@ -35,6 +55,7 @@ const projects = [
     ],
   },
   {
+    id: "business-club",
     title: "Objektmöbel – Business Club Möbel und Coworking Area mit freistehender Küche",
     images: [
       "81b6c4_fc0c64b0444540659460b3d56d09bfb4~mv2_d_4000_3000_s_4_2.jpg",
@@ -49,6 +70,7 @@ const projects = [
     ],
   },
   {
+    id: "buero-kueche",
     title: "Moderne Büro-Küche mit Theke",
     images: [
       "81b6c4_5330a85313044a22a35f589fffe6d9ba~mv2.jpg",
@@ -63,6 +85,7 @@ const projects = [
     ],
   },
   {
+    id: "krankenhaus",
     title:
       "Objekteinrichtung – Krankenhausausstattung – Patientenzimmer – Empfangstheken – Schwestern-Küchen – Wandvertäfelung – Fensterbänke zum Sitzen",
     images: [
@@ -94,11 +117,178 @@ const projects = [
   },
 ];
 
+const STORAGE_KEY = "referenzen-order-v1";
+
+type OrderMap = Record<string, string[]>;
+
+const loadOrder = (): OrderMap => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+};
+
+const saveOrder = (order: OrderMap) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
+  } catch {
+    /* ignore */
+  }
+};
+
+// Wendet gespeicherte Reihenfolge an, behält neue/entfernte Bilder konsistent
+const applyOrder = (project: Project, order: OrderMap): string[] => {
+  const saved = order[project.id];
+  if (!saved) return project.images;
+  const known = new Set(project.images);
+  const ordered = saved.filter((f) => known.has(f));
+  const missing = project.images.filter((f) => !ordered.includes(f));
+  return [...ordered, ...missing];
+};
+
+type SortableImageProps = {
+  id: string;
+  file: string;
+  title: string;
+  index: number;
+  isAdmin: boolean;
+};
+
+const SortableImage = ({ id, file, title, index, isAdmin }: SortableImageProps) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+
+  const style: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    zIndex: isDragging ? 10 : "auto",
+  };
+
+  const inner = (
+    <img
+      src={wixThumb(file, 600)}
+      srcSet={wixSrcSet(file)}
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      alt={`${title} – Bild ${index + 1}`}
+      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+      loading="lazy"
+      decoding="async"
+      draggable={false}
+    />
+  );
+
+  if (isAdmin) {
+    return (
+      <div
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
+        className="group relative block overflow-hidden shadow-md aspect-[4/3] bg-secondary cursor-grab active:cursor-grabbing touch-none ring-2 ring-primary/40 hover:ring-primary"
+      >
+        {inner}
+        <span className="absolute top-2 left-2 bg-primary text-primary-foreground text-xs font-display px-2 py-1 rounded">
+          {index + 1}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <a
+      ref={setNodeRef}
+      style={style}
+      href={wixFull(file)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block overflow-hidden shadow-md aspect-[4/3] bg-secondary"
+    >
+      {inner}
+    </a>
+  );
+};
+
+type ProjectGridProps = {
+  project: Project;
+  files: string[];
+  isAdmin: boolean;
+  onReorder: (next: string[]) => void;
+};
+
+const ProjectGrid = ({ project, files, isAdmin, onReorder }: ProjectGridProps) => {
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } }),
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIndex = files.indexOf(String(active.id));
+    const newIndex = files.indexOf(String(over.id));
+    if (oldIndex < 0 || newIndex < 0) return;
+    onReorder(arrayMove(files, oldIndex, newIndex));
+  };
+
+  return (
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={files} strategy={rectSortingStrategy}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {files.map((file, i) => (
+            <SortableImage
+              key={file}
+              id={file}
+              file={file}
+              title={project.title}
+              index={i}
+              isAdmin={isAdmin}
+            />
+          ))}
+        </div>
+      </SortableContext>
+    </DndContext>
+  );
+};
+
 const Referenzen = () => {
+  const [searchParams] = useSearchParams();
+  const isAdmin = searchParams.get("admin") === "1";
+  const [order, setOrder] = useState<OrderMap>({});
+
   useEffect(() => {
     document.title = "Referenzen – Vollmer Objektmöbel";
     window.scrollTo(0, 0);
+    setOrder(loadOrder());
   }, []);
+
+  const orderedProjects = useMemo(
+    () => projects.map((p) => ({ project: p, files: applyOrder(p, order) })),
+    [order],
+  );
+
+  const handleReorder = (projectId: string, next: string[]) => {
+    setOrder((prev) => {
+      const updated = { ...prev, [projectId]: next };
+      saveOrder(updated);
+      return updated;
+    });
+  };
+
+  const handleResetProject = (projectId: string) => {
+    setOrder((prev) => {
+      const updated = { ...prev };
+      delete updated[projectId];
+      saveOrder(updated);
+      return updated;
+    });
+  };
+
+  const handleResetAll = () => {
+    setOrder({});
+    saveOrder({});
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -106,35 +296,49 @@ const Referenzen = () => {
       <main className="flex-1 pt-20">
         <section className="py-16 px-6 max-w-6xl mx-auto">
           <h1 className="font-display text-4xl md:text-5xl text-foreground mb-4 text-center">Referenzen</h1>
-          <p className="font-serif text-xl text-muted-foreground text-center mb-16">
+          <p className="font-serif text-xl text-muted-foreground text-center mb-8">
             Aus dem Bereich Küchen, Küchenstudio, Küchenplanung und Objektmöbel
           </p>
 
+          {isAdmin && (
+            <div className="mb-12 p-4 border-2 border-primary bg-primary/5 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <p className="font-display text-sm text-foreground">
+                  🛠 Admin-Modus aktiv – Bilder per Drag &amp; Drop sortieren
+                </p>
+                <p className="font-sans text-xs text-muted-foreground mt-1">
+                  Reihenfolge wird automatisch in diesem Browser gespeichert.
+                </p>
+              </div>
+              <button
+                onClick={handleResetAll}
+                className="font-display text-xs uppercase tracking-wide px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors"
+              >
+                Alle zurücksetzen
+              </button>
+            </div>
+          )}
+
           <div className="space-y-20">
-            {projects.map((p) => (
-              <div key={p.title}>
-                <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">{p.title}</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {p.images.map((file, i) => (
-                    <a
-                      key={i}
-                      href={wixFull(file)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block overflow-hidden shadow-md aspect-[4/3] bg-secondary"
+            {orderedProjects.map(({ project, files }) => (
+              <div key={project.id}>
+                <div className="flex items-start justify-between gap-4 mb-6">
+                  <h2 className="font-display text-2xl md:text-3xl text-foreground">{project.title}</h2>
+                  {isAdmin && order[project.id] && (
+                    <button
+                      onClick={() => handleResetProject(project.id)}
+                      className="shrink-0 font-display text-xs uppercase tracking-wide px-3 py-1.5 border border-muted-foreground text-muted-foreground hover:border-foreground hover:text-foreground transition-colors"
                     >
-                      <img
-                        src={wixThumb(file, 600)}
-                        srcSet={wixSrcSet(file)}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        alt={`${p.title} – Bild ${i + 1}`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </a>
-                  ))}
+                      Zurücksetzen
+                    </button>
+                  )}
                 </div>
+                <ProjectGrid
+                  project={project}
+                  files={files}
+                  isAdmin={isAdmin}
+                  onReorder={(next) => handleReorder(project.id, next)}
+                />
               </div>
             ))}
           </div>
