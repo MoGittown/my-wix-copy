@@ -525,6 +525,42 @@ const Referenzen = () => {
     });
   };
 
+  const buildExportJson = () => {
+    const payload = {
+      order: projectIds,
+      images: Object.fromEntries(projectIds.map((id) => [id, imagesMap[id] || []])),
+    };
+    return JSON.stringify(payload, null, 2);
+  };
+
+  const handleExportClipboard = async () => {
+    const json = buildExportJson();
+    try {
+      await navigator.clipboard.writeText(json);
+      toast({ title: "In Zwischenablage kopiert", description: "JSON ist bereit zum Einfügen in den Chat." });
+    } catch {
+      toast({
+        title: "Kopieren fehlgeschlagen",
+        description: "Bitte stattdessen den Download-Button benutzen.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleExportDownload = () => {
+    const json = buildExportJson();
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "referenzen-sortierung.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast({ title: "Datei heruntergeladen", description: "referenzen-sortierung.json" });
+  };
+
   const handleResetAll = () => {
     const fresh = defaultImagesMap();
     setImagesMap(fresh);
