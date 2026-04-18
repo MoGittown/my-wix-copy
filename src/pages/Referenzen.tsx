@@ -95,7 +95,6 @@ const projects: Project[] = [
       "81b6c4_d0713e027e9f4f139abc2695377ba896~mv2.jpg",
       "81b6c4_c3b6c5c843a74523bf484046923ed782~mv2.jpg",
       "81b6c4_ba58afcfef5045debe7de98bbeea4aff~mv2.jpg",
-      "81b6c4_43cb3b15329c47ddad58338282762099~mv2.jpg",
     ],
   },
 ];
