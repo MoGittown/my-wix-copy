@@ -1,0 +1,41 @@
+name: Deploy to Hostinger
+
+# Läuft bei jedem Push auf main und kann auch manuell gestartet werden
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Code auschecken
+        uses: actions/checkout@v4
+
+      - name: 🟢 Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Dependencies installieren
+        run: npm ci
+
+      - name: 🔨 Production Build
+        run: npm run build
+
+      - name: 🚀 Upload zu Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Welcher Ordner hochgeladen wird (Build-Output)
+          local-dir: ./dist/
+          # Zielordner auf Hostinger – meist /public_html/ oder /domains/<deine-domain>/public_html/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Versteckte Dateien wie .htaccess mitnehmen
+          dangerous-clean-slate: false
+          # Logs verständlich halten
+          log-level: minimal
