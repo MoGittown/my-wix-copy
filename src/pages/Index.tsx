@@ -83,7 +83,7 @@ const portfolioItems = [
   {
     image: "https://static.wixstatic.com/media/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg/v1/fill/w_571,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg",
     title: "Küchenstudio",
-    items: ["Objektküchen", "Teeküchen", "Coworking", "Privathaushalte", "lang lebige Stahlküchen"],
+    items: ["Objektküchen", "Teeküchen", "Coworking", "Privathaushalte", "langlebige Stahlküchen"],
   },
   {
     image: "https://static.wixstatic.com/media/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg/v1/fill/w_570,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg",
@@ -184,7 +184,7 @@ const Index = () => {
             Die Basis für unsere Arbeit ist jahrzehntelange Berufserfahrung. Wir arbeiten ökonomisch, verantwortlich, effizient, präzise, zuverlässig, termintreu und persönlich.
           </p>
           <p className="font-serif text-sm sm:text-base text-muted-foreground leading-relaxed mt-4">Unser Ziel ist die vollständige Kundenzufriedenheit.</p>
-          <p className="font-serif text-sm sm:text-base text-muted-foreground leading-relaxed mt-4">Wir beraten Sie gerne in einem persönlichem Gespräch.</p>
+          <p className="font-serif text-sm sm:text-base text-muted-foreground leading-relaxed mt-4">Wir beraten Sie gerne in einem persönlichen Gespräch.</p>
         </div>
       </section>
 
@@ -216,10 +216,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Neuste Projekte Slider */}
+      {/* Neueste Projekte Slider */}
       <section className="py-16 md:py-24 px-4 sm:px-6 bg-background">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8 md:mb-10 leading-snug">Hier finden Sie unsere neusten Projekte.</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8 md:mb-10 leading-snug">Hier finden Sie unsere neuesten Projekte.</h2>
           <div className="relative aspect-[16/9] overflow-hidden bg-secondary">
             {projectGallery.map((slide, i) => {
               const isActive = i === currentProject;
