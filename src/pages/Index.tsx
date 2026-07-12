@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
+import SEO from "@/components/SEO";
 import projektEichenschrank from "@/assets/projekt-eichenschrank.jpg";
 import projektBadmoebel from "@/assets/projekt-badmoebel.jpg";
 import projektSideboardDetail from "@/assets/projekt-sideboard-detail.jpg";
@@ -162,6 +163,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Vollmer Objektmöbel | Küchenstudio Erftstadt — Köln, Bonn, Brühl"
+        description="Maßküchen, Praxiseinrichtung & Objektmöbel in Erftstadt. 3D-Küchenplanung, Vor-Ort-Aufmaß, schlüsselfertige Montage für Köln, Bonn und Brühl."
+        path="/"
+      />
       <SiteHeader />
 
       {/* Hero Slider mit Admin-Modus */}
