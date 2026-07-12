@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://vollmer-objektmoebel.com/sitemap.xml
