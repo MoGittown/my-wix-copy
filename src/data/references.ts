@@ -11,13 +11,13 @@ export interface ReferenceItem {
 export const references: ReferenceItem[] = [
   {
     slug: "wohn-kueche-naturstein",
-    title: "Wohn-Küche mit Naturstein „San Sebastian" satiniert",
+    title: "Wohn-Küche mit Naturstein „San Sebastian“ satiniert",
     metaTitle: "Referenz: Wohnküche mit Naturstein San Sebastian | Vollmer",
     metaDescription:
-      "Wohnküche in Nussbaum mit Naturstein-Arbeitsplatte „San Sebastian" satiniert, Kochinsel und Spiegel-Rückwand — geplant und montiert von Vollmer Objektmöbel.",
+      "Wohnküche in Nussbaum mit Naturstein-Arbeitsplatte „San Sebastian“ satiniert, Kochinsel und Spiegel-Rückwand — geplant und montiert von Vollmer Objektmöbel.",
     tags: ["Wohnküche", "Naturstein", "Kochinsel", "Nussbaum"],
     description: [
-      "Für dieses Privatprojekt planten wir eine offene Wohnküche, die als Herzstück des Hauses funktioniert. Die Nussbaum-Fronten harmonieren mit der Naturstein-Arbeitsplatte „San Sebastian" in satinierter Ausführung — ein Material, das kratzfest ist und über die Jahre eine natürliche Patina entwickelt.",
+      "Für dieses Privatprojekt planten wir eine offene Wohnküche, die als Herzstück des Hauses funktioniert. Die Nussbaum-Fronten harmonieren mit der Naturstein-Arbeitsplatte „San Sebastian“ in satinierter Ausführung — ein Material, das kratzfest ist und über die Jahre eine natürliche Patina entwickelt.",
       "Zentrales Element ist die freistehende Kochinsel, die gleichzeitig als Frühstückstresen dient. Die Spiegel-Rückwand vergrößert den Raum optisch und wirft das Licht der Fensterfront zurück in die Küche. Für die Einbaugeräte fiel die Wahl auf Miele — vom Induktionsfeld über den Backofen-Turm bis zum vollintegrierten Kühlschrank.",
       "Wir übernahmen von der 3D-Planung über das Aufmaß bis zur Montage alle Schritte inklusive Elektro- und Sanitäranschlüsse.",
     ],
@@ -39,7 +39,7 @@ export const references: ReferenceItem[] = [
     description: [
       "Für den weltweit größten Business-Center-Anbieter Regus richteten wir eine Lounge mit Coworking-Area ein. Das Projekt umfasste eine offene Küche mit Sitzmöglichkeiten, Copy-Points, Meeting-Booths (doppelte Sitznischen), Designer-Tische und weitere hochwertige Möbel.",
       "Die Möbel mussten hohem Nutzungsdruck standhalten und gleichzeitig repräsentativ wirken. Wir wählten robuste Oberflächen in warmen Holztönen, ergänzten sie mit dunklen Metallelementen und schallabsorbierenden Booths.",
-      "Die Küche wurde freistehend geplant, sodass sie als sozialer Treffpunkt in der Mitte des Raumes funktioniert. Kommunikation, Qualität und Ausführung wurden vom Auftraggeber als „auf Top-Niveau" bewertet.",
+      "Die Küche wurde freistehend geplant, sodass sie als sozialer Treffpunkt in der Mitte des Raumes funktioniert. Kommunikation, Qualität und Ausführung wurden vom Auftraggeber als „auf Top-Niveau“ bewertet.",
     ],
     images: [
       "81b6c4_892b027834a94efdab23ef8343158d8c~mv2_d_4000_3000_s_4_2.jpg",
