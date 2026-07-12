@@ -158,7 +158,7 @@ export const services: Service[] = [
     intro:
       "Eine Stahlküche ist die dauerhafteste Küche, die Sie kaufen können. Wir planen Stahlküchen sowohl für Objekte mit hoher Nutzungsintensität — Gastronomie, Kantinen, Coworking — als auch für Privathaushalte, die eine wirklich langlebige Küche suchen.",
     paragraphs: [
-      "Edelstahl ist absolut hygienisch, hitze- und wasserresistent, kratzfest und altert würdig. Anders als lackierte Fronten wird Edelstahl nicht mit den Jahren „aus der Mode" — er entwickelt eine natürliche Patina und wirkt in jedem Jahrzehnt zeitgemäß.",
+      "Edelstahl ist absolut hygienisch, hitze- und wasserresistent, kratzfest und altert würdig. Anders als lackierte Fronten wird Edelstahl nicht mit den Jahren „aus der Mode“ — er entwickelt eine natürliche Patina und wirkt in jedem Jahrzehnt zeitgemäß.",
       "Für Objektküchen in Gastronomie, Kantinen oder Coworking-Spaces sind Stahlküchen praktisch alternativlos: Sie halten den täglichen Einsatz aus, sind mit gewerblichen Reinigungsmitteln kompatibel und erfüllen jede Hygiene-Vorschrift.",
       "Auch privat wird die Stahlküche immer beliebter. Wir kombinieren Edelstahl-Fronten mit Holz-Akzenten (z. B. Nussbaum-Regalen), Naturstein-Arbeitsplatten und hochwertigen Geräten von Miele, BORA oder Siemens. Ergebnis: eine Küche mit Charakter, die eine Generation überdauert.",
     ],
