@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Phone, Mail, MapPin } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
+import SEO from "@/components/SEO";
 import projektEichenschrank from "@/assets/projekt-eichenschrank.jpg";
 import projektBadmoebel from "@/assets/projekt-badmoebel.jpg";
 import projektSideboardDetail from "@/assets/projekt-sideboard-detail.jpg";
@@ -162,6 +163,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Vollmer Objektmöbel | Küchenstudio Erftstadt — Köln, Bonn, Brühl"
+        description="Maßküchen, Praxiseinrichtung & Objektmöbel in Erftstadt. 3D-Küchenplanung, Vor-Ort-Aufmaß, schlüsselfertige Montage für Köln, Bonn und Brühl."
+        path="/"
+      />
       <SiteHeader />
 
       {/* Hero Slider mit Admin-Modus */}
@@ -344,7 +350,8 @@ const Index = () => {
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
                 <div className="text-muted-foreground">
-                  <a href="tel:+491788576150" className="hover:text-primary transition-colors block">+49 178 8576150</a>
+                  <a href="tel:+4922359765401" className="hover:text-primary transition-colors block">02235 9765401</a>
+                  <a href="tel:+491788576150" className="hover:text-primary transition-colors block text-sm">Mobil: 0178 8576150</a>
                 </div>
               </div>
               <div className="flex items-center gap-3">

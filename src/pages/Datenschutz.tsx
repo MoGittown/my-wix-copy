@@ -40,7 +40,7 @@ const Datenschutz = () => {
               <p>Schusters Garten 4</p>
               <p>50374 Erftstadt</p>
               <p>Deutschland</p>
-              <p>Telefon: +49 178 8576150</p>
+              <p>Telefon: 02235 9765401 · Mobil: 0178 8576150</p>
               <p>E-Mail: office@vollmer-objektmoebel.com</p>
             </div>
             <p>Datenschutzbeauftragte/r beim Anbieter ist: Maurice Vollmer</p>

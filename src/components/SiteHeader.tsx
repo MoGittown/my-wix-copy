@@ -3,11 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const navItems = [
   { label: "HOME", to: "/" },
-  { label: "Küchen, Objekteinrichtung & Co.", to: "/#portfolio" },
-  { label: "Das sagen unsere Kunden", to: "/#clients" },
+  { label: "Küchenstudio", to: "/kuechenstudio-erftstadt" },
+  { label: "Objektmöbel", to: "/objektmoebel" },
   { label: "Unternehmen", to: "/unternehmen" },
   { label: "Referenzen", to: "/referenzen" },
-  { label: "Kontakt", to: "/#contact" },
+  { label: "FAQ", to: "/faq" },
+  { label: "Kontakt", to: "/kontakt" },
 ];
 
 const SiteHeader = () => {
