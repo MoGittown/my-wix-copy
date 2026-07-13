@@ -11,15 +11,32 @@ const services = [
 ];
 
 const ContactForm = () => {
-  const [state, setState] = useState({ name: "", email: "", phone: "", service: services[0], message: "" });
+  const [state, setState] = useState({ name: "", email: "", phone: "", service: services[0], message: "", website: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Anfrage: ${state.service} – ${state.name}`);
-    const body = encodeURIComponent(
-      `Name: ${state.name}\nE-Mail: ${state.email}\nTelefon: ${state.phone}\nLeistung: ${state.service}\n\nNachricht:\n${state.message}`
-    );
-    window.location.href = `mailto:office@vollmer-objektmoebel.com?subject=${subject}&body=${body}`;
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/kontakt.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(state),
+      });
+      const data = await res.json().catch(() => ({ ok: false, error: "Ungültige Antwort vom Server." }));
+      if (!res.ok || !data.ok) {
+        setErrorMsg(data.error || "Versand fehlgeschlagen. Bitte versuchen Sie es später erneut.");
+        setStatus("error");
+        return;
+      }
+      setStatus("success");
+      setState({ name: "", email: "", phone: "", service: services[0], message: "", website: "" });
+    } catch {
+      setErrorMsg("Verbindungsfehler. Bitte versuchen Sie es später erneut.");
+      setStatus("error");
+    }
   };
 
   const input = "w-full border border-border bg-background px-4 py-3 font-serif text-foreground focus:outline-none focus:border-primary";
@@ -38,13 +55,19 @@ const ContactForm = () => {
       </div>
       <textarea required rows={6} placeholder="Ihre Nachricht*" value={state.message} onChange={(e) => setState({ ...state, message: e.target.value })} className={input} />
       {/* Honeypot */}
-      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden value={state.website} onChange={(e) => setState({ ...state, website: e.target.value })} />
       <p className="font-serif text-xs text-muted-foreground">
-        Mit dem Absenden akzeptieren Sie unsere <a href="/datenschutz" className="text-primary hover:underline">Datenschutzerklärung</a>. Ihre Anfrage wird per E-Mail an office@vollmer-objektmoebel.com übermittelt.
+        Mit dem Absenden akzeptieren Sie unsere <a href="/datenschutz" className="text-primary hover:underline">Datenschutzerklärung</a>. Ihre Anfrage wird an office@vollmer-objektmoebel.com übermittelt.
       </p>
-      <button type="submit" className="bg-primary text-primary-foreground px-8 py-3 font-display text-sm uppercase tracking-wide hover:opacity-90">
-        Anfrage senden
+      <button type="submit" disabled={status === "sending"} className="bg-primary text-primary-foreground px-8 py-3 font-display text-sm uppercase tracking-wide hover:opacity-90 disabled:opacity-60">
+        {status === "sending" ? "Wird gesendet…" : "Anfrage senden"}
       </button>
+      {status === "success" && (
+        <p className="font-serif text-sm text-primary">Vielen Dank! Ihre Anfrage wurde versendet — wir melden uns zeitnah zurück.</p>
+      )}
+      {status === "error" && (
+        <p className="font-serif text-sm text-destructive">{errorMsg}</p>
+      )}
     </form>
   );
 };
