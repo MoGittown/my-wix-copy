@@ -12,7 +12,7 @@ const Kontakt = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <SEO
         title="Kontakt | Vollmer Objektmöbel Erftstadt — Beratungstermin"
-        description="Kontakt zum Küchenstudio Vollmer in Erftstadt: Telefon 02235 9765401, office@vollmer-objektmoebel.com. Unverbindliche Beratung für Kunden in Köln, Bonn, Brühl."
+        description="Kontakt zum Küchenstudio Vollmer in Erftstadt: Telefon 0178 8576150, office@vollmer-objektmoebel.com. Unverbindliche Beratung für Kunden in Köln, Bonn, Brühl."
         path="/kontakt"
       />
       <SiteHeader />
@@ -39,8 +39,7 @@ const Kontakt = () => {
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
                 <div className="text-muted-foreground">
-                  <a href="tel:+4922359765401" className="block hover:text-primary">02235 9765401</a>
-                  <a href="tel:+491788576150" className="block hover:text-primary text-sm">Mobil: 0178 8576150</a>
+                  <a href="tel:+491788576150" className="block hover:text-primary">0178 8576150</a>
                 </div>
               </div>
               <div className="flex items-center gap-3">

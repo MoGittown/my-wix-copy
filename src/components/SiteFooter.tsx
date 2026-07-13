@@ -16,8 +16,7 @@ const SiteFooter = () => (
         <p className="font-display text-base mb-2">Vollmer Objektmöbel</p>
         <p>Schusters Garten 4</p>
         <p>50374 Erftstadt</p>
-        <p><a href="tel:+4922359765401" className="hover:text-primary">02235 9765401</a></p>
-        <p className="text-xs opacity-80"><a href="tel:+491788576150" className="hover:text-primary">Mobil: 0178 8576150</a></p>
+        <p><a href="tel:+491788576150" className="hover:text-primary">0178 8576150</a></p>
         <p><a href="mailto:office@vollmer-objektmoebel.com" className="hover:text-primary break-all">office@vollmer-objektmoebel.com</a></p>
       </div>
       <div>

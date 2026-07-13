@@ -8,8 +8,8 @@ const CtaBox = ({ title = "Jetzt unverbindlich beraten lassen" }: { title?: stri
       Vor-Ort-Aufmaß, 3D-Planung und ein transparentes Angebot – für Kunden in Erftstadt, Köln, Bonn und Brühl.
     </p>
     <div className="flex flex-col sm:flex-row gap-3">
-      <a href="tel:+4922359765401" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 font-display text-sm uppercase tracking-wide hover:opacity-90">
-        <Phone className="w-4 h-4" /> 02235 9765401
+      <a href="tel:+491788576150" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 font-display text-sm uppercase tracking-wide hover:opacity-90">
+        <Phone className="w-4 h-4" /> 0178 8576150
       </a>
       <Link to="/kontakt" className="inline-flex items-center gap-2 border border-foreground px-5 py-3 font-display text-sm uppercase tracking-wide hover:bg-foreground hover:text-background transition-colors">
         <Mail className="w-4 h-4" /> Kontaktformular
