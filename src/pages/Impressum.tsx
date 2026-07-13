@@ -26,8 +26,7 @@ const Impressum = () => {
 
           <h2 className="font-display text-2xl text-foreground mb-4">Kontakt</h2>
           <div className="font-serif text-muted-foreground space-y-2 mb-10">
-            <p>Tel: <a href="tel:+4922359765401" className="text-primary hover:underline">02235 9765401</a></p>
-            <p>Mobil: <a href="tel:+491788576150" className="text-primary hover:underline">0178 8576150</a></p>
+            <p>Tel: <a href="tel:+491788576150" className="text-primary hover:underline">0178 8576150</a></p>
             <p>E-Mail: <a href="mailto:office@vollmer-objektmoebel.com" className="text-primary hover:underline">office@vollmer-objektmoebel.com</a></p>
             <p>Web: <a href="https://www.vollmer-objektmoebel.com" className="text-primary hover:underline">www.vollmer-objektmoebel.com</a></p>
           </div>

@@ -20,7 +20,7 @@ const faqs: FaqItem[] = [
   { q: "Was heißt Projektbegleitung genau?", a: "Wir übernehmen Bauleitung, Bauzeitenplan und Kommunikation aller Gewerke. Sie haben einen festen Ansprechpartner und einen Termin für die Übergabe." },
   { q: "Machen Sie auch 3D-Küchenplanungen?", a: "Ja, jede unserer Küchen wird in 3D geplant. So können Sie Ihre neue Küche schon vor dem Kauf realistisch erleben." },
   { q: "Kann ich meine bestehende Küche bei Ihnen umbauen lassen?", a: "In vielen Fällen ja — wir schauen uns die vorhandene Küche an und beraten ehrlich, ob Aufwertung, Teilerneuerung oder Neubau sinnvoller ist." },
-  { q: "Wie kann ich einen Beratungstermin vereinbaren?", a: "Am einfachsten telefonisch unter 02235 9765401 oder über unser Kontaktformular. Wir melden uns zeitnah zurück." },
+  { q: "Wie kann ich einen Beratungstermin vereinbaren?", a: "Am einfachsten telefonisch unter 0178 8576150 oder über unser Kontaktformular. Wir melden uns zeitnah zurück." },
   { q: "Welche Arbeitsplatten sind möglich?", a: "Granit, Quarzkomposit, Keramik, Naturstein oder klassisch Melaminharz — wir beraten Sie zu Vor- und Nachteilen des jeweiligen Materials." },
   { q: "Gibt es Garantie auf die Möbel?", a: "Ja. Auf die Möbel gilt die Herstellergarantie (in der Regel 2–5 Jahre je nach Marke). Auf unsere Montage geben wir zusätzlich Gewährleistung nach BGB." },
 ];
