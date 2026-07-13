@@ -1,15 +1,9 @@
-import { writeFileSync } from "fs";
-import { resolve } from "path";
+import { writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 const BASE_URL = "https://vollmer-objektmoebel.com";
 
-interface Entry {
-  path: string;
-  changefreq?: "weekly" | "monthly" | "yearly";
-  priority?: string;
-}
-
-const entries: Entry[] = [
+const entries = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
   { path: "/unternehmen", changefreq: "monthly", priority: "0.8" },
   { path: "/referenzen", changefreq: "monthly", priority: "0.8" },
@@ -34,10 +28,10 @@ const xml =
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   entries
     .map(
-      (e) =>
-        `  <url>\n    <loc>${BASE_URL}${e.path}</loc>\n    <lastmod>${today}</lastmod>\n` +
-        (e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>\n` : "") +
-        (e.priority ? `    <priority>${e.priority}</priority>\n` : "") +
+      (entry) =>
+        `  <url>\n    <loc>${BASE_URL}${entry.path}</loc>\n    <lastmod>${today}</lastmod>\n` +
+        (entry.changefreq ? `    <changefreq>${entry.changefreq}</changefreq>\n` : "") +
+        (entry.priority ? `    <priority>${entry.priority}</priority>\n` : "") +
         `  </url>`
     )
     .join("\n") +
