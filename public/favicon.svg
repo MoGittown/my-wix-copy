@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Vollmer Objektmöbel">
+  <rect width="512" height="512" fill="#111111"/>
+  <g fill="#ffffff">
+    <!-- V left arm: stylized cabinet -->
+    <path d="M128 96h72v32h-72z"/>
+    <path d="M128 136h72v8h-72z"/>
+    <path d="M128 152h72v56h-8v-48h-56v48h-8z"/>
+    <path d="M160 168h8v32h-8z"/>
+    <!-- V right arm -->
+    <path d="M312 96h32l72 320h-40L312 96z"/>
+    <!-- V left diagonal -->
+    <path d="M128 96l104 320h-40L128 96z"/>
+  </g>
+  <rect y="500" width="512" height="12" fill="#dc2626"/>
+</svg>
