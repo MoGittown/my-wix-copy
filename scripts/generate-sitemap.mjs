@@ -20,6 +20,8 @@ const entries = [
   { path: "/kuechenstudio-bonn", changefreq: "monthly", priority: "0.9" },
   { path: "/kuechenstudio-bruehl", changefreq: "monthly", priority: "0.9" },
   { path: "/teekueche-buero", changefreq: "monthly", priority: "0.8" },
+  { path: "/praxiseinrichtung-koeln-bonn", changefreq: "monthly", priority: "0.9" },
+  { path: "/bueroeinrichtung-rhein-erft-kreis", changefreq: "monthly", priority: "0.9" },
   { path: "/referenzen/wohn-kueche-naturstein", changefreq: "yearly", priority: "0.6" },
   { path: "/referenzen/business-club-coworking", changefreq: "yearly", priority: "0.6" },
   { path: "/referenzen/buero-kueche-theke", changefreq: "yearly", priority: "0.6" },

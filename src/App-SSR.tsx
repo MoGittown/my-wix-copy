@@ -19,6 +19,8 @@ import KuechenstudioKoeln from "./pages/KuechenstudioKoeln";
 import KuechenstudioBonn from "./pages/KuechenstudioBonn";
 import KuechenstudioBruehl from "./pages/KuechenstudioBruehl";
 import TeekcueheBuero from "./pages/TeekcueheBuero";
+import PraxiseinrichtungKoelnBonn from "./pages/PraxiseinrichtungKoelnBonn";
+import BueroeinrichtungRheinErftKreis from "./pages/BueroeinrichtungRheinErftKreis";
 
 const App = () => (
   <>
@@ -42,6 +44,8 @@ const App = () => (
       <Route path="/kuechenstudio-bonn" element={<KuechenstudioBonn />} />
       <Route path="/kuechenstudio-bruehl" element={<KuechenstudioBruehl />} />
       <Route path="/teekueche-buero" element={<TeekcueheBuero />} />
+      <Route path="/praxiseinrichtung-koeln-bonn" element={<PraxiseinrichtungKoelnBonn />} />
+      <Route path="/bueroeinrichtung-rhein-erft-kreis" element={<BueroeinrichtungRheinErftKreis />} />
       <Route path="/impressum" element={<Impressum />} />
       <Route path="/datenschutz" element={<Datenschutz />} />
       <Route path="/datenschutzerklärung" element={<Datenschutz />} />

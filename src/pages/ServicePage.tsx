@@ -85,6 +85,22 @@ const ServicePage = ({ slug: propSlug }: Props) => {
           <h2 className="font-display text-2xl md:text-3xl text-foreground mt-12 mb-6">Häufige Fragen</h2>
           <FaqAccordion items={service.faqs} />
 
+          {service.regionalLinks && service.regionalLinks.length > 0 && (
+            <div className="mt-10 p-6 bg-muted/30 border border-border">
+              <p className="font-serif text-sm text-muted-foreground">
+                <strong className="text-foreground">Regionale Vertiefung:</strong>{" "}
+                {service.regionalLinks.map((link, i) => (
+                  <span key={link.to}>
+                    {i > 0 && " · "}
+                    <Link to={link.to} className="text-primary hover:underline">
+                      {link.label}
+                    </Link>
+                  </span>
+                ))}
+              </p>
+            </div>
+          )}
+
           <h2 className="font-display text-2xl md:text-3xl text-foreground mt-16 mb-4">Weitere Leistungen</h2>
           <ul className="grid sm:grid-cols-2 gap-3">
             {services.filter((s) => s.slug !== service.slug).map((s) => (
