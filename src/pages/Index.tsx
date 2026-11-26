@@ -129,7 +129,7 @@ const localBusinessJsonLd = {
   "name": "Vollmer Objektmöbel",
   "description": "Vollausstatter für Praxiseinrichtung, Büroeinrichtung, Objektmöbel, Teeküchen, Stahlküchen, Projektbegleitung und maßgefertigte Einbauküchen. Von der 3D-Planung über Gewerke-Koordination bis zur schlüsselfertigen Montage.",
   "url": "https://vollmer-objektmoebel.com",
-  "image": "https://static.wixstatic.com/media/81b6c4_12ffe13a374840cd9c583630babbb08d~mv2_d_3480_3108_s_4_2.jpg",
+  "image": "https://vollmer-objektmoebel.com/og-image.jpg",
   "telephone": "+491788576150",
   "email": "office@vollmer-objektmoebel.com",
   "address": {

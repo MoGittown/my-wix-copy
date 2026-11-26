@@ -1,17 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { chromium } from 'playwright';
-import { spawn } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const distDir = path.resolve(__dirname, '../dist');
-const PORT = 4173; // Standard-Vite-Preview-Port
-const BASE_URL = `http://localhost:${PORT}`;
+const serverEntry = path.resolve(distDir, 'server', 'entry-server.js');
 
-// Alle Routen, die prerendert werden sollen
+// Alle Routen für Prerendering
 const routes = [
   { path: '/', output: 'index.html' },
   { path: '/unternehmen', output: 'unternehmen.html' },
@@ -37,117 +34,134 @@ const routes = [
   { path: '/teekueche-buero', output: 'teekueche-buero.html' },
 ];
 
-console.log('🔧 Starte Full-HTML-Prerendering mit Playwright...');
+console.log('🔧 Starte SSR Prerendering...');
 
-// Preview-Server starten
-let previewServer;
-function startPreviewServer() {
-  return new Promise((resolve, reject) => {
-    console.log(`🚀 Starte Vite-Preview-Server auf Port ${PORT}...`);
-    previewServer = spawn('npx', ['vite', 'preview', '--port', String(PORT), '--strictPort'], {
-      stdio: 'pipe',
-      cwd: path.resolve(__dirname, '..'),
-    });
+// Template HTML laden
+const templatePath = path.join(distDir, 'index.html');
+let template = fs.readFileSync(templatePath, 'utf-8');
 
-    let started = false;
-    const timeout = setTimeout(() => {
-      if (!started) reject(new Error('Preview-Server konnte nicht gestartet werden'));
-    }, 30000);
+// Server-Rendering-Funktion dynamisch laden
+const { render } = await import(serverEntry);
 
-    previewServer.stdout.on('data', (data) => {
-      const output = data.toString();
-      if (output.includes('Local:') || output.includes(`${PORT}`)) {
-        if (!started) {
-          started = true;
-          clearTimeout(timeout);
-          console.log('✅ Preview-Server läuft');
-          // Warte kurz, damit der Server vollständig bereit ist
-          setTimeout(() => resolve(), 1000);
-        }
-      }
-    });
-
-    previewServer.stderr.on('data', (data) => {
-      console.error(`Preview-Server-Fehler: ${data}`);
-    });
-
-    previewServer.on('error', reject);
-  });
-}
-
-function stopPreviewServer() {
-  if (previewServer) {
-    previewServer.kill();
-    console.log('🛑 Preview-Server gestoppt');
-  }
-}
-
-// Funktion zum Rendern einer einzelnen Route
-async function prerenderRoute(page, route) {
+// Alle Routen prerendern
+for (const route of routes) {
   try {
-    const url = `${BASE_URL}${route.path}`;
-    console.log(`🔄 Rendere ${route.path}...`);
+    console.log(`⚙️  Rendering ${route.path}...`);
     
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
-    
-    // Warte lange genug für verschachtelte Lazy-Imports und Code-Splitting
-    // (FAQ, ServicePage, RegionalPages haben mehrere Lazy-Import-Ebenen)
-    await page.waitForTimeout(6000);
-    
-    // Hole das vollständige HTML (inkl. <head> mit Helmet-Updates und <body> mit gerendertem Content)
-    const html = await page.content();
-    
+    const { html, helmetContext } = render(route.path);
+    const { helmet } = helmetContext;
+
+    // HTML mit gerendertem Body + Helmet-Metadaten zusammenbauen
+    let renderedHtml = template;
+
+    // Body-Content einsetzen (in <div id="root">)
+    renderedHtml = renderedHtml.replace(
+      '<div id="root"></div>',
+      `<div id="root">${html}</div>`
+    );
+
+    // Helmet-Tags einsetzen - entferne alte und füge neue ein
+    if (helmet) {
+      // Title ersetzen
+      if (helmet.title) {
+        renderedHtml = renderedHtml.replace(
+          /<title[^>]*>.*?<\/title>/,
+          helmet.title.toString()
+        );
+      }
+      
+      // Entferne alte dynamische Meta-Tags (description, canonical, og:*, twitter:*)
+      renderedHtml = renderedHtml.replace(
+        /<meta name="description"[^>]*>/,
+        ''
+      );
+      renderedHtml = renderedHtml.replace(
+        /<link rel="canonical"[^>]*>/,
+        ''
+      );
+      renderedHtml = renderedHtml.replace(
+        /<meta property="og:[^"]*"[^>]*>/g,
+        ''
+      );
+      renderedHtml = renderedHtml.replace(
+        /<meta name="twitter:[^"]*"[^>]*>/g,
+        ''
+      );
+      
+      // Füge Helmet Meta-Tags ein
+      if (helmet.meta) {
+        const metaString = helmet.meta.toString();
+        renderedHtml = renderedHtml.replace(
+          '</head>',
+          `${metaString}\n</head>`
+        );
+      }
+      
+      if (helmet.link) {
+        const linkString = helmet.link.toString();
+        renderedHtml = renderedHtml.replace(
+          '</head>',
+          `${linkString}\n</head>`
+        );
+      }
+      
+      if (helmet.script) {
+        const scriptString = helmet.script.toString();
+        renderedHtml = renderedHtml.replace(
+          '</head>',
+          `${scriptString}\n</head>`
+        );
+      }
+    }
+
     // Datei schreiben
     const outputPath = path.join(distDir, route.output);
     const outputDir = path.dirname(outputPath);
-    
+
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
-    
-    fs.writeFileSync(outputPath, html, 'utf-8');
+
+    fs.writeFileSync(outputPath, renderedHtml, 'utf-8');
     console.log(`✅ ${route.path} → ${route.output}`);
   } catch (error) {
-    console.error(`❌ Fehler beim Rendern von ${route.path}:`, error.message);
-  }
-}
-
-// Hauptfunktion
-async function main() {
-  try {
-    await startPreviewServer();
-    
-    const browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
-    
-    // Alle Routen prerendern
-    for (const route of routes) {
-      await prerenderRoute(page, route);
-    }
-    
-    // 404.html erstellen
-    console.log('🔄 Erstelle 404.html...');
-    await page.goto(`${BASE_URL}/diese-seite-existiert-nicht-404`, { waitUntil: 'networkidle', timeout: 30000 });
-    await page.waitForTimeout(6000);
-    
-    let html404 = await page.content();
-    
-    // Noindex-Meta-Tag hinzufügen (falls nicht schon vorhanden)
-    if (!html404.includes('noindex')) {
-      html404 = html404.replace('</head>', '<meta name="robots" content="noindex,nofollow"></head>');
-    }
-    
-    fs.writeFileSync(path.join(distDir, '404.html'), html404, 'utf-8');
-    console.log('✅ 404 → 404.html');
-    
-    await browser.close();
-    console.log('✨ Full-HTML-Prerendering abgeschlossen!');
-  } catch (error) {
-    console.error('❌ Prerendering-Fehler:', error);
+    console.error(`❌ Fehler bei ${route.path}:`, error.message);
     process.exit(1);
-  } finally {
-    stopPreviewServer();
   }
 }
 
-main();
+// 404.html mit NotFound-Seite rendern
+try {
+  console.log('⚙️  Rendering 404...');
+  const { html, helmetContext } = render('/404-not-found-page');
+  const { helmet } = helmetContext;
+
+  let notFoundHtml = template.replace(
+    '<div id="root"></div>',
+    `<div id="root">${html}</div>`
+  );
+
+  if (helmet) {
+    if (helmet.title) {
+      notFoundHtml = notFoundHtml.replace(
+        /<title[^>]*>.*?<\/title>/,
+        '<title>404 — Seite nicht gefunden | Vollmer Objektmöbel</title>'
+      );
+    }
+    if (helmet.meta) {
+      const metaString = helmet.meta.toString();
+      notFoundHtml = notFoundHtml.replace(
+        '</head>',
+        `${metaString}\n<meta name="robots" content="noindex,nofollow">\n</head>`
+      );
+    }
+  }
+
+  fs.writeFileSync(path.join(distDir, '404.html'), notFoundHtml, 'utf-8');
+  console.log('✅ 404 → 404.html');
+} catch (error) {
+  console.error('❌ Fehler bei 404.html:', error.message);
+  process.exit(1);
+}
+
+console.log('✨ SSR Prerendering abgeschlossen!');

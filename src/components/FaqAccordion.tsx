@@ -21,10 +21,9 @@ const FaqAccordion = ({ items }: { items: FaqItem[] }) => (
     {items.map((item, i) => (
       <AccordionItem key={i} value={`item-${i}`}>
         <AccordionTrigger className="font-display text-left text-base md:text-lg">{item.q}</AccordionTrigger>
-        <AccordionContent 
-          className="font-serif text-muted-foreground leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: item.a }}
-        />
+        <AccordionContent className="font-serif text-muted-foreground leading-relaxed">
+          <div dangerouslySetInnerHTML={{ __html: item.a }} />
+        </AccordionContent>
       </AccordionItem>
     ))}
   </Accordion>
