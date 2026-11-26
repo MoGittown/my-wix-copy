@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
   { label: "HOME", to: "/" },
@@ -14,32 +14,6 @@ const navItems = [
 const SiteHeader = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleClick = (to: string) => {
-    setOpen(false);
-    if (to === "/") {
-      if (location.pathname === "/") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        navigate("/");
-        window.scrollTo({ top: 0 });
-      }
-      return;
-    }
-    if (to.includes("#")) {
-      const [path, hash] = to.split("#");
-      const targetPath = path || "/";
-      if (location.pathname === targetPath) {
-        document.querySelector(`#${hash}`)?.scrollIntoView({ behavior: "smooth" });
-      } else {
-        // Erst navigieren, dann nach dem Mount zum Anker scrollen
-        navigate(targetPath, { state: { scrollTo: hash } });
-      }
-    } else {
-      navigate(to);
-    }
-  };
 
   const isActive = (to: string) => {
     if (to === "/") return location.pathname === "/" && !location.hash;
@@ -50,17 +24,17 @@ const SiteHeader = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between h-16 md:h-20">
-        <button
-          onClick={() => handleClick("/")}
-          className="font-display text-lg sm:text-xl md:text-3xl text-foreground tracking-tight truncate text-left"
+        <Link
+          to="/"
+          className="font-display text-lg sm:text-xl md:text-3xl text-foreground tracking-tight truncate text-left hover:text-primary transition-colors"
         >
           Vollmer Objektmöbel
-        </button>
+        </Link>
         <nav className="hidden lg:flex items-center gap-7">
           {navItems.map((item) => (
-            <button
+            <Link
               key={item.label}
-              onClick={() => handleClick(item.to)}
+              to={item.to}
               className={`font-display text-[13px] uppercase tracking-wide transition-colors ${
                 isActive(item.to)
                   ? "text-primary"
@@ -68,7 +42,7 @@ const SiteHeader = () => {
               }`}
             >
               {item.label}
-            </button>
+            </Link>
           ))}
         </nav>
         <button className="lg:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menü">
@@ -82,15 +56,16 @@ const SiteHeader = () => {
       {open && (
         <nav className="lg:hidden bg-background border-t border-border px-6 py-4 flex flex-col gap-3">
           {navItems.map((item) => (
-            <button
+            <Link
               key={item.label}
-              onClick={() => handleClick(item.to)}
+              to={item.to}
+              onClick={() => setOpen(false)}
               className={`font-display text-left text-sm uppercase tracking-wide ${
                 isActive(item.to) ? "text-primary" : "text-foreground hover:text-primary"
               }`}
             >
               {item.label}
-            </button>
+            </Link>
           ))}
         </nav>
       )}

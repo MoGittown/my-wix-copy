@@ -1,15 +1,20 @@
 import { useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import SEO from "@/components/SEO";
 
 const Unternehmen = () => {
   useEffect(() => {
-    document.title = "Unternehmen – Vollmer Objektmöbel";
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <SEO
+        title="Unternehmen — Vollmer Objektmöbel aus Erftstadt"
+        description="Seit 2017 planen und montieren wir Küchen und Objektmöbel in Erftstadt, Köln, Bonn und Brühl — mit mehr als 10 Jahren Berufserfahrung."
+        path="/unternehmen"
+      />
       <SiteHeader />
       <main className="flex-1 pt-20">
         <section className="py-16 px-6 max-w-4xl mx-auto">

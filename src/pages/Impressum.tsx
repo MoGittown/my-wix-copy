@@ -1,15 +1,20 @@
 import { useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import SEO from "@/components/SEO";
 
 const Impressum = () => {
   useEffect(() => {
-    document.title = "Impressum – Vollmer Objektmöbel";
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <SEO
+        title="Impressum — Vollmer Objektmöbel"
+        description="Impressum und rechtliche Angaben von Vollmer Objektmöbel, Maurice Vollmer, Schusters Garten 4, 50374 Erftstadt."
+        path="/impressum"
+      />
       <SiteHeader />
       <main className="flex-1 pt-20">
         <section className="py-16 px-6 max-w-3xl mx-auto">
@@ -28,7 +33,7 @@ const Impressum = () => {
           <div className="font-serif text-muted-foreground space-y-2 mb-10">
             <p>Tel: <a href="tel:+491788576150" className="text-primary hover:underline">0178 8576150</a></p>
             <p>E-Mail: <a href="mailto:office@vollmer-objektmoebel.com" className="text-primary hover:underline">office@vollmer-objektmoebel.com</a></p>
-            <p>Web: <a href="https://www.vollmer-objektmoebel.com" className="text-primary hover:underline">www.vollmer-objektmoebel.com</a></p>
+            <p>Web: <a href="https://vollmer-objektmoebel.com" className="text-primary hover:underline">vollmer-objektmoebel.com</a></p>
           </div>
 
           <h2 className="font-display text-2xl text-foreground mb-4">Umsatzsteuer-ID</h2>
