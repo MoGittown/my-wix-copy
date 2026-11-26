@@ -11,7 +11,8 @@ export const faqJsonLd = (items: FaqItem[]) => ({
   mainEntity: items.map((f) => ({
     "@type": "Question",
     name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
+    // Strip HTML tags from answers for JSON-LD (plain text only)
+    acceptedAnswer: { "@type": "Answer", text: f.a.replace(/<[^>]*>/g, '') },
   })),
 });
 
@@ -20,7 +21,10 @@ const FaqAccordion = ({ items }: { items: FaqItem[] }) => (
     {items.map((item, i) => (
       <AccordionItem key={i} value={`item-${i}`}>
         <AccordionTrigger className="font-display text-left text-base md:text-lg">{item.q}</AccordionTrigger>
-        <AccordionContent className="font-serif text-muted-foreground leading-relaxed">{item.a}</AccordionContent>
+        <AccordionContent 
+          className="font-serif text-muted-foreground leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: item.a }}
+        />
       </AccordionItem>
     ))}
   </Accordion>
