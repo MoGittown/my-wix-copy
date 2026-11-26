@@ -1,5 +1,12 @@
-# Hostinger / Apache – SPA Routing für React Router (BrowserRouter)
+# Hostinger / Apache / LiteSpeed – SPA Routing für React Router (BrowserRouter)
 # Mit korrekten Redirects (HTTPS + apex domain) und echtem 404-Status
+#
+# Wichtig: DirectorySlash Off verhindert den 301 von /referenzen → /referenzen/
+# (sonst greift das Verzeichnis dist/referenzen/ ohne index und liefert 403).
+# Rewrite-Reihenfolge: .html vor Verzeichnissen, dann index.html in Verzeichnissen.
+
+DirectorySlash Off
+Options -Indexes
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -13,14 +20,26 @@
   RewriteCond %{HTTP_HOST} ^www\.vollmer-objektmoebel\.com$ [NC]
   RewriteRule ^(.*)$ https://vollmer-objektmoebel.com/$1 [L,R=301]
 
-  # Wenn Datei oder Verzeichnis existiert → direkt ausliefern
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
+  # Bereits existierende Dateien (z. B. assets, .html) direkt ausliefern
+  RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
-  # Bekannte prerenderte Routen → zur entsprechenden .html
+  # /referenzen → referenzen.html (vor Verzeichnis-Handling)
+  # Trailing Slash entfernen, damit .html-Lookup greift
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} ^(.+)/$
+  RewriteCond %{DOCUMENT_ROOT}%1.html -f
+  RewriteRule ^(.+)/$ $1.html [L]
+
+  # Bekannte prerenderte Routen ohne Slash → zur entsprechenden .html
+  RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.*)$ $1.html [L]
+
+  # /referenzen/ → referenzen/index.html (DirectorySlash ist aus)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*?)/?$ $1/index.html [L]
 
   # Sonst: 404.html mit HTTP 404 Status
   RewriteRule ^ 404.html [L,R=404]
