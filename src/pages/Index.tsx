@@ -121,6 +121,132 @@ const testimonials = [
   },
 ];
 
+// LocalBusiness JSON-LD mit vollständigem Leistungsspektrum
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://vollmer-objektmoebel.com/#business",
+  "name": "Vollmer Objektmöbel",
+  "description": "Vollausstatter für Praxiseinrichtung, Büroeinrichtung, Objektmöbel, Teeküchen, Stahlküchen, Projektbegleitung und maßgefertigte Einbauküchen. Von der 3D-Planung über Gewerke-Koordination bis zur schlüsselfertigen Montage.",
+  "url": "https://vollmer-objektmoebel.com",
+  "image": "https://vollmer-objektmoebel.com/og-image.jpg",
+  "telephone": "+491788576150",
+  "email": "office@vollmer-objektmoebel.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Schusters Garten 4",
+    "postalCode": "50374",
+    "addressLocality": "Erftstadt",
+    "addressCountry": "DE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 50.8117,
+    "longitude": 6.7847
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Erftstadt" },
+    { "@type": "City", "name": "Köln" },
+    { "@type": "City", "name": "Bonn" },
+    { "@type": "City", "name": "Brühl" },
+    { "@type": "City", "name": "Hürth" },
+    { "@type": "City", "name": "Kerpen" },
+    { "@type": "City", "name": "Frechen" },
+    { "@type": "City", "name": "Wesseling" },
+    { "@type": "AdministrativeArea", "name": "Rhein-Erft-Kreis" }
+  ],
+  "knowsAbout": [
+    "Praxiseinrichtung",
+    "Arztpraxis-Ausstattung",
+    "Empfangstresen",
+    "Behandlungsraum-Möbel",
+    "Büroeinrichtung",
+    "Coworking-Einrichtung",
+    "Teeküchen",
+    "Büroküchen",
+    "Objektküchen",
+    "Objektmöbel",
+    "Co-Living-Einrichtung",
+    "Micro-Apartments",
+    "Stahlküchen",
+    "Einbauküchen",
+    "Küchenplanung",
+    "3D-Küchenplanung",
+    "Küchenmontage",
+    "Projektbegleitung",
+    "Bauleitung",
+    "Gewerke-Koordination"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Leistungen",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Praxiseinrichtung",
+          "description": "Komplette Ausstattung von Arztpraxen, Zahnarztpraxen und medizinischen Behandlungsräumen mit Empfangstresen, Wartezonen und desinfektionsmittelbeständigen Möbeln."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Büroeinrichtung & Coworking-Ausstattung",
+          "description": "Einrichtung von Einzelbüros, Coworking-Spaces, Business Clubs und Firmen-Lounges mit ergonomischen Möbeln und Meeting-Räumen."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Teeküchen & Büroküchen",
+          "description": "Pantry-Küchen und Gemeinschaftsküchen für Büros und Coworking-Spaces — langlebig und funktional für hohe Nutzungsintensität."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Objektmöbel für Co-Living & Micro-Apartments",
+          "description": "Skalierbare Einrichtungslösungen für Bauträger und Betreiber von Micro-Apartments und Co-Living-Projekten."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Stahlküchen",
+          "description": "Langlebige, hygienische Stahlküchen für Gastronomie, Kantinen, Coworking-Spaces und Privathaushalte."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Einbauküchen",
+          "description": "Maßgefertigte Küchen für Privathaushalte mit Marken wie Nobilia, Häcker, Next125 und Einbaugeräten von Siemens, Miele, NEFF, BORA. Inklusive 3D-Planung und schlüsselfertiger Montage."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Projektbegleitung & Bauleitung",
+          "description": "Gewerke-Koordination, Bauzeitenplan und Bauleitung für Einrichtungsprojekte mit mehreren beteiligten Gewerken."
+        }
+      }
+    ]
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Maurice Vollmer"
+  },
+  "foundingDate": "2017",
+  "vatID": "DE123513601"
+};
+
 const Index = () => {
   const [currentProject, setCurrentProject] = useState(0);
   const [currentPartner, setCurrentPartner] = useState(0);
@@ -164,9 +290,10 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Vollmer Objektmöbel | Küchenstudio Erftstadt — Köln, Bonn, Brühl"
-        description="Maßküchen, Praxiseinrichtung & Objektmöbel in Erftstadt. 3D-Küchenplanung, Vor-Ort-Aufmaß, schlüsselfertige Montage für Köln, Bonn und Brühl."
+        title="Vollmer Objektmöbel | Praxis, Büro, Objektmöbel & Küchen — Erftstadt"
+        description="Vollausstatter für Praxiseinrichtung, Büroeinrichtung, Objektmöbel, Teeküchen, Stahlküchen, Projektbegleitung & maßgefertigte Einbauküchen. 3D-Planung, schlüsselfertige Montage für Erftstadt, Köln, Bonn, Brühl."
         path="/"
+        jsonLd={localBusinessJsonLd}
       />
       <SiteHeader />
 

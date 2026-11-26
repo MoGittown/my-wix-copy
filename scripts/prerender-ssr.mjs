@@ -144,7 +144,7 @@ try {
   if (helmet) {
     if (helmet.title) {
       notFoundHtml = notFoundHtml.replace(
-        /<title>.*?<\/title>/,
+        /<title[^>]*>.*?<\/title>/,
         '<title>404 — Seite nicht gefunden | Vollmer Objektmöbel</title>'
       );
     }
