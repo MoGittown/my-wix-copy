@@ -47,48 +47,136 @@ const wixImg = (file: string) =>
   `https://static.wixstatic.com/media/${file}/v1/fill/w_1400,h_800,al_c,q_90,enc_avif,quality_auto/${file}`;
 
 const projectGallery = [
-  { src: projektEichenschrank, caption: "Einbauschrank in Eiche – maßgefertigt mit Schublade und Kleiderlift" },
-  { src: projektBadmoebel, caption: "Badmöbel mit Doppelwaschtisch und Hochschrank in Eiche-Optik" },
-  { src: projektBadJuergen, caption: "Badezimmer mit Doppelwaschtisch in Eiche-Optik – maßgefertigt" },
-  { src: projektBadJuergen2, caption: "Hochschrank in Eiche-Optik mit Schubladen – passend zum Waschtisch" },
-  { src: projektKuecheNussbaum, caption: "Küche in Nussbaum mit Naturstein-Arbeitsplatte und Kochinsel" },
-  { src: projektKuecheMiele, caption: "Hochglanz-Küchenzeile mit Miele-Einbaugeräten und Naturstein-Arbeitsplatte" },
-  { src: projektKuecheNaturstein, caption: "Küche in Nussbaum mit großzügiger Naturstein-Arbeitsplatte und Spiegel-Rückwand" },
-  { src: projektKuecheAnthrazitInsel, caption: "Landhaus-Küche in Anthrazit mit Kochinsel und Naturstein-Arbeitsplatte" },
-  { src: projektKuecheBlauAnthrazit, caption: "Küche in Anthrazit kombiniert mit petrolblauer Kochinsel" },
-  { src: projektKuecheAnthrazitUebersicht, caption: "Moderne Anthrazit-Küche mit freistehender Kochinsel und Keramikspüle" },
-  { src: projektKuecheAnthrazitPetrol, caption: "Anthrazit-Landhausküche mit petrolblauer Kochinsel und offenen Holzregalen" },
-  { src: projektDetailArmatur, caption: "Detailansicht: Edelstahl-Armatur mit Doppel-Keramikspüle auf Naturstein" },
-  { src: projektDetailMuehlen, caption: "Detailansicht: Naturstein-Arbeitsplatte mit dezenter Maserung" },
-  { src: projektKuecheNussbaumTag, caption: "Nussbaum-Küche mit Spiegel-Rückwand bei Tageslicht" },
-  { src: projektKuecheNussbaumAbend, caption: "Nussbaum-Kochinsel mit Naturstein – stimmungsvoll bei Abendlicht" },
-  { src: projektKuecheSpiegelwand, caption: "Küche mit raumvergrößernder Spiegel-Rückwand und Nussbaum-Wandregal" },
-  { src: projektKuecheMieleDetail, caption: "Detailansicht: Miele-Backofen-Turm in Hochglanz-Weiß" },
-  { src: projektSideboardDetail, caption: "Sideboard in Grau matt mit Eiche-Schubladen – Detailansicht" },
-  { src: projektSideboardSchublade, caption: "Sideboard mit massiver Eiche-Schublade und filigraner Front" },
-  { src: projektSideboardGrau, caption: "Sideboard in Grau matt auf schlanken Metallfüßen" },
-  { src: projektSchubladeEiche, caption: "Massive Eiche-Schublade mit traditioneller Zinkenverbindung" },
+  {
+    src: projektEichenschrank,
+    caption: "Einbauschrank in Eiche – maßgefertigt mit Schublade und Kleiderlift",
+    alt: "Maßgefertigter Einbauschrank in Eiche mit Schublade und Kleiderlift – Objektmöbel von Vollmer",
+  },
+  {
+    src: projektBadmoebel,
+    caption: "Badmöbel mit Doppelwaschtisch und Hochschrank in Eiche-Optik",
+    alt: "Badmöbel mit Doppelwaschtisch und Hochschrank in Eiche-Optik – maßgefertigte Objekteinrichtung",
+  },
+  {
+    src: projektBadJuergen,
+    caption: "Badezimmer mit Doppelwaschtisch in Eiche-Optik – maßgefertigt",
+    alt: "Maßgefertigtes Badezimmer mit Doppelwaschtisch in Eiche-Optik",
+  },
+  {
+    src: projektBadJuergen2,
+    caption: "Hochschrank in Eiche-Optik mit Schubladen – passend zum Waschtisch",
+    alt: "Hochschrank in Eiche-Optik mit Schubladen, abgestimmt auf den Waschtisch",
+  },
+  {
+    src: projektKuecheNussbaum,
+    caption: "Küche in Nussbaum mit Naturstein-Arbeitsplatte und Kochinsel",
+    alt: "Einbauküche in Nussbaum mit Naturstein-Arbeitsplatte und freistehender Kochinsel",
+  },
+  {
+    src: projektKuecheMiele,
+    caption: "Hochglanz-Küchenzeile mit Miele-Einbaugeräten und Naturstein-Arbeitsplatte",
+    alt: "Hochglanz-Einbauküche mit Miele-Geräten und Naturstein-Arbeitsplatte",
+  },
+  {
+    src: projektKuecheNaturstein,
+    caption: "Küche in Nussbaum mit großzügiger Naturstein-Arbeitsplatte und Spiegel-Rückwand",
+    alt: "Wohnküche in Nussbaum mit Natursteinplatte und raumvergrößernder Spiegel-Rückwand",
+  },
+  {
+    src: projektKuecheAnthrazitInsel,
+    caption: "Landhaus-Küche in Anthrazit mit Kochinsel und Naturstein-Arbeitsplatte",
+    alt: "Landhaus-Einbauküche in Anthrazit mit Kochinsel und Naturstein-Arbeitsplatte",
+  },
+  {
+    src: projektKuecheBlauAnthrazit,
+    caption: "Küche in Anthrazit kombiniert mit petrolblauer Kochinsel",
+    alt: "Einbauküche in Anthrazit mit petrolblauer Kochinsel",
+  },
+  {
+    src: projektKuecheAnthrazitUebersicht,
+    caption: "Moderne Anthrazit-Küche mit freistehender Kochinsel und Keramikspüle",
+    alt: "Moderne Anthrazit-Einbauküche mit freistehender Kochinsel und Keramikspüle",
+  },
+  {
+    src: projektKuecheAnthrazitPetrol,
+    caption: "Anthrazit-Landhausküche mit petrolblauer Kochinsel und offenen Holzregalen",
+    alt: "Anthrazit-Landhausküche mit petrolblauer Kochinsel und offenen Holzregalen",
+  },
+  {
+    src: projektDetailArmatur,
+    caption: "Detailansicht: Edelstahl-Armatur mit Doppel-Keramikspüle auf Naturstein",
+    alt: "Edelstahl-Armatur mit Doppel-Keramikspüle auf Naturstein-Arbeitsplatte",
+  },
+  {
+    src: projektDetailMuehlen,
+    caption: "Detailansicht: Naturstein-Arbeitsplatte mit dezenter Maserung",
+    alt: "Naturstein-Arbeitsplatte mit dezenter Maserung in der Einbauküche",
+  },
+  {
+    src: projektKuecheNussbaumTag,
+    caption: "Nussbaum-Küche mit Spiegel-Rückwand bei Tageslicht",
+    alt: "Nussbaum-Wohnküche mit Spiegel-Rückwand bei Tageslicht",
+  },
+  {
+    src: projektKuecheNussbaumAbend,
+    caption: "Nussbaum-Kochinsel mit Naturstein – stimmungsvoll bei Abendlicht",
+    alt: "Nussbaum-Kochinsel mit Naturstein-Arbeitsplatte bei Abendlicht",
+  },
+  {
+    src: projektKuecheSpiegelwand,
+    caption: "Küche mit raumvergrößernder Spiegel-Rückwand und Nussbaum-Wandregal",
+    alt: "Einbauküche mit Spiegel-Rückwand und Nussbaum-Wandregal",
+  },
+  {
+    src: projektKuecheMieleDetail,
+    caption: "Detailansicht: Miele-Backofen-Turm in Hochglanz-Weiß",
+    alt: "Miele-Backofen-Turm in Hochglanz-Weiß als Teil der Einbauküche",
+  },
+  {
+    src: projektSideboardDetail,
+    caption: "Sideboard in Grau matt mit Eiche-Schubladen – Detailansicht",
+    alt: "Sideboard in Grau matt mit Eiche-Schubladen – Detail der Objektmöbel",
+  },
+  {
+    src: projektSideboardSchublade,
+    caption: "Sideboard mit massiver Eiche-Schublade und filigraner Front",
+    alt: "Sideboard mit massiver Eiche-Schublade und filigraner Front",
+  },
+  {
+    src: projektSideboardGrau,
+    caption: "Sideboard in Grau matt auf schlanken Metallfüßen",
+    alt: "Sideboard in Grau matt auf schlanken Metallfüßen – maßgefertigtes Objektmöbel",
+  },
+  {
+    src: projektSchubladeEiche,
+    caption: "Massive Eiche-Schublade mit traditioneller Zinkenverbindung",
+    alt: "Massive Eiche-Schublade mit traditioneller Zinkenverbindung",
+  },
 ];
 
 const portfolioItems = [
   {
     image: "https://static.wixstatic.com/media/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg/v1/fill/w_570,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_a39ec49f754b4e87871417e45a09abf3~mv2_d_5760_3840_s_4_2.jpeg",
     title: "Objektmöbel",
+    alt: "Objektmöbel für Büros, Coworking-Areas und Micro-Apartments von Vollmer Objektmöbel",
     items: ["Singlebüros", "Coworking Areas", "Micro-Apartments", "Co-Living", "Empfangsbereiche"],
   },
   {
     image: "https://static.wixstatic.com/media/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg/v1/fill/w_570,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_19e898634e5d4d6e998c6ef5bdc52841~mv2_d_3477_2332_s_2.jpeg",
     title: "Praxiseinrichtung",
+    alt: "Praxiseinrichtung mit Empfangsbereich und Wartezone – geplant von Vollmer Objektmöbel",
     items: ["Empfangsbereiche", "Wartezonen", "Behandlungsräume"],
   },
   {
     image: "https://static.wixstatic.com/media/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg/v1/fill/w_571,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_46a9aebeb77d41c0b2871d3465386966~mv2_d_3500_2625_s_4_2.jpeg",
     title: "Küchenstudio",
+    alt: "Modernes Küchenstudio: Einbauküche mit hochwertiger Planung und Montage",
     items: ["Objektküchen", "Teeküchen", "Coworking", "Privathaushalte", "langlebige Stahlküchen"],
   },
   {
     image: "https://static.wixstatic.com/media/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg/v1/fill/w_570,h_540,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/81b6c4_f6d1c59b161d4864abf8d1cbf3735b70~mv2_d_4500_3000_s_4_2.jpeg",
     title: "Projektbegleitung",
+    alt: "Projektbegleitung und Bauleitung für Einrichtungsprojekte durch Vollmer Objektmöbel",
     items: [
       "Bauleitung auf der Baustelle",
       "Koordinierung von Gewerken",
@@ -330,10 +418,11 @@ const Index = () => {
               <div key={item.title} className="group relative overflow-hidden aspect-square">
                 <img
                   src={item.image}
-                  alt={item.title}
+                  alt={item.alt}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-colors duration-500" />
                 <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-8">
                   <h3 className="font-display text-xl sm:text-2xl md:text-3xl text-white mb-2 md:mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">{item.title}</h3>
@@ -360,7 +449,7 @@ const Index = () => {
                 <img
                   key={i}
                   src={slide.src}
-                  alt={slide.caption}
+                  alt={slide.alt}
                   className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isActive ? "opacity-100" : "opacity-0"}`}
                   loading={i <= 1 ? "eager" : "lazy"}
                   decoding="async"
