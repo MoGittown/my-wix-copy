@@ -1,23 +1,33 @@
 # Hostinger / Apache – SPA Routing für React Router (BrowserRouter)
-# Leitet alle Anfragen, die keine echte Datei/Ordner sind, an index.html weiter,
-# damit Deep-Links wie /referenzen, /unternehmen, /impressum, /datenschutz funktionieren.
+# Mit korrekten Redirects (HTTPS + apex domain) und echtem 404-Status
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # HTTPS erzwingen (optional – Hostinger liefert i.d.R. SSL bereits aus)
-  # RewriteCond %{HTTPS} off
-  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # HTTPS erzwingen
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # www → apex (non-www) Redirect
+  RewriteCond %{HTTP_HOST} ^www\.vollmer-objektmoebel\.com$ [NC]
+  RewriteRule ^(.*)$ https://vollmer-objektmoebel.com/$1 [L,R=301]
 
   # Wenn Datei oder Verzeichnis existiert → direkt ausliefern
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Sonst: index.html (SPA Fallback)
-  RewriteRule ^ index.html [L]
+  # Bekannte prerenderte Routen → zur entsprechenden .html
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+
+  # Sonst: 404.html mit HTTP 404 Status
+  RewriteRule ^ 404.html [L,R=404]
 </IfModule>
+
+# 404 ErrorDocument
+ErrorDocument 404 /404.html
 
 # Caching für statische Assets (Bilder, JS, CSS, Fonts)
 <IfModule mod_expires.c>

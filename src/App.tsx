@@ -17,6 +17,11 @@ const ServicePage = lazy(() => import("./pages/ServicePage.tsx"));
 const ReferencePage = lazy(() => import("./pages/ReferencePage.tsx"));
 const Kontakt = lazy(() => import("./pages/Kontakt.tsx"));
 const Faq = lazy(() => import("./pages/Faq.tsx"));
+const KuechenRheinErftKreis = lazy(() => import("./pages/KuechenRheinErftKreis.tsx"));
+const KuechenstudioKoeln = lazy(() => import("./pages/KuechenstudioKoeln.tsx"));
+const KuechenstudioBonn = lazy(() => import("./pages/KuechenstudioBonn.tsx"));
+const KuechenstudioBruehl = lazy(() => import("./pages/KuechenstudioBruehl.tsx"));
+const TeekcueheBuero = lazy(() => import("./pages/TeekcueheBuero.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -44,6 +49,11 @@ const App = () => (
             <Route path="/objektmoebel" element={<ServicePage slug="objektmoebel" />} />
             <Route path="/stahlkuechen" element={<ServicePage slug="stahlkuechen" />} />
             <Route path="/projektbegleitung" element={<ServicePage slug="projektbegleitung" />} />
+            <Route path="/kuechen-rhein-erft-kreis" element={<KuechenRheinErftKreis />} />
+            <Route path="/kuechenstudio-koeln" element={<KuechenstudioKoeln />} />
+            <Route path="/kuechenstudio-bonn" element={<KuechenstudioBonn />} />
+            <Route path="/kuechenstudio-bruehl" element={<KuechenstudioBruehl />} />
+            <Route path="/teekueche-buero" element={<TeekcueheBuero />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/datenschutzerklärung" element={<Datenschutz />} />
