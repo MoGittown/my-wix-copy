@@ -90,8 +90,28 @@ async function prerenderRoute(page, route) {
     
     await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
     
-    // Zusätzliche Wartezeit für React-Hydration und Helmet-Updates
-    await page.waitForTimeout(1500);
+    // Warte auf React-Hydration und Lazy-Loading (länger für Code-Split-Routen)
+    await page.waitForTimeout(3000);
+    
+    // Zusätzliche Prüfung: Warte, bis tatsächlich Content im #root div ist
+    // (nicht nur Toast-/Notification-Container)
+    try {
+      await page.waitForFunction(
+        () => {
+          const root = document.getElementById('root');
+          if (!root) return false;
+          // Prüfe, ob es mindestens ein sichtbares Element mit Text-Content gibt
+          const hasVisibleContent = root.querySelector('h1, h2, main, section.py-16, section.py-12');
+          return hasVisibleContent !== null;
+        },
+        { timeout: 10000 }
+      );
+    } catch (e) {
+      console.warn(`⚠️  Content-Check Timeout für ${route.path}, fahre trotzdem fort`);
+    }
+    
+    // Nochmal kurz warten für finale Helmet-Updates
+    await page.waitForTimeout(500);
     
     // Hole das vollständige HTML (inkl. <head> mit Helmet-Updates und <body> mit gerendertem Content)
     const html = await page.content();
@@ -127,7 +147,23 @@ async function main() {
     // 404.html erstellen
     console.log('🔄 Erstelle 404.html...');
     await page.goto(`${BASE_URL}/diese-seite-existiert-nicht-404`, { waitUntil: 'networkidle', timeout: 30000 });
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(3000);
+    
+    try {
+      await page.waitForFunction(
+        () => {
+          const root = document.getElementById('root');
+          if (!root) return false;
+          const hasVisibleContent = root.querySelector('h1, h2, main, section');
+          return hasVisibleContent !== null;
+        },
+        { timeout: 10000 }
+      );
+    } catch (e) {
+      console.warn(`⚠️  Content-Check Timeout für 404, fahre trotzdem fort`);
+    }
+    
+    await page.waitForTimeout(500);
     
     let html404 = await page.content();
     
