@@ -63,4 +63,6 @@ Die Datei `public/.htaccess` wird beim Build mit nach `dist/` kopiert und sorgt 
 
 **Deep-Link `/referenzen` zeigt 404:** `.htaccess` fehlt im Zielordner. Prüfe im Hostinger-Dateimanager (oben rechts „Versteckte Dateien anzeigen").
 
+**`/referenzen` → 301 → `/referenzen/` → 403:** Das Verzeichnis `referenzen/` (Detailseiten) konkurriert mit `referenzen.html`. Build schreibt zusätzlich `referenzen/index.html`; `.htaccess` setzt `DirectorySlash Off` und liefert `.html` vor dem Verzeichnis.
+
 **Workflow lädt nichts hoch:** Im GitHub Actions-Log prüfen, ob `FTP_SERVER_DIR` korrekt ist (mit `/` am Anfang und Ende).

@@ -132,6 +132,33 @@ for (const route of routes) {
   }
 }
 
+/**
+ * Apache/LiteSpeed: Wenn sowohl `route.html` als auch Verzeichnis `route/`
+ * existieren (z. B. referenzen.html + referenzen/*.html), liefert der Server
+ * oft das Verzeichnis — ohne index.html → 403. Deshalb denselben HTML-Stand
+ * zusätzlich als `route/index.html` spiegeln.
+ */
+function mirrorHtmlBesideDirs(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    // server/ und assets/ nicht anfassen
+    if (entry.name === 'server' || entry.name === 'assets') continue;
+
+    const childDir = path.join(dir, entry.name);
+    mirrorHtmlBesideDirs(childDir);
+
+    const siblingHtml = path.join(dir, `${entry.name}.html`);
+    if (!fs.existsSync(siblingHtml)) continue;
+
+    const indexPath = path.join(childDir, 'index.html');
+    fs.copyFileSync(siblingHtml, indexPath);
+    const relative = path.relative(distDir, indexPath);
+    console.log(`📁 Mirror ${entry.name}.html → ${relative}`);
+  }
+}
+
+mirrorHtmlBesideDirs(distDir);
+
 // 404.html mit NotFound-Seite rendern
 try {
   console.log('⚙️  Rendering 404...');
