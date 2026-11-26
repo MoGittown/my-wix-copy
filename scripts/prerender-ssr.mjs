@@ -88,13 +88,10 @@ async function prerenderRoute(page, route) {
     const url = `${BASE_URL}${route.path}`;
     console.log(`🔄 Rendere ${route.path}...`);
     
-    await page.goto(url, { waitUntil: 'networkidle' });
+    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
     
-    // Warte, bis React vollständig gehydriert ist
-    await page.waitForSelector('#root > *', { timeout: 5000 });
-    
-    // Zusätzliche kurze Wartezeit für Helmet-Updates
-    await page.waitForTimeout(500);
+    // Zusätzliche Wartezeit für React-Hydration und Helmet-Updates
+    await page.waitForTimeout(1500);
     
     // Hole das vollständige HTML (inkl. <head> mit Helmet-Updates und <body> mit gerendertem Content)
     const html = await page.content();
@@ -129,9 +126,8 @@ async function main() {
     
     // 404.html erstellen
     console.log('🔄 Erstelle 404.html...');
-    await page.goto(`${BASE_URL}/diese-seite-existiert-nicht-404`, { waitUntil: 'networkidle' });
-    await page.waitForSelector('#root > *', { timeout: 5000 });
-    await page.waitForTimeout(500);
+    await page.goto(`${BASE_URL}/diese-seite-existiert-nicht-404`, { waitUntil: 'networkidle', timeout: 30000 });
+    await page.waitForTimeout(1500);
     
     let html404 = await page.content();
     
