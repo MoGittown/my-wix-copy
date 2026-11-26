@@ -49,7 +49,7 @@ const HeroSlider = ({ slides, intervalMs = 6000 }: { slides: HeroSlide[]; interv
               className="w-full h-full object-cover"
               loading={i === 0 ? "eager" : "eager"}
               decoding="async"
-              {...(i === 0 ? { fetchPriority: "high" as const } : {})}
+              {...(i === 0 ? { fetchpriority: "high" as any } : {})}
             />
             <div
               className="absolute w-[90%] max-w-5xl px-2 sm:px-6 text-center"

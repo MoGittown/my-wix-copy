@@ -5,14 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.mjs",
+    "build": "npm run build:client && npm run build:server && node scripts/prerender-ssr.mjs",
+    "build:client": "vite build",
+    "build:server": "vite build --config vite.config.server.ts",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "predev": "node scripts/generate-sitemap.mjs",
-    "prebuild": "node scripts/generate-sitemap.mjs"
+    "predev": "node scripts/generate-sitemap.mjs && node scripts/generate-og-image.mjs",
+    "prebuild": "node scripts/generate-sitemap.mjs && node scripts/generate-og-image.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -84,6 +86,7 @@
     "jsdom": "^20.0.3",
     "lovable-tagger": "^1.1.13",
     "postcss": "^8.5.6",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
