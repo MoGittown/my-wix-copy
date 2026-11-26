@@ -22,6 +22,8 @@ const KuechenstudioKoeln = lazy(() => import("./pages/KuechenstudioKoeln.tsx"));
 const KuechenstudioBonn = lazy(() => import("./pages/KuechenstudioBonn.tsx"));
 const KuechenstudioBruehl = lazy(() => import("./pages/KuechenstudioBruehl.tsx"));
 const TeekcueheBuero = lazy(() => import("./pages/TeekcueheBuero.tsx"));
+const PraxiseinrichtungKoelnBonn = lazy(() => import("./pages/PraxiseinrichtungKoelnBonn.tsx"));
+const BueroeinrichtungRheinErftKreis = lazy(() => import("./pages/BueroeinrichtungRheinErftKreis.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -54,6 +56,8 @@ const App = () => (
             <Route path="/kuechenstudio-bonn" element={<KuechenstudioBonn />} />
             <Route path="/kuechenstudio-bruehl" element={<KuechenstudioBruehl />} />
             <Route path="/teekueche-buero" element={<TeekcueheBuero />} />
+            <Route path="/praxiseinrichtung-koeln-bonn" element={<PraxiseinrichtungKoelnBonn />} />
+            <Route path="/bueroeinrichtung-rhein-erft-kreis" element={<BueroeinrichtungRheinErftKreis />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/datenschutzerklärung" element={<Datenschutz />} />

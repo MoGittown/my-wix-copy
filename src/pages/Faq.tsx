@@ -173,7 +173,10 @@ const Faq = () => {
             <h2 className="font-display text-2xl md:text-3xl text-foreground mb-6">Region, Montage & Termine</h2>
             <FaqAccordion items={faqRegionMontage} />
             <p className="font-serif text-sm text-muted-foreground mt-4">
-              → Regional: <Link to="/kuechenstudio-koeln" className="text-primary hover:underline">Köln</Link>, <Link to="/kuechenstudio-bonn" className="text-primary hover:underline">Bonn</Link>, <Link to="/kuechenstudio-bruehl" className="text-primary hover:underline">Brühl</Link>, <Link to="/kuechen-rhein-erft-kreis" className="text-primary hover:underline">Rhein-Erft-Kreis</Link>
+              → Regional Küchen: <Link to="/kuechenstudio-koeln" className="text-primary hover:underline">Köln</Link>, <Link to="/kuechenstudio-bonn" className="text-primary hover:underline">Bonn</Link>, <Link to="/kuechenstudio-bruehl" className="text-primary hover:underline">Brühl</Link>, <Link to="/kuechen-rhein-erft-kreis" className="text-primary hover:underline">Rhein-Erft-Kreis</Link>
+            </p>
+            <p className="font-serif text-sm text-muted-foreground mt-2">
+              → Regional B2B: <Link to="/praxiseinrichtung-koeln-bonn" className="text-primary hover:underline">Praxiseinrichtung Köln &amp; Bonn</Link>, <Link to="/bueroeinrichtung-rhein-erft-kreis" className="text-primary hover:underline">Büroeinrichtung Rhein-Erft-Kreis</Link>
             </p>
           </div>
 

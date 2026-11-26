@@ -11,6 +11,7 @@ export interface Service {
   bullets: string[];
   images: { file: string; alt: string }[];
   faqs: FaqItem[];
+  regionalLinks?: { label: string; to: string }[];
 }
 
 const wix = (file: string) =>
@@ -65,7 +66,7 @@ export const services: Service[] = [
       "Der Empfang ist die Visitenkarte Ihrer Praxis. Wir gestalten Empfangstheken, die Ihren Mitarbeitenden ergonomisches Arbeiten ermöglichen und gleichzeitig auf Patientinnen und Patienten einladend wirken. Materialien, Farben und Beleuchtung stimmen wir auf Ihre Corporate Identity ab.",
       "In der Wartezone kombinieren wir bequeme Sitzmöbel mit robusten, leicht zu reinigenden Oberflächen — hygienisch, DGUV-konform und optisch stimmig. Auf Wunsch integrieren wir Info-Displays, Getränkestationen und Kinderecken.",
       "Behandlungsräume planen wir mit Fokus auf Funktion: Unterschränke mit hygienegerechten Fronten, Waschplätze, Materialschränke und individuelle Stauraumlösungen. Wir arbeiten mit Herstellern zusammen, die Möbel speziell für den Medizinbereich fertigen — inklusive der passenden Waschtische und Arbeitsflächen.",
-      "Sie profitieren von unserer langjährigen Erfahrung mit Praxen und Kliniken. Für die Referenz eines vollständigen Klinikbereichs schauen Sie sich unser Projekt zur Krankenhausausstattung an.",
+      "Sie profitieren von unserer langjährigen Erfahrung mit Praxen und Kliniken. Für die Referenz eines vollständigen Klinikbereichs schauen Sie sich unser Projekt zur Krankenhausausstattung an. Speziell für Praxen in Köln, Bonn, Brühl und Erftstadt finden Sie weitere lokale Informationen auf unserer regionalen Praxiseinrichtungs-Seite.",
     ],
     bullets: [
       "Empfangstheken repräsentativ und ergonomisch",
@@ -84,6 +85,9 @@ export const services: Service[] = [
       { q: "Übernehmen Sie auch die Bauleitung?", a: "Auf Wunsch koordinieren wir alle Gewerke — Elektrik, Sanitär, Maler, Bodenleger — und stellen einen Bauzeitenplan auf. Mehr Details finden Sie unter Projektbegleitung." },
       { q: "Wie lange dauert eine Praxiseinrichtung?", a: "Vom Auftrag bis zur Übergabe liegen typischerweise 8–14 Wochen — abhängig von Umfang und Lieferzeiten der Möbel." },
     ],
+    regionalLinks: [
+      { label: "Praxiseinrichtung Köln, Bonn & Erftstadt", to: "/praxiseinrichtung-koeln-bonn" },
+    ],
   },
   {
     slug: "bueroeinrichtung",
@@ -98,7 +102,7 @@ export const services: Service[] = [
       "Einzelbüros und Chefzimmer statten wir mit hochwertigen Schreibtischen, individuellen Regallösungen und passenden Sideboards aus. Die Materialien wählen wir so, dass sie zur Architektur und zum Markenauftritt Ihres Unternehmens passen — von warmem Nussbaum bis zu klarem Weiß-Grau.",
       "In Coworking-Umgebungen und Open-Space-Büros geht es um Akustik, Flexibilität und Aufenthaltsqualität. Wir planen Meeting-Booths, Copy-Points, Sitznischen und Lounges — inklusive der Teeküche als sozialer Treffpunkt. Ein solches Projekt haben wir für den Regus Business Club umgesetzt.",
       "Teeküchen und kleine Bürokäufen sind unsere Spezialität: Wir planen Grundrisse, in denen mehrere Personen gleichzeitig entspannt Kaffee holen können, wählen langlebige Arbeitsplatten (Keramik, Quarz) und statten sie mit Quooker, Kühl- und Spülgeräten aus.",
-      "Wenn Sie ein neues Bürogebäude beziehen oder Ihre bestehenden Räume umgestalten möchten, begleiten wir Sie vom ersten Grundriss bis zur schlüsselfertigen Übergabe.",
+      "Wenn Sie ein neues Bürogebäude beziehen oder Ihre bestehenden Räume umgestalten möchten, begleiten wir Sie vom ersten Grundriss bis zur schlüsselfertigen Übergabe. Für Unternehmen im Rhein-Erft-Kreis sowie in Köln und Bonn finden Sie zusätzliche regionale Informationen auf unserer Seite zur Büroeinrichtung Rhein-Erft-Kreis.",
     ],
     bullets: [
       "Einzel- und Chefzimmer nach Maß",
@@ -116,6 +120,10 @@ export const services: Service[] = [
       { q: "Bieten Sie auch Akustik-Lösungen an?", a: "Ja, wir integrieren Akustik-Trennwände, gedämmte Meeting-Booths und schallabsorbierende Wandpaneele." },
       { q: "Kann ich einzelne Möbelstücke bestellen?", a: "Unser Fokus liegt auf ganzheitlichen Einrichtungskonzepten. Sprechen Sie uns bei einzelnen Sondermöbeln gerne an — wir prüfen, ob es passt." },
     ],
+    regionalLinks: [
+      { label: "Büroeinrichtung Rhein-Erft-Kreis, Köln & Bonn", to: "/bueroeinrichtung-rhein-erft-kreis" },
+      { label: "Teeküche & Büroküche", to: "/teekueche-buero" },
+    ],
   },
   {
     slug: "objektmoebel",
@@ -129,7 +137,7 @@ export const services: Service[] = [
     paragraphs: [
       "Coworking-Spaces brauchen Flexibilität: Arbeitsplätze, die morgens Einzelplatz sind und nachmittags Team-Table werden, dazu Meeting-Räume, Phone-Booths und eine großzügige Küche als Herzstück. Wir liefern das komplette Möbelprogramm aus einer Hand.",
       "In Co-Living- und Micro-Apartment-Projekten planen wir Einbauküchen im kleinen Format, kompakte Bad- und Schlafmöbel und modulare Stauraumlösungen. Ziel ist, auf 20–35 m² ein vollwertiges Zuhause zu schaffen — mit Materialien, die einer täglichen Reinigung durch das Betreiber-Team standhalten.",
-      "Für Bauträger und Betreiber ist Skalierbarkeit entscheidend: Wir liefern gleiche Einheiten in großer Stückzahl mit konstanter Qualität. Bei Bedarf koordinieren wir alle Gewerke bis zur schlüsselfertigen Übergabe.",
+      "Für Bauträger und Betreiber ist Skalierbarkeit entscheidend: Wir liefern gleiche Einheiten in großer Stückzahl mit konstanter Qualität. Bei Bedarf koordinieren wir alle Gewerke bis zur schlüsselfertigen Übergabe. Regionale Büro- und Objektprojekte im Rhein-Erft-Kreis sowie in Köln und Bonn bündeln wir auf unserer Seite zur Büroeinrichtung Rhein-Erft-Kreis.",
     ],
     bullets: [
       "Coworking-Areas mit Bürokäufe, Lounges und Meeting-Booths",
@@ -146,6 +154,10 @@ export const services: Service[] = [
       { q: "Welche Stückzahlen können Sie liefern?", a: "Wir haben Erfahrung mit Projekten von einzelnen Micro-Apartments bis zu über 100 gleichartigen Einheiten." },
       { q: "Übernehmen Sie auch die Bauleitung?", a: "Ja, für größere Objekte bieten wir vollständige Projektbegleitung inkl. Bauzeitenplan und Gewerke-Koordination." },
       { q: "Wie langlebig sind die Möbel?", a: "Wir wählen Kanten, Beschläge und Oberflächen bewusst für hohe Nutzungsintensität — mit einer typischen Lebensdauer von 10+ Jahren." },
+    ],
+    regionalLinks: [
+      { label: "Büroeinrichtung Rhein-Erft-Kreis, Köln & Bonn", to: "/bueroeinrichtung-rhein-erft-kreis" },
+      { label: "Praxiseinrichtung Köln, Bonn & Erftstadt", to: "/praxiseinrichtung-koeln-bonn" },
     ],
   },
   {

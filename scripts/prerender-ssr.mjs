@@ -32,6 +32,8 @@ const routes = [
   { path: '/kuechenstudio-bonn', output: 'kuechenstudio-bonn.html' },
   { path: '/kuechenstudio-bruehl', output: 'kuechenstudio-bruehl.html' },
   { path: '/teekueche-buero', output: 'teekueche-buero.html' },
+  { path: '/praxiseinrichtung-koeln-bonn', output: 'praxiseinrichtung-koeln-bonn.html' },
+  { path: '/bueroeinrichtung-rhein-erft-kreis', output: 'bueroeinrichtung-rhein-erft-kreis.html' },
 ];
 
 console.log('🔧 Starte SSR Prerendering...');
